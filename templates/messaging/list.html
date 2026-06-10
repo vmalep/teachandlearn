@@ -1,10 +1,10 @@
 {% extends "base.html" %}
-{% load tal_extras %}
-{% block title %}Messages — TeachAndLearn{% endblock %}
+{% load i18n tal_extras %}
+{% block title %}{% trans "Messages" %} — TeachAndLearn{% endblock %}
 {% block content %}
 <div class="max-w-2xl mx-auto px-4 py-10">
 
-  <h1 class="text-xl font-bold text-slate-900 mb-6">Messages</h1>
+  <h1 class="text-xl font-bold text-slate-900 mb-6">{% trans "Messages" %}</h1>
 
   {% if conversations %}
     <ul class="space-y-2">
@@ -29,19 +29,19 @@
                   {{ other.get_full_name|default:other.email }}
                 </p>
                 {% if conv.last_message_at %}
-                  <span class="text-xs text-slate-400 shrink-0">{{ conv.last_message_at|timesince }} ago</span>
+                  <span class="text-xs text-slate-400 shrink-0">{{ conv.last_message_at|timesince }} {% trans "ago" %}</span>
                 {% endif %}
               </div>
               <div class="flex items-center gap-2 mt-0.5">
                 {% if conv.last_message_body %}
                   <p class="text-sm text-slate-500 truncate">{{ conv.last_message_body|truncatechars:60 }}</p>
                 {% else %}
-                  <p class="text-sm text-slate-400 italic">No messages yet</p>
+                  <p class="text-sm text-slate-400 italic">{% trans "No messages yet" %}</p>
                 {% endif %}
                 {% if conv.state == "new" %}
-                  <span class="shrink-0 text-xs bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full">New</span>
+                  <span class="shrink-0 text-xs bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full">{% trans "New" %}</span>
                 {% elif conv.state == "closed" %}
-                  <span class="shrink-0 text-xs bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full">Closed</span>
+                  <span class="shrink-0 text-xs bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full">{% trans "Closed" %}</span>
                 {% endif %}
               </div>
             </div>
@@ -58,8 +58,8 @@
   {% else %}
     <div class="text-center py-20">
       <p class="text-4xl mb-4">💬</p>
-      <p class="text-slate-500 text-sm">No conversations yet.</p>
-      <a href="/" class="mt-4 inline-block text-indigo-600 hover:underline text-sm">Find a teacher</a>
+      <p class="text-slate-500 text-sm">{% trans "No conversations yet." %}</p>
+      <a href="/" class="mt-4 inline-block text-indigo-600 hover:underline text-sm">{% trans "Find a teacher" %}</a>
     </div>
   {% endif %}
 

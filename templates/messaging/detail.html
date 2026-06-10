@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block title %}{{ other.get_full_name|default:other.email }} — Messages{% endblock %}
+{% load i18n %}
+{% block title %}{{ other.get_full_name|default:other.email }} — {% trans "Messages" %}{% endblock %}
 {% block content %}
 
 {# Sticky header #}
@@ -24,17 +25,17 @@
         {{ other.get_full_name|default:other.email }}
       </p>
       {% if other.profile.is_teacher %}
-        <p class="text-xs text-slate-400">Teacher</p>
+        <p class="text-xs text-slate-400">{% trans "Teacher" %}</p>
       {% else %}
-        <p class="text-xs text-slate-400">Student</p>
+        <p class="text-xs text-slate-400">{% trans "Student" %}</p>
       {% endif %}
     </div>
 
     {# State badge #}
     {% if conversation.state == "closed" %}
-      <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full">Closed</span>
+      <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full">{% trans "Closed" %}</span>
     {% elif conversation.state == "new" %}
-      <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full">New</span>
+      <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full">{% trans "New" %}</span>
     {% endif %}
   </div>
 </div>
@@ -44,13 +45,12 @@
 
   {% if not thread %}
     <div class="text-center py-12">
-      <p class="text-slate-400 text-sm">Start the conversation by sending a message below.</p>
+      <p class="text-slate-400 text-sm">{% trans "Start the conversation by sending a message below." %}</p>
     </div>
   {% endif %}
 
   {% for msg in thread %}
     {% if msg.sender == user %}
-      {# My message — right #}
       <div class="flex justify-end">
         <div class="max-w-xs sm:max-w-md">
           <div class="bg-indigo-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm leading-relaxed">
@@ -60,7 +60,6 @@
         </div>
       </div>
     {% else %}
-      {# Their message — left #}
       <div class="flex items-end gap-2">
         {% if other.profile.avatar %}
           <img src="{{ other.profile.avatar.url }}" alt="" class="w-6 h-6 rounded-full object-cover shrink-0 mb-5">
@@ -87,7 +86,7 @@
   <div class="max-w-2xl mx-auto px-4 py-3">
     <form method="post" class="flex items-end gap-3">
       {% csrf_token %}
-      <textarea name="body" rows="2" placeholder="Write a message…"
+      <textarea name="body" rows="2" placeholder="{% trans "Write a message…" %}"
         class="flex-1 field-input resize-none"
         onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();this.form.submit();}"></textarea>
       <button type="submit"
@@ -98,18 +97,17 @@
         </svg>
       </button>
     </form>
-    <p class="text-xs text-slate-400 mt-1.5">Enter to send · Shift+Enter for new line</p>
+    <p class="text-xs text-slate-400 mt-1.5">{% trans "Enter to send · Shift+Enter for new line" %}</p>
   </div>
 </div>
 {% else %}
 <div class="sticky bottom-0 bg-slate-50 border-t border-slate-200">
   <div class="max-w-2xl mx-auto px-4 py-4 text-center text-sm text-slate-400">
-    This conversation is closed.
+    {% trans "This conversation is closed." %}
   </div>
 </div>
 {% endif %}
 
-{# Auto-scroll to bottom on load #}
 <script>
   document.getElementById('thread').lastElementChild?.scrollIntoView({block:'end'});
 </script>

@@ -1,30 +1,29 @@
 {% extends "base.html" %}
-{% block title %}Write a Review — TeachAndLearn{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Write a Review" %} — TeachAndLearn{% endblock %}
 {% block content %}
 <div class="max-w-xl mx-auto px-4 py-10">
 
   <div class="mb-6">
     <a href="/teachers/{{ teacher.profile.teacher_profile.pk }}/"
-      class="text-sm text-indigo-600 hover:underline">← Back to profile</a>
+      class="text-sm text-indigo-600 hover:underline">← {% trans "Back to profile" %}</a>
   </div>
 
   <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8">
 
     <h1 class="text-xl font-bold text-slate-900 mb-1">
-      {% if existing %}Edit your review{% else %}Write a review{% endif %}
+      {% if existing %}{% trans "Edit your review" %}{% else %}{% trans "Write a review" %}{% endif %}
     </h1>
     <p class="text-sm text-slate-500 mb-7">
-      For <span class="font-medium text-slate-700">{{ teacher.get_full_name|default:teacher.email }}</span>
+      {% trans "For" %} <span class="font-medium text-slate-700">{{ teacher.get_full_name|default:teacher.email }}</span>
     </p>
 
     <form method="post" novalidate>
       {% csrf_token %}
 
-      {# Star rating — JS-driven visual picker backed by hidden radio inputs #}
       <div class="mb-6">
-        <label class="block text-sm font-medium text-slate-700 mb-3">Your rating</label>
+        <label class="block text-sm font-medium text-slate-700 mb-3">{% trans "Your rating" %}</label>
 
-        {# Hidden radio buttons for form submission #}
         <div class="hidden">
           {% for choice_val, choice_label in form.rating.field.choices %}
             <input type="radio" name="rating" id="star-{{ choice_val }}" value="{{ choice_val }}"
@@ -32,7 +31,6 @@
           {% endfor %}
         </div>
 
-        {# Visual stars — JS sets initial colour via data-selected #}
         <div class="flex gap-1" id="star-display" data-selected="{{ form.rating.value|default:0 }}">
           {% for i in "12345" %}
             <button type="button" data-val="{{ forloop.counter }}"
@@ -41,7 +39,7 @@
         </div>
 
         <p class="text-xs text-slate-400 mt-2" id="star-label">
-          {% if form.rating.value %}{{ form.rating.value }} out of 5{% else %}Click to rate{% endif %}
+          {% if form.rating.value %}{% blocktrans with val=form.rating.value %}{{ val }} out of 5{% endblocktrans %}{% else %}{% trans "Click to rate" %}{% endif %}
         </p>
 
         {% if form.rating.errors %}
@@ -49,11 +47,10 @@
         {% endif %}
       </div>
 
-      {# Comment #}
       <div class="mb-7">
         <label for="{{ form.comment.id_for_label }}"
           class="block text-sm font-medium text-slate-700 mb-1">
-          Comment <span class="text-slate-400 font-normal">(optional)</span>
+          {% trans "Comment" %} <span class="text-slate-400 font-normal">({% trans "optional" %})</span>
         </label>
         {{ form.comment }}
         {% if form.comment.errors %}
@@ -64,14 +61,14 @@
       <div class="flex items-center gap-3">
         <button type="submit"
           class="bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-indigo-700 transition-colors">
-          {% if existing %}Update review{% else %}Submit review{% endif %}
+          {% if existing %}{% trans "Update review" %}{% else %}{% trans "Submit review" %}{% endif %}
         </button>
         <a href="/teachers/{{ teacher.profile.teacher_profile.pk }}/"
-          class="text-sm text-slate-500 hover:text-slate-700">Cancel</a>
+          class="text-sm text-slate-500 hover:text-slate-700">{% trans "Cancel" %}</a>
       </div>
 
       <p class="text-xs text-slate-400 mt-4">
-        Your review will appear after admin validation.
+        {% trans "Your review will appear after admin validation." %}
       </p>
     </form>
   </div>
@@ -84,6 +81,7 @@
   const label = document.getElementById('star-label');
   const btns = display.querySelectorAll('.star-btn');
   let selected = parseInt(display.dataset.selected) || 0;
+  const outOf = "{% trans 'out of 5' %}";
 
   function paint(highlighted) {
     btns.forEach((btn, i) => {
@@ -99,7 +97,7 @@
       selected = i + 1;
       paint(selected);
       document.getElementById('star-' + selected).checked = true;
-      label.textContent = selected + ' out of 5';
+      label.textContent = selected + ' ' + outOf;
     });
   });
 
