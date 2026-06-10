@@ -4,6 +4,13 @@ from django.core.exceptions import ImproperlyConfigured
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load .env file if present (local dev and production)
+try:
+    from dotenv import load_dotenv
+    load_dotenv(BASE_DIR / ".env")
+except ImportError:
+    pass
+
 
 def env(key, default=None, required=False):
     value = os.environ.get(key, default)
