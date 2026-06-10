@@ -1,11 +1,24 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse_lazy
+from django.db.models import Avg, Count, Q
+from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView, DetailView
 from .forms import CertificateFormSet, TeacherProfileForm
 from .models import TeacherProfile
 from subjects.models import Subject
+
+
+def _rating_qs(qs):
+    return qs.annotate(
+        avg_rating=Avg(
+            "profile__user__received_reviews__rating",
+            filter=Q(profile__user__received_reviews__state="validated"),
+        ),
+        review_count=Count(
+            "profile__user__received_reviews",
+            filter=Q(profile__user__received_reviews__state="validated"),
+        ),
+    )
 
 
 class TeacherDirectoryView(ListView):
@@ -14,7 +27,7 @@ class TeacherDirectoryView(ListView):
     context_object_name = "teachers"
 
     def get_queryset(self):
-        qs = (
+        qs = _rating_qs(
             TeacherProfile.objects.filter(state=TeacherProfile.State.VALIDATED)
             .select_related("profile__user")
             .prefetch_related("subjects")
@@ -31,7 +44,7 @@ class TeacherDirectoryView(ListView):
                 qs = qs.filter(price_per_hour__lte=float(max_price))
             except ValueError:
                 pass
-        return qs
+        return qs.order_by("-avg_rating", "price_per_hour")
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
@@ -45,11 +58,29 @@ class TeacherDetailView(LoginRequiredMixin, DetailView):
     context_object_name = "teacher"
 
     def get_queryset(self):
-        return (
+        return _rating_qs(
             TeacherProfile.objects.filter(state=TeacherProfile.State.VALIDATED)
             .select_related("profile__user")
             .prefetch_related("subjects", "certificates")
         )
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        teacher = self.object
+        from reviews.models import Review
+        ctx["reviews"] = Review.objects.filter(
+            teacher=teacher.profile.user, state=Review.State.VALIDATED
+        ).select_related("student").order_by("-created_at")
+
+        if self.request.user.is_authenticated:
+            ctx["user_review"] = Review.objects.filter(
+                student=self.request.user, teacher=teacher.profile.user
+            ).first()
+            from messaging.models import Conversation
+            ctx["conversation"] = Conversation.objects.filter(
+                student=self.request.user, teacher=teacher.profile.user
+            ).first()
+        return ctx
 
 
 class TeacherProfileView(LoginRequiredMixin, View):

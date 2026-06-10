@@ -1,19 +1,111 @@
 {% extends "base.html" %}
 {% block title %}Find a Teacher — TeachAndLearn{% endblock %}
 {% block content %}
-<h1>Find a Teacher</h1>
-<form method="get">
-  <input type="text" name="municipality" placeholder="Municipality" value="{{ request.GET.municipality }}">
-  <input type="text" name="max_price" placeholder="Max €/hour" value="{{ request.GET.max_price }}">
-  <button type="submit">Search</button>
-</form>
-{% for teacher in teachers %}
-  <div>
-    <a href="/teachers/{{ teacher.pk }}/">{{ teacher.profile.user.get_full_name|default:teacher.profile.user.email }}</a>
-    {% if teacher.price_per_hour %}— €{{ teacher.price_per_hour }}/h{% endif %}
-    — {{ teacher.profile.municipality }}
+
+{# Hero #}
+<div class="bg-indigo-600 text-white py-14 px-4">
+  <div class="max-w-3xl mx-auto text-center">
+    <h1 class="text-3xl font-bold mb-2">Find a private teacher</h1>
+    <p class="text-indigo-200 text-sm">Verified teachers for one-on-one lessons in Belgium</p>
+
+    <form method="get" class="mt-8 bg-white rounded-2xl p-3 flex flex-col sm:flex-row gap-2 shadow-lg">
+      <select name="subject"
+        class="flex-1 rounded-xl border border-slate-200 px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        <option value="">All subjects</option>
+        {% for subj in all_subjects %}
+          <option value="{{ subj.pk }}" {% if request.GET.subject == subj.pk|stringformat:"s" %}selected{% endif %}>
+            {{ subj.name }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <input type="text" name="municipality" placeholder="Municipality"
+        value="{{ request.GET.municipality }}"
+        class="flex-1 rounded-xl border border-slate-200 px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+
+      <input type="number" name="max_price" placeholder="Max €/h" min="0" step="5"
+        value="{{ request.GET.max_price }}"
+        class="w-28 rounded-xl border border-slate-200 px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+
+      <button type="submit"
+        class="bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-indigo-700 transition-colors text-sm shrink-0">
+        Search
+      </button>
+    </form>
   </div>
-{% empty %}
-  <p>No teachers found.</p>
-{% endfor %}
+</div>
+
+{# Results #}
+<div class="max-w-5xl mx-auto px-4 py-10">
+
+  {% if request.GET.subject or request.GET.municipality or request.GET.max_price %}
+    <div class="flex items-center justify-between mb-6">
+      <p class="text-sm text-slate-500">
+        {{ teachers|length }} teacher{{ teachers|length|pluralize }} found
+      </p>
+      <a href="/" class="text-sm text-indigo-600 hover:underline">Clear filters</a>
+    </div>
+  {% endif %}
+
+  {% if teachers %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {% for teacher in teachers %}
+        <a href="/teachers/{{ teacher.pk }}/"
+          class="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all p-5 flex flex-col gap-3">
+
+          {# Avatar + name #}
+          <div class="flex items-center gap-3">
+            {% if teacher.profile.avatar %}
+              <img src="{{ teacher.profile.avatar.url }}" alt=""
+                class="w-12 h-12 rounded-full object-cover shrink-0">
+            {% else %}
+              <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-base font-bold text-indigo-400 shrink-0">
+                {{ teacher.profile.user.first_name|first|upper }}{{ teacher.profile.user.last_name|first|upper }}
+              </div>
+            {% endif %}
+            <div class="min-w-0">
+              <p class="font-semibold text-slate-900 truncate group-hover:text-indigo-600 transition-colors">
+                {{ teacher.profile.user.get_full_name|default:teacher.profile.user.email }}
+              </p>
+              {% if teacher.profile.municipality %}
+                <p class="text-xs text-slate-400 truncate">📍 {{ teacher.profile.municipality }}</p>
+              {% endif %}
+            </div>
+          </div>
+
+          {# Subjects #}
+          {% if teacher.subjects.all %}
+            <div class="flex flex-wrap gap-1.5">
+              {% for s in teacher.subjects.all %}
+                <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-full">{{ s }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {# Price + rating #}
+          <div class="flex items-center justify-between mt-auto pt-2 border-t border-slate-100">
+            <span class="text-sm font-semibold text-slate-800">
+              {% if teacher.price_per_hour %}€{{ teacher.price_per_hour }}/h{% else %}<span class="text-slate-400">Price on request</span>{% endif %}
+            </span>
+            {% if teacher.avg_rating %}
+              <span class="flex items-center gap-1 text-xs text-slate-500">
+                <span class="text-yellow-400">★</span>
+                {{ teacher.avg_rating|floatformat:1 }}
+                <span class="text-slate-300">({{ teacher.review_count }})</span>
+              </span>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <div class="text-center py-20">
+      <p class="text-4xl mb-4">🔍</p>
+      <p class="text-slate-500 text-sm">No teachers found for these filters.</p>
+      <a href="/" class="mt-4 inline-block text-indigo-600 hover:underline text-sm">See all teachers</a>
+    </div>
+  {% endif %}
+
+</div>
 {% endblock %}
