@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, UserCreationForm
 from .models import User
 
 INPUT_CLASS = "field-input"
@@ -11,6 +11,12 @@ class LoginForm(AuthenticationForm):
         self.fields["username"].label = "Email"
         self.fields["username"].widget = forms.EmailInput(attrs={"class": INPUT_CLASS, "autofocus": True})
         self.fields["password"].widget.attrs["class"] = INPUT_CLASS
+
+
+class StyledPasswordResetForm(PasswordResetForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["email"].widget.attrs["class"] = INPUT_CLASS
 
 
 class RegisterForm(UserCreationForm):
