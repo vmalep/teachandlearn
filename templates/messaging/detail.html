@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}{{ other.get_full_name|default:other.email }} — Messages{% endblock %}
+{% block content %}
+
+{# Sticky header #}
+<div class="sticky top-0 z-10 bg-white border-b border-slate-200">
+  <div class="max-w-2xl mx-auto px-4 h-14 flex items-center gap-3">
+    <a href="/messages/" class="text-slate-400 hover:text-slate-700 mr-1">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+    </a>
+
+    {% if other.profile.avatar %}
+      <img src="{{ other.profile.avatar.url }}" alt="" class="w-8 h-8 rounded-full object-cover">
+    {% else %}
+      <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-400">
+        {{ other.first_name|first|upper }}{{ other.last_name|first|upper }}
+      </div>
+    {% endif %}
+
+    <div class="flex-1 min-w-0">
+      <p class="text-sm font-semibold text-slate-900 truncate">
+        {{ other.get_full_name|default:other.email }}
+      </p>
+      {% if other.profile.is_teacher %}
+        <p class="text-xs text-slate-400">Teacher</p>
+      {% else %}
+        <p class="text-xs text-slate-400">Student</p>
+      {% endif %}
+    </div>
+
+    {# State badge #}
+    {% if conversation.state == "closed" %}
+      <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full">Closed</span>
+    {% elif conversation.state == "new" %}
+      <span class="text-xs bg-indigo-50 text-indigo-600 px-2.5 py-1 rounded-full">New</span>
+    {% endif %}
+  </div>
+</div>
+
+{# Message thread #}
+<div class="max-w-2xl mx-auto px-4 py-6 space-y-3" id="thread">
+
+  {% if not thread %}
+    <div class="text-center py-12">
+      <p class="text-slate-400 text-sm">Start the conversation by sending a message below.</p>
+    </div>
+  {% endif %}
+
+  {% for msg in thread %}
+    {% if msg.sender == user %}
+      {# My message — right #}
+      <div class="flex justify-end">
+        <div class="max-w-xs sm:max-w-md">
+          <div class="bg-indigo-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 text-sm leading-relaxed">
+            {{ msg.body|linebreaksbr }}
+          </div>
+          <p class="text-xs text-slate-400 text-right mt-1 px-1">{{ msg.created_at|date:"H:i" }}</p>
+        </div>
+      </div>
+    {% else %}
+      {# Their message — left #}
+      <div class="flex items-end gap-2">
+        {% if other.profile.avatar %}
+          <img src="{{ other.profile.avatar.url }}" alt="" class="w-6 h-6 rounded-full object-cover shrink-0 mb-5">
+        {% else %}
+          <div class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-400 shrink-0 mb-5">
+            {{ other.first_name|first|upper }}
+          </div>
+        {% endif %}
+        <div class="max-w-xs sm:max-w-md">
+          <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-sm px-4 py-2.5 text-sm text-slate-800 leading-relaxed shadow-sm">
+            {{ msg.body|linebreaksbr }}
+          </div>
+          <p class="text-xs text-slate-400 mt-1 px-1">{{ msg.created_at|date:"H:i" }}</p>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+
+</div>
+
+{# Message input — sticky at bottom #}
+{% if conversation.state != "closed" %}
+<div class="sticky bottom-0 bg-white border-t border-slate-200">
+  <div class="max-w-2xl mx-auto px-4 py-3">
+    <form method="post" class="flex items-end gap-3">
+      {% csrf_token %}
+      <textarea name="body" rows="2" placeholder="Write a message…"
+        class="flex-1 field-input resize-none"
+        onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();this.form.submit();}"></textarea>
+      <button type="submit"
+        class="shrink-0 bg-indigo-600 text-white p-2.5 rounded-xl hover:bg-indigo-700 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+        </svg>
+      </button>
+    </form>
+    <p class="text-xs text-slate-400 mt-1.5">Enter to send · Shift+Enter for new line</p>
+  </div>
+</div>
+{% else %}
+<div class="sticky bottom-0 bg-slate-50 border-t border-slate-200">
+  <div class="max-w-2xl mx-auto px-4 py-4 text-center text-sm text-slate-400">
+    This conversation is closed.
+  </div>
+</div>
+{% endif %}
+
+{# Auto-scroll to bottom on load #}
+<script>
+  document.getElementById('thread').lastElementChild?.scrollIntoView({block:'end'});
+</script>
+
+{% endblock %}

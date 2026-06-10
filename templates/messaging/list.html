@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load tal_extras %}
+{% block title %}Messages — TeachAndLearn{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-10">
+
+  <h1 class="text-xl font-bold text-slate-900 mb-6">Messages</h1>
+
+  {% if conversations %}
+    <ul class="space-y-2">
+      {% for conv in conversations %}
+        {% other_party conv as other %}
+        <li>
+          <a href="/messages/{{ conv.pk }}/"
+            class="flex items-center gap-4 bg-white rounded-2xl border border-slate-200 shadow-sm hover:border-indigo-200 hover:shadow-md transition-all px-5 py-4">
+
+            {% if other.profile.avatar %}
+              <img src="{{ other.profile.avatar.url }}" alt=""
+                class="w-11 h-11 rounded-full object-cover shrink-0">
+            {% else %}
+              <div class="w-11 h-11 rounded-full bg-indigo-100 flex items-center justify-center text-sm font-bold text-indigo-400 shrink-0">
+                {{ other.first_name|first|upper }}{{ other.last_name|first|upper }}
+              </div>
+            {% endif %}
+
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <p class="text-sm font-semibold text-slate-900 truncate">
+                  {{ other.get_full_name|default:other.email }}
+                </p>
+                {% if conv.last_message_at %}
+                  <span class="text-xs text-slate-400 shrink-0">{{ conv.last_message_at|timesince }} ago</span>
+                {% endif %}
+              </div>
+              <div class="flex items-center gap-2 mt-0.5">
+                {% if conv.last_message_body %}
+                  <p class="text-sm text-slate-500 truncate">{{ conv.last_message_body|truncatechars:60 }}</p>
+                {% else %}
+                  <p class="text-sm text-slate-400 italic">No messages yet</p>
+                {% endif %}
+                {% if conv.state == "new" %}
+                  <span class="shrink-0 text-xs bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full">New</span>
+                {% elif conv.state == "closed" %}
+                  <span class="shrink-0 text-xs bg-slate-100 text-slate-400 px-2 py-0.5 rounded-full">Closed</span>
+                {% endif %}
+              </div>
+            </div>
+
+            <svg class="w-4 h-4 text-slate-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+  {% else %}
+    <div class="text-center py-20">
+      <p class="text-4xl mb-4">💬</p>
+      <p class="text-slate-500 text-sm">No conversations yet.</p>
+      <a href="/" class="mt-4 inline-block text-indigo-600 hover:underline text-sm">Find a teacher</a>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

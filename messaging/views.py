@@ -1,8 +1,26 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, View
+from django.db.models import OuterRef, Q, Subquery
+from django.shortcuts import get_object_or_404, redirect, render
+from django.views import View
+from django.views.generic import ListView
 from .models import Conversation, Message
 from accounts.models import User
+
+
+def _user_conversations(user):
+    last_msg = Message.objects.filter(
+        conversation=OuterRef("pk")
+    ).order_by("-created_at")
+    return (
+        Conversation.objects.filter(Q(student=user) | Q(teacher=user))
+        .select_related("student", "teacher",
+                        "student__profile", "teacher__profile")
+        .annotate(
+            last_message_body=Subquery(last_msg.values("body")[:1]),
+            last_message_at=Subquery(last_msg.values("created_at")[:1]),
+        )
+        .order_by("-last_message_at", "-updated_at")
+    )
 
 
 class ConversationListView(LoginRequiredMixin, ListView):
@@ -10,35 +28,50 @@ class ConversationListView(LoginRequiredMixin, ListView):
     context_object_name = "conversations"
 
     def get_queryset(self):
-        user = self.request.user
-        return Conversation.objects.filter(
-            student=user
-        ) | Conversation.objects.filter(teacher=user)
+        return _user_conversations(self.request.user)
 
 
-class ConversationDetailView(LoginRequiredMixin, DetailView):
-    model = Conversation
+class ConversationDetailView(LoginRequiredMixin, View):
     template_name = "messaging/detail.html"
-    context_object_name = "conversation"
 
-    def get_queryset(self):
-        user = self.request.user
-        return Conversation.objects.filter(student=user) | Conversation.objects.filter(teacher=user)
+    def _get_conversation(self, request, pk):
+        user = request.user
+        return get_object_or_404(
+            Conversation.objects.select_related("student", "teacher")
+            .prefetch_related("messages__sender"),
+            Q(student=user) | Q(teacher=user),
+            pk=pk,
+        )
+
+    def get(self, request, pk):
+        conversation = self._get_conversation(request, pk)
+        other = conversation.teacher if request.user == conversation.student else conversation.student
+        return render(request, self.template_name, {
+            "conversation": conversation,
+            "thread": conversation.messages.all(),
+            "other": other,
+        })
 
     def post(self, request, pk):
-        conversation = self.get_object()
+        conversation = self._get_conversation(request, pk)
         body = request.POST.get("body", "").strip()
         if body:
-            Message.objects.create(conversation=conversation, sender=request.user, body=body)
+            Message.objects.create(
+                conversation=conversation, sender=request.user, body=body
+            )
             if conversation.state == Conversation.State.NEW:
                 conversation.state = Conversation.State.ONGOING
-                conversation.save()
+                conversation.save(update_fields=["state", "updated_at"])
         return redirect("messaging:detail", pk=pk)
 
 
 class StartConversationView(LoginRequiredMixin, View):
     def post(self, request, teacher_pk):
-        teacher_user = get_object_or_404(User, pk=teacher_pk)
+        teacher_user = get_object_or_404(
+            User, pk=teacher_pk, profile__is_teacher=True
+        )
+        if teacher_user == request.user:
+            return redirect("home")
         conversation, _ = Conversation.objects.get_or_create(
             student=request.user, teacher=teacher_user
         )
