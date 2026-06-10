@@ -136,7 +136,8 @@
               <div class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-400">
                 {{ review.student.first_name|first|upper }}
               </div>
-              <span class="text-sm font-medium text-slate-800">{{ review.student.get_full_name|default:_("Anonymous") }}</span>
+              {% trans "Anonymous" as anon_label %}
+              <span class="text-sm font-medium text-slate-800">{{ review.student.get_full_name|default:anon_label }}</span>
               <span class="text-slate-300 text-xs ml-auto">{{ review.created_at|date:"N j, Y" }}</span>
             </div>
             <div class="flex items-center gap-1 mb-2">

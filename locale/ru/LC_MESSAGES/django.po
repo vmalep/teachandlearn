@@ -1,0 +1,430 @@
+# Russian translations for TeachAndLearn
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Login"
+msgstr "Войти"
+
+msgid "Logout"
+msgstr "Выйти"
+
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+msgid "My Profile"
+msgstr "Мой профиль"
+
+msgid "Messages"
+msgstr "Сообщения"
+
+msgid "Sign in"
+msgstr "Войти"
+
+msgid "Welcome back"
+msgstr "С возвращением"
+
+msgid "No account?"
+msgstr "Нет аккаунта?"
+
+msgid "Create one"
+msgstr "Создать"
+
+msgid "Forgot your password?"
+msgstr "Забыли пароль?"
+
+msgid "Create an account"
+msgstr "Создать аккаунт"
+
+msgid "Create your account"
+msgstr "Создайте свой аккаунт"
+
+msgid "Already have one?"
+msgstr "Уже есть аккаунт?"
+
+msgid "Create account"
+msgstr "Создать аккаунт"
+
+msgid "By registering you agree to use the platform responsibly."
+msgstr "Регистрируясь, вы соглашаетесь использовать платформу ответственно."
+
+msgid "Check your email"
+msgstr "Проверьте почту"
+
+msgid "Check your inbox"
+msgstr "Проверьте входящие"
+
+msgid "We've sent a verification link to your email address."
+msgstr "Мы отправили ссылку для подтверждения на ваш адрес электронной почты."
+
+msgid "Click the link to activate your account."
+msgstr "Нажмите на ссылку, чтобы активировать аккаунт."
+
+msgid "Didn't receive it? Check your spam folder."
+msgstr "Не получили? Проверьте папку «Спам»."
+
+msgid "Invalid link"
+msgstr "Недействительная ссылка"
+
+msgid "Link expired or invalid"
+msgstr "Ссылка устарела или недействительна"
+
+msgid "This verification link has already been used or has expired."
+msgstr "Эта ссылка подтверждения уже использована или устарела."
+
+msgid "Register again"
+msgstr "Зарегистрироваться снова"
+
+msgid "Reset your password"
+msgstr "Сброс пароля"
+
+msgid "Enter your email and we'll send you a reset link."
+msgstr "Введите почту и мы отправим ссылку для сброса пароля."
+
+msgid "Send reset link"
+msgstr "Отправить ссылку"
+
+msgid "Back to sign in"
+msgstr "Назад к входу"
+
+msgid "Reset link sent"
+msgstr "Ссылка для сброса отправлена"
+
+msgid "If an account exists for that email, you'll receive a password reset link shortly."
+msgstr "Если аккаунт с такой почтой существует, вы скоро получите ссылку для сброса пароля."
+
+msgid "Choose a new password"
+msgstr "Выберите новый пароль"
+
+msgid "Set new password"
+msgstr "Установить новый пароль"
+
+msgid "This reset link is invalid or has expired."
+msgstr "Эта ссылка для сброса недействительна или устарела."
+
+msgid "Request a new one"
+msgstr "Запросить новую"
+
+msgid "Password updated"
+msgstr "Пароль обновлён"
+
+msgid "Your password has been changed successfully."
+msgstr "Ваш пароль был успешно изменён."
+
+msgid "Edit Profile"
+msgstr "Редактировать профиль"
+
+msgid "Back"
+msgstr "Назад"
+
+msgid "My role on TeachAndLearn"
+msgstr "Моя роль на TeachAndLearn"
+
+msgid "I am a teacher"
+msgstr "Я преподаватель"
+
+msgid "I am a student"
+msgstr "Я студент"
+
+msgid "Save changes"
+msgstr "Сохранить"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Avatar"
+msgstr "Аватар"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Teacher Profile"
+msgstr "Профиль преподавателя"
+
+msgid "Validated"
+msgstr "Подтверждён"
+
+msgid "Rejected"
+msgstr "Отклонён"
+
+msgid "Pending validation"
+msgstr "Ожидает проверки"
+
+msgid "Price:"
+msgstr "Цена:"
+
+msgid "Native language:"
+msgstr "Родной язык:"
+
+msgid "Availability:"
+msgstr "Доступность:"
+
+msgid "Certificates:"
+msgstr "Сертификаты:"
+
+msgid "No teacher profile yet."
+msgstr "Профиль преподавателя ещё не создан."
+
+msgid "Set it up"
+msgstr "Настроить"
+
+msgid "Student Profile"
+msgstr "Профиль студента"
+
+msgid "Subjects:"
+msgstr "Предметы:"
+
+msgid "Goals:"
+msgstr "Цели:"
+
+msgid "No student profile yet."
+msgstr "Профиль студента ещё не создан."
+
+msgid "You haven't set a role yet."
+msgstr "Вы ещё не выбрали роль."
+
+msgid "Set up your profile"
+msgstr "Настроить профиль"
+
+msgid "ago"
+msgstr "назад"
+
+msgid "No messages yet"
+msgstr "Сообщений пока нет"
+
+msgid "New"
+msgstr "Новое"
+
+msgid "Closed"
+msgstr "Закрыто"
+
+msgid "No conversations yet."
+msgstr "Разговоров пока нет."
+
+msgid "Find a teacher"
+msgstr "Найти преподавателя"
+
+msgid "Teacher"
+msgstr "Преподаватель"
+
+msgid "Student"
+msgstr "Студент"
+
+msgid "Start the conversation by sending a message below."
+msgstr "Начните разговор, отправив сообщение ниже."
+
+msgid "Write a message…"
+msgstr "Написать сообщение…"
+
+msgid "Enter to send · Shift+Enter for new line"
+msgstr "Enter для отправки · Shift+Enter для новой строки"
+
+msgid "This conversation is closed."
+msgstr "Этот разговор закрыт."
+
+msgid "Find a Teacher"
+msgstr "Найти преподавателя"
+
+msgid "Find a private teacher"
+msgstr "Найти частного преподавателя"
+
+msgid "Verified teachers for one-on-one lessons in Belgium"
+msgstr "Проверенные преподаватели для индивидуальных занятий в Бельгии"
+
+msgid "All subjects"
+msgstr "Все предметы"
+
+msgid "Municipality"
+msgstr "Муниципалитет"
+
+msgid "Max €/h"
+msgstr "Макс. €/ч"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "%(num)s teacher found"
+msgid_plural "%(num)s teachers found"
+msgstr[0] "Найден %(num)s преподаватель"
+msgstr[1] "Найдено %(num)s преподавателя"
+msgstr[2] "Найдено %(num)s преподавателей"
+
+msgid "Clear filters"
+msgstr "Сбросить фильтры"
+
+msgid "Price on request"
+msgstr "Цена по запросу"
+
+msgid "No teachers found for these filters."
+msgstr "Преподаватели по этим фильтрам не найдены."
+
+msgid "See all teachers"
+msgstr "Все преподаватели"
+
+msgid "hour"
+msgstr "час"
+
+msgid "%(num)s review"
+msgid_plural "%(num)s reviews"
+msgstr[0] "%(num)s отзыв"
+msgstr[1] "%(num)s отзыва"
+msgstr[2] "%(num)s отзывов"
+
+msgid "Continue conversation"
+msgstr "Продолжить разговор"
+
+msgid "Contact this teacher"
+msgstr "Связаться с преподавателем"
+
+msgid "About"
+msgstr "О себе"
+
+msgid "Native language"
+msgstr "Родной язык"
+
+msgid "Availability"
+msgstr "Доступность"
+
+msgid "Certificates & Credentials"
+msgstr "Сертификаты и квалификации"
+
+msgid "Obtained:"
+msgstr "Получен:"
+
+msgid "Expires:"
+msgstr "Действителен до:"
+
+msgid "Reviews"
+msgstr "Отзывы"
+
+msgid "You already reviewed this teacher"
+msgstr "Вы уже оставили отзыв об этом преподавателе"
+
+msgid "Write a review"
+msgstr "Написать отзыв"
+
+msgid "Anonymous"
+msgstr "Аноним"
+
+msgid "No reviews yet."
+msgstr "Отзывов пока нет."
+
+msgid "My Teacher Profile"
+msgstr "Мой профиль преподавателя"
+
+msgid "Your profile is published"
+msgstr "Ваш профиль опубликован"
+
+msgid "Students can find you in the directory."
+msgstr "Студенты могут найти вас в каталоге."
+
+msgid "Your profile was rejected"
+msgstr "Ваш профиль отклонён"
+
+msgid "Update your profile and it will be reviewed again."
+msgstr "Обновите профиль, и он будет повторно проверен."
+
+msgid "Awaiting validation"
+msgstr "Ожидает проверки"
+
+msgid "An admin will review your profile before it goes live."
+msgstr "Администратор проверит ваш профиль перед публикацией."
+
+msgid "Subjects"
+msgstr "Предметы"
+
+msgid "No subjects added yet."
+msgstr "Предметы ещё не добавлены."
+
+msgid "Price per hour"
+msgstr "Цена в час"
+
+msgid "Not set"
+msgstr "Не указано"
+
+msgid "No certificates added yet."
+msgstr "Сертификаты ещё не добавлены."
+
+msgid "Edit Teacher Profile"
+msgstr "Редактировать профиль преподавателя"
+
+msgid "Teaching info"
+msgstr "Информация о преподавании"
+
+msgid "Subjects you teach"
+msgstr "Предметы, которые вы преподаёте"
+
+msgid "No subjects available yet — an admin must add them first."
+msgstr "Предметы ещё недоступны — сначала их должен добавить администратор."
+
+msgid "Certificate #%(num)s"
+msgstr "Сертификат №%(num)s"
+
+msgid "Add new"
+msgstr "Добавить"
+
+msgid "Remove this certificate"
+msgstr "Удалить этот сертификат"
+
+msgid "My Student Profile"
+msgstr "Мой профиль студента"
+
+msgid "Subjects I want to learn"
+msgstr "Предметы, которые я хочу изучить"
+
+msgid "Learning goals"
+msgstr "Цели обучения"
+
+msgid "Edit Student Profile"
+msgstr "Редактировать профиль студента"
+
+msgid "Subjects & levels"
+msgstr "Предметы и уровни"
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Save to add another subject row."
+msgstr "Сохраните, чтобы добавить ещё один предмет."
+
+msgid "Write a Review"
+msgstr "Написать отзыв"
+
+msgid "Back to profile"
+msgstr "Назад к профилю"
+
+msgid "Edit your review"
+msgstr "Редактировать отзыв"
+
+msgid "For"
+msgstr "Для"
+
+msgid "Your rating"
+msgstr "Ваша оценка"
+
+msgid "%(val)s out of 5"
+msgstr "%(val)s из 5"
+
+msgid "out of 5"
+msgstr "из 5"
+
+msgid "Click to rate"
+msgstr "Нажмите для оценки"
+
+msgid "Comment"
+msgstr "Комментарий"
+
+msgid "optional"
+msgstr "необязательно"
+
+msgid "Update review"
+msgstr "Обновить отзыв"
+
+msgid "Submit review"
+msgstr "Отправить отзыв"
+
+msgid "Your review will appear after admin validation."
+msgstr "Ваш отзыв появится после проверки администратором."

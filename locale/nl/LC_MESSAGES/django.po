@@ -1,0 +1,428 @@
+# Dutch translations for TeachAndLearn
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Login"
+msgstr "Inloggen"
+
+msgid "Logout"
+msgstr "Uitloggen"
+
+msgid "Register"
+msgstr "Registreren"
+
+msgid "My Profile"
+msgstr "Mijn profiel"
+
+msgid "Messages"
+msgstr "Berichten"
+
+msgid "Sign in"
+msgstr "Inloggen"
+
+msgid "Welcome back"
+msgstr "Welkom terug"
+
+msgid "No account?"
+msgstr "Geen account?"
+
+msgid "Create one"
+msgstr "Maak er een"
+
+msgid "Forgot your password?"
+msgstr "Wachtwoord vergeten?"
+
+msgid "Create an account"
+msgstr "Account aanmaken"
+
+msgid "Create your account"
+msgstr "Maak uw account aan"
+
+msgid "Already have one?"
+msgstr "Al een account?"
+
+msgid "Create account"
+msgstr "Account aanmaken"
+
+msgid "By registering you agree to use the platform responsibly."
+msgstr "Door te registreren stemt u ermee in het platform verantwoord te gebruiken."
+
+msgid "Check your email"
+msgstr "Controleer uw e-mail"
+
+msgid "Check your inbox"
+msgstr "Controleer uw inbox"
+
+msgid "We've sent a verification link to your email address."
+msgstr "We hebben een verificatielink naar uw e-mailadres gestuurd."
+
+msgid "Click the link to activate your account."
+msgstr "Klik op de link om uw account te activeren."
+
+msgid "Didn't receive it? Check your spam folder."
+msgstr "Niet ontvangen? Controleer uw spammap."
+
+msgid "Invalid link"
+msgstr "Ongeldige link"
+
+msgid "Link expired or invalid"
+msgstr "Link verlopen of ongeldig"
+
+msgid "This verification link has already been used or has expired."
+msgstr "Deze verificatielink is al gebruikt of verlopen."
+
+msgid "Register again"
+msgstr "Opnieuw registreren"
+
+msgid "Reset your password"
+msgstr "Wachtwoord opnieuw instellen"
+
+msgid "Enter your email and we'll send you a reset link."
+msgstr "Voer uw e-mail in en we sturen u een resetlink."
+
+msgid "Send reset link"
+msgstr "Resetlink sturen"
+
+msgid "Back to sign in"
+msgstr "Terug naar inloggen"
+
+msgid "Reset link sent"
+msgstr "Resetlink verzonden"
+
+msgid "If an account exists for that email, you'll receive a password reset link shortly."
+msgstr "Als er een account bestaat voor dat e-mailadres, ontvangt u binnenkort een resetlink."
+
+msgid "Choose a new password"
+msgstr "Kies een nieuw wachtwoord"
+
+msgid "Set new password"
+msgstr "Nieuw wachtwoord instellen"
+
+msgid "This reset link is invalid or has expired."
+msgstr "Deze resetlink is ongeldig of verlopen."
+
+msgid "Request a new one"
+msgstr "Vraag een nieuwe aan"
+
+msgid "Password updated"
+msgstr "Wachtwoord bijgewerkt"
+
+msgid "Your password has been changed successfully."
+msgstr "Uw wachtwoord is succesvol gewijzigd."
+
+msgid "Edit Profile"
+msgstr "Profiel bewerken"
+
+msgid "Back"
+msgstr "Terug"
+
+msgid "My role on TeachAndLearn"
+msgstr "Mijn rol op TeachAndLearn"
+
+msgid "I am a teacher"
+msgstr "Ik ben een leraar"
+
+msgid "I am a student"
+msgstr "Ik ben een student"
+
+msgid "Save changes"
+msgstr "Wijzigingen opslaan"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Avatar"
+msgstr "Avatar"
+
+msgid "Edit"
+msgstr "Bewerken"
+
+msgid "Teacher Profile"
+msgstr "Leraarsprofiel"
+
+msgid "Validated"
+msgstr "Gevalideerd"
+
+msgid "Rejected"
+msgstr "Afgewezen"
+
+msgid "Pending validation"
+msgstr "Wacht op validatie"
+
+msgid "Price:"
+msgstr "Prijs:"
+
+msgid "Native language:"
+msgstr "Moedertaal:"
+
+msgid "Availability:"
+msgstr "Beschikbaarheid:"
+
+msgid "Certificates:"
+msgstr "Certificaten:"
+
+msgid "No teacher profile yet."
+msgstr "Nog geen leraarsprofiel."
+
+msgid "Set it up"
+msgstr "Instellen"
+
+msgid "Student Profile"
+msgstr "Studentprofiel"
+
+msgid "Subjects:"
+msgstr "Vakken:"
+
+msgid "Goals:"
+msgstr "Doelen:"
+
+msgid "No student profile yet."
+msgstr "Nog geen studentprofiel."
+
+msgid "You haven't set a role yet."
+msgstr "U heeft nog geen rol ingesteld."
+
+msgid "Set up your profile"
+msgstr "Profiel instellen"
+
+msgid "ago"
+msgstr "geleden"
+
+msgid "No messages yet"
+msgstr "Nog geen berichten"
+
+msgid "New"
+msgstr "Nieuw"
+
+msgid "Closed"
+msgstr "Gesloten"
+
+msgid "No conversations yet."
+msgstr "Nog geen gesprekken."
+
+msgid "Find a teacher"
+msgstr "Zoek een leraar"
+
+msgid "Teacher"
+msgstr "Leraar"
+
+msgid "Student"
+msgstr "Student"
+
+msgid "Start the conversation by sending a message below."
+msgstr "Begin het gesprek door hieronder een bericht te sturen."
+
+msgid "Write a message…"
+msgstr "Schrijf een bericht…"
+
+msgid "Enter to send · Shift+Enter for new line"
+msgstr "Enter om te versturen · Shift+Enter voor nieuwe regel"
+
+msgid "This conversation is closed."
+msgstr "Dit gesprek is gesloten."
+
+msgid "Find a Teacher"
+msgstr "Zoek een leraar"
+
+msgid "Find a private teacher"
+msgstr "Zoek een privéleraar"
+
+msgid "Verified teachers for one-on-one lessons in Belgium"
+msgstr "Geverifieerde leraren voor privélessen in België"
+
+msgid "All subjects"
+msgstr "Alle vakken"
+
+msgid "Municipality"
+msgstr "Gemeente"
+
+msgid "Max €/h"
+msgstr "Max €/u"
+
+msgid "Search"
+msgstr "Zoeken"
+
+msgid "%(num)s teacher found"
+msgid_plural "%(num)s teachers found"
+msgstr[0] "%(num)s leraar gevonden"
+msgstr[1] "%(num)s leraren gevonden"
+
+msgid "Clear filters"
+msgstr "Filters wissen"
+
+msgid "Price on request"
+msgstr "Prijs op aanvraag"
+
+msgid "No teachers found for these filters."
+msgstr "Geen leraren gevonden voor deze filters."
+
+msgid "See all teachers"
+msgstr "Alle leraren bekijken"
+
+msgid "hour"
+msgstr "uur"
+
+msgid "%(num)s review"
+msgid_plural "%(num)s reviews"
+msgstr[0] "%(num)s beoordeling"
+msgstr[1] "%(num)s beoordelingen"
+
+msgid "Continue conversation"
+msgstr "Gesprek voortzetten"
+
+msgid "Contact this teacher"
+msgstr "Neem contact op met deze leraar"
+
+msgid "About"
+msgstr "Over"
+
+msgid "Native language"
+msgstr "Moedertaal"
+
+msgid "Availability"
+msgstr "Beschikbaarheid"
+
+msgid "Certificates & Credentials"
+msgstr "Certificaten en referenties"
+
+msgid "Obtained:"
+msgstr "Behaald:"
+
+msgid "Expires:"
+msgstr "Verloopt:"
+
+msgid "Reviews"
+msgstr "Beoordelingen"
+
+msgid "You already reviewed this teacher"
+msgstr "U heeft deze leraar al beoordeeld"
+
+msgid "Write a review"
+msgstr "Schrijf een beoordeling"
+
+msgid "Anonymous"
+msgstr "Anoniem"
+
+msgid "No reviews yet."
+msgstr "Nog geen beoordelingen."
+
+msgid "My Teacher Profile"
+msgstr "Mijn leraarsprofiel"
+
+msgid "Your profile is published"
+msgstr "Uw profiel is gepubliceerd"
+
+msgid "Students can find you in the directory."
+msgstr "Studenten kunnen u vinden in de gids."
+
+msgid "Your profile was rejected"
+msgstr "Uw profiel is afgewezen"
+
+msgid "Update your profile and it will be reviewed again."
+msgstr "Werk uw profiel bij en het wordt opnieuw beoordeeld."
+
+msgid "Awaiting validation"
+msgstr "Wacht op validatie"
+
+msgid "An admin will review your profile before it goes live."
+msgstr "Een beheerder beoordeelt uw profiel voordat het gepubliceerd wordt."
+
+msgid "Subjects"
+msgstr "Vakken"
+
+msgid "No subjects added yet."
+msgstr "Nog geen vakken toegevoegd."
+
+msgid "Price per hour"
+msgstr "Prijs per uur"
+
+msgid "Not set"
+msgstr "Niet ingesteld"
+
+msgid "No certificates added yet."
+msgstr "Nog geen certificaten toegevoegd."
+
+msgid "Edit Teacher Profile"
+msgstr "Leraarsprofiel bewerken"
+
+msgid "Teaching info"
+msgstr "Onderwijsinformatie"
+
+msgid "Subjects you teach"
+msgstr "Vakken die u onderwijst"
+
+msgid "No subjects available yet — an admin must add them first."
+msgstr "Nog geen vakken beschikbaar — een beheerder moet ze eerst toevoegen."
+
+msgid "Certificate #%(num)s"
+msgstr "Certificaat nr. %(num)s"
+
+msgid "Add new"
+msgstr "Toevoegen"
+
+msgid "Remove this certificate"
+msgstr "Dit certificaat verwijderen"
+
+msgid "My Student Profile"
+msgstr "Mijn studentprofiel"
+
+msgid "Subjects I want to learn"
+msgstr "Vakken die ik wil leren"
+
+msgid "Learning goals"
+msgstr "Leerdoelen"
+
+msgid "Edit Student Profile"
+msgstr "Studentprofiel bewerken"
+
+msgid "Subjects & levels"
+msgstr "Vakken en niveaus"
+
+msgid "Remove"
+msgstr "Verwijderen"
+
+msgid "Save to add another subject row."
+msgstr "Sla op om een ander vak toe te voegen."
+
+msgid "Write a Review"
+msgstr "Schrijf een beoordeling"
+
+msgid "Back to profile"
+msgstr "Terug naar profiel"
+
+msgid "Edit your review"
+msgstr "Uw beoordeling bewerken"
+
+msgid "For"
+msgstr "Voor"
+
+msgid "Your rating"
+msgstr "Uw beoordeling"
+
+msgid "%(val)s out of 5"
+msgstr "%(val)s van de 5"
+
+msgid "out of 5"
+msgstr "van de 5"
+
+msgid "Click to rate"
+msgstr "Klik om te beoordelen"
+
+msgid "Comment"
+msgstr "Opmerking"
+
+msgid "optional"
+msgstr "optioneel"
+
+msgid "Update review"
+msgstr "Beoordeling bijwerken"
+
+msgid "Submit review"
+msgstr "Beoordeling indienen"
+
+msgid "Your review will appear after admin validation."
+msgstr "Uw beoordeling verschijnt na validatie door een beheerder."

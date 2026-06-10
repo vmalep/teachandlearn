@@ -1,0 +1,428 @@
+# Spanish translations for TeachAndLearn
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Login"
+msgstr "Iniciar sesión"
+
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+msgid "Register"
+msgstr "Registrarse"
+
+msgid "My Profile"
+msgstr "Mi perfil"
+
+msgid "Messages"
+msgstr "Mensajes"
+
+msgid "Sign in"
+msgstr "Iniciar sesión"
+
+msgid "Welcome back"
+msgstr "Bienvenido de nuevo"
+
+msgid "No account?"
+msgstr "¿Sin cuenta?"
+
+msgid "Create one"
+msgstr "Crea una"
+
+msgid "Forgot your password?"
+msgstr "¿Olvidaste tu contraseña?"
+
+msgid "Create an account"
+msgstr "Crear una cuenta"
+
+msgid "Create your account"
+msgstr "Crea tu cuenta"
+
+msgid "Already have one?"
+msgstr "¿Ya tienes una?"
+
+msgid "Create account"
+msgstr "Crear cuenta"
+
+msgid "By registering you agree to use the platform responsibly."
+msgstr "Al registrarte, aceptas usar la plataforma de manera responsable."
+
+msgid "Check your email"
+msgstr "Revisa tu correo"
+
+msgid "Check your inbox"
+msgstr "Revisa tu bandeja de entrada"
+
+msgid "We've sent a verification link to your email address."
+msgstr "Hemos enviado un enlace de verificación a tu dirección de correo."
+
+msgid "Click the link to activate your account."
+msgstr "Haz clic en el enlace para activar tu cuenta."
+
+msgid "Didn't receive it? Check your spam folder."
+msgstr "¿No lo recibiste? Revisa tu carpeta de spam."
+
+msgid "Invalid link"
+msgstr "Enlace inválido"
+
+msgid "Link expired or invalid"
+msgstr "Enlace caducado o inválido"
+
+msgid "This verification link has already been used or has expired."
+msgstr "Este enlace de verificación ya fue utilizado o ha caducado."
+
+msgid "Register again"
+msgstr "Registrarse de nuevo"
+
+msgid "Reset your password"
+msgstr "Restablecer contraseña"
+
+msgid "Enter your email and we'll send you a reset link."
+msgstr "Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña."
+
+msgid "Send reset link"
+msgstr "Enviar enlace"
+
+msgid "Back to sign in"
+msgstr "Volver al inicio de sesión"
+
+msgid "Reset link sent"
+msgstr "Enlace de restablecimiento enviado"
+
+msgid "If an account exists for that email, you'll receive a password reset link shortly."
+msgstr "Si existe una cuenta con ese correo, recibirás un enlace de restablecimiento en breve."
+
+msgid "Choose a new password"
+msgstr "Elige una nueva contraseña"
+
+msgid "Set new password"
+msgstr "Establecer nueva contraseña"
+
+msgid "This reset link is invalid or has expired."
+msgstr "Este enlace de restablecimiento es inválido o ha caducado."
+
+msgid "Request a new one"
+msgstr "Solicitar uno nuevo"
+
+msgid "Password updated"
+msgstr "Contraseña actualizada"
+
+msgid "Your password has been changed successfully."
+msgstr "Tu contraseña ha sido cambiada con éxito."
+
+msgid "Edit Profile"
+msgstr "Editar perfil"
+
+msgid "Back"
+msgstr "Volver"
+
+msgid "My role on TeachAndLearn"
+msgstr "Mi rol en TeachAndLearn"
+
+msgid "I am a teacher"
+msgstr "Soy profesor"
+
+msgid "I am a student"
+msgstr "Soy estudiante"
+
+msgid "Save changes"
+msgstr "Guardar cambios"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Avatar"
+msgstr "Avatar"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Teacher Profile"
+msgstr "Perfil de profesor"
+
+msgid "Validated"
+msgstr "Validado"
+
+msgid "Rejected"
+msgstr "Rechazado"
+
+msgid "Pending validation"
+msgstr "Pendiente de validación"
+
+msgid "Price:"
+msgstr "Precio:"
+
+msgid "Native language:"
+msgstr "Lengua materna:"
+
+msgid "Availability:"
+msgstr "Disponibilidad:"
+
+msgid "Certificates:"
+msgstr "Certificados:"
+
+msgid "No teacher profile yet."
+msgstr "Aún no hay perfil de profesor."
+
+msgid "Set it up"
+msgstr "Configurarlo"
+
+msgid "Student Profile"
+msgstr "Perfil de estudiante"
+
+msgid "Subjects:"
+msgstr "Materias:"
+
+msgid "Goals:"
+msgstr "Objetivos:"
+
+msgid "No student profile yet."
+msgstr "Aún no hay perfil de estudiante."
+
+msgid "You haven't set a role yet."
+msgstr "Aún no has establecido un rol."
+
+msgid "Set up your profile"
+msgstr "Configurar tu perfil"
+
+msgid "ago"
+msgstr "hace"
+
+msgid "No messages yet"
+msgstr "Sin mensajes aún"
+
+msgid "New"
+msgstr "Nuevo"
+
+msgid "Closed"
+msgstr "Cerrado"
+
+msgid "No conversations yet."
+msgstr "Aún no hay conversaciones."
+
+msgid "Find a teacher"
+msgstr "Buscar un profesor"
+
+msgid "Teacher"
+msgstr "Profesor"
+
+msgid "Student"
+msgstr "Estudiante"
+
+msgid "Start the conversation by sending a message below."
+msgstr "Inicia la conversación enviando un mensaje a continuación."
+
+msgid "Write a message…"
+msgstr "Escribe un mensaje…"
+
+msgid "Enter to send · Shift+Enter for new line"
+msgstr "Enter para enviar · Shift+Enter para nueva línea"
+
+msgid "This conversation is closed."
+msgstr "Esta conversación está cerrada."
+
+msgid "Find a Teacher"
+msgstr "Buscar un profesor"
+
+msgid "Find a private teacher"
+msgstr "Encontrar un profesor particular"
+
+msgid "Verified teachers for one-on-one lessons in Belgium"
+msgstr "Profesores verificados para clases particulares en Bélgica"
+
+msgid "All subjects"
+msgstr "Todas las materias"
+
+msgid "Municipality"
+msgstr "Municipio"
+
+msgid "Max €/h"
+msgstr "Máx €/h"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "%(num)s teacher found"
+msgid_plural "%(num)s teachers found"
+msgstr[0] "%(num)s profesor encontrado"
+msgstr[1] "%(num)s profesores encontrados"
+
+msgid "Clear filters"
+msgstr "Limpiar filtros"
+
+msgid "Price on request"
+msgstr "Precio a consultar"
+
+msgid "No teachers found for these filters."
+msgstr "No se encontraron profesores para estos filtros."
+
+msgid "See all teachers"
+msgstr "Ver todos los profesores"
+
+msgid "hour"
+msgstr "hora"
+
+msgid "%(num)s review"
+msgid_plural "%(num)s reviews"
+msgstr[0] "%(num)s valoración"
+msgstr[1] "%(num)s valoraciones"
+
+msgid "Continue conversation"
+msgstr "Continuar conversación"
+
+msgid "Contact this teacher"
+msgstr "Contactar a este profesor"
+
+msgid "About"
+msgstr "Acerca de"
+
+msgid "Native language"
+msgstr "Lengua materna"
+
+msgid "Availability"
+msgstr "Disponibilidad"
+
+msgid "Certificates & Credentials"
+msgstr "Certificados y credenciales"
+
+msgid "Obtained:"
+msgstr "Obtenido:"
+
+msgid "Expires:"
+msgstr "Vence:"
+
+msgid "Reviews"
+msgstr "Valoraciones"
+
+msgid "You already reviewed this teacher"
+msgstr "Ya has valorado a este profesor"
+
+msgid "Write a review"
+msgstr "Escribir una valoración"
+
+msgid "Anonymous"
+msgstr "Anónimo"
+
+msgid "No reviews yet."
+msgstr "Aún no hay valoraciones."
+
+msgid "My Teacher Profile"
+msgstr "Mi perfil de profesor"
+
+msgid "Your profile is published"
+msgstr "Tu perfil está publicado"
+
+msgid "Students can find you in the directory."
+msgstr "Los estudiantes pueden encontrarte en el directorio."
+
+msgid "Your profile was rejected"
+msgstr "Tu perfil fue rechazado"
+
+msgid "Update your profile and it will be reviewed again."
+msgstr "Actualiza tu perfil y será revisado nuevamente."
+
+msgid "Awaiting validation"
+msgstr "Esperando validación"
+
+msgid "An admin will review your profile before it goes live."
+msgstr "Un administrador revisará tu perfil antes de publicarlo."
+
+msgid "Subjects"
+msgstr "Materias"
+
+msgid "No subjects added yet."
+msgstr "Aún no se han añadido materias."
+
+msgid "Price per hour"
+msgstr "Precio por hora"
+
+msgid "Not set"
+msgstr "No establecido"
+
+msgid "No certificates added yet."
+msgstr "Aún no se han añadido certificados."
+
+msgid "Edit Teacher Profile"
+msgstr "Editar perfil de profesor"
+
+msgid "Teaching info"
+msgstr "Información de enseñanza"
+
+msgid "Subjects you teach"
+msgstr "Materias que enseñas"
+
+msgid "No subjects available yet — an admin must add them first."
+msgstr "Aún no hay materias disponibles — un administrador debe añadirlas primero."
+
+msgid "Certificate #%(num)s"
+msgstr "Certificado n.º %(num)s"
+
+msgid "Add new"
+msgstr "Añadir"
+
+msgid "Remove this certificate"
+msgstr "Eliminar este certificado"
+
+msgid "My Student Profile"
+msgstr "Mi perfil de estudiante"
+
+msgid "Subjects I want to learn"
+msgstr "Materias que quiero aprender"
+
+msgid "Learning goals"
+msgstr "Objetivos de aprendizaje"
+
+msgid "Edit Student Profile"
+msgstr "Editar perfil de estudiante"
+
+msgid "Subjects & levels"
+msgstr "Materias y niveles"
+
+msgid "Remove"
+msgstr "Eliminar"
+
+msgid "Save to add another subject row."
+msgstr "Guarda para añadir otra fila de materia."
+
+msgid "Write a Review"
+msgstr "Escribir una valoración"
+
+msgid "Back to profile"
+msgstr "Volver al perfil"
+
+msgid "Edit your review"
+msgstr "Editar tu valoración"
+
+msgid "For"
+msgstr "Para"
+
+msgid "Your rating"
+msgstr "Tu puntuación"
+
+msgid "%(val)s out of 5"
+msgstr "%(val)s de 5"
+
+msgid "out of 5"
+msgstr "de 5"
+
+msgid "Click to rate"
+msgstr "Haz clic para valorar"
+
+msgid "Comment"
+msgstr "Comentario"
+
+msgid "optional"
+msgstr "opcional"
+
+msgid "Update review"
+msgstr "Actualizar valoración"
+
+msgid "Submit review"
+msgstr "Enviar valoración"
+
+msgid "Your review will appear after admin validation."
+msgstr "Tu valoración aparecerá tras la validación de un administrador."
