@@ -16,7 +16,8 @@
       <div class="flex items-center gap-4 text-sm font-medium">
 
         {# Language switcher #}
-        {% get_current_language_info as current_lang_info %}
+        {% get_current_language as current_lang_code %}
+        {% get_language_info for current_lang_code as current_lang_info %}
         <div class="relative group">
           <button class="flex items-center gap-1 text-slate-500 hover:text-slate-900 text-xs uppercase tracking-wide">
             {{ current_lang_info.name_local }}
