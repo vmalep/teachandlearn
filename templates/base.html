@@ -1,5 +1,6 @@
+{% load i18n %}
 <!doctype html>
-<html lang="en" class="h-full bg-slate-50">
+<html lang="{{ LANGUAGE_CODE }}" class="h-full bg-slate-50">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,17 +12,42 @@
   <header class="bg-white border-b border-slate-200">
     <nav class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
       <a href="/" class="text-indigo-600 font-bold text-lg tracking-tight">TeachAndLearn</a>
+
       <div class="flex items-center gap-4 text-sm font-medium">
+
+        {# Language switcher #}
+        <div class="relative group">
+          <button class="flex items-center gap-1 text-slate-500 hover:text-slate-900 text-xs uppercase tracking-wide">
+            {{ LANGUAGE_CODE }}
+            <svg class="w-3 h-3" viewBox="0 0 12 12" fill="currentColor"><path d="M6 8L1 3h10z"/></svg>
+          </button>
+          <div class="absolute right-0 mt-1 hidden group-hover:block bg-white border border-slate-200 rounded-lg shadow-md py-1 z-50 min-w-max">
+            {% get_available_languages as languages %}
+            {% get_current_language as current_lang %}
+            {% for lang_code, lang_name in languages %}
+              <form method="post" action="/i18n/set_language/">
+                {% csrf_token %}
+                <input type="hidden" name="language" value="{{ lang_code }}">
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <button type="submit"
+                  class="w-full text-left px-4 py-1.5 text-sm {% if lang_code == current_lang %}text-indigo-600 font-semibold{% else %}text-slate-600 hover:text-slate-900{% endif %}">
+                  {{ lang_name }}
+                </button>
+              </form>
+            {% endfor %}
+          </div>
+        </div>
+
         {% if user.is_authenticated %}
-          <a href="/profiles/" class="text-slate-600 hover:text-slate-900">My Profile</a>
-          <a href="/messages/" class="text-slate-600 hover:text-slate-900">Messages</a>
+          <a href="/profiles/" class="text-slate-600 hover:text-slate-900">{% trans "My Profile" %}</a>
+          <a href="/messages/" class="text-slate-600 hover:text-slate-900">{% trans "Messages" %}</a>
           <form method="post" action="/accounts/logout/" class="inline">
             {% csrf_token %}
-            <button type="submit" class="text-slate-600 hover:text-slate-900 cursor-pointer">Logout</button>
+            <button type="submit" class="text-slate-600 hover:text-slate-900 cursor-pointer">{% trans "Logout" %}</button>
           </form>
         {% else %}
-          <a href="/accounts/login/" class="text-slate-600 hover:text-slate-900">Login</a>
-          <a href="/accounts/register/" class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg hover:bg-indigo-700">Register</a>
+          <a href="/accounts/login/" class="text-slate-600 hover:text-slate-900">{% trans "Login" %}</a>
+          <a href="/accounts/register/" class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg hover:bg-indigo-700">{% trans "Register" %}</a>
         {% endif %}
       </div>
     </nav>

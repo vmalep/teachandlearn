@@ -100,6 +100,20 @@ Allow teachers offering private lessons to create a profile and be discovered by
 
 ---
 
+## Internationalisation
+
+- **Languages:** English (default), French, Spanish, Russian, Dutch, German
+- **Django i18n codes:** `en`, `fr`, `es`, `ru`, `nl`, `de`
+- **Strategy:** session/cookie-based language switching (`LocaleMiddleware` + `set_language` view)
+- **Translation files:** `locale/<lang>/LC_MESSAGES/django.po` per language
+- **Templates:** use `{% load i18n %}` + `{% trans "…" %}` / `{% blocktrans %}` for all UI strings
+- **To translate:** run `python manage.py makemessages -l fr` (etc.), edit `.po` files, then `compilemessages`
+- **Language switcher:** in base.html nav, POSTs to `/i18n/set_language/` with `language` + `next`
+- **Note:** URL-prefix approach (`i18n_patterns`) would be better for SEO but requires replacing all
+  hardcoded URLs in templates with `{% url %}` tags — defer until templates are stable
+
+---
+
 ## Design Principles
 
 - Keep it simple: no JavaScript framework, HTMX for dynamic interactions
@@ -117,7 +131,7 @@ Allow teachers offering private lessons to create a profile and be discovered by
 - Video lessons integration
 - Social login (Google, Facebook)
 - Native mobile app
-- Multi-language UI (French/Dutch/German) — English UI first
+- URL-prefix-based i18n (`/en/`, `/fr/`, …) — using session/cookie switching for now
 
 ---
 
