@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Find a Teacher — TeachAndLearn{% endblock %}
+{% block content %}
+<h1>Find a Teacher</h1>
+<form method="get">
+  <input type="text" name="municipality" placeholder="Municipality" value="{{ request.GET.municipality }}">
+  <input type="text" name="max_price" placeholder="Max €/hour" value="{{ request.GET.max_price }}">
+  <button type="submit">Search</button>
+</form>
+{% for teacher in teachers %}
+  <div>
+    <a href="/teachers/{{ teacher.pk }}/">{{ teacher.profile.user.get_full_name|default:teacher.profile.user.email }}</a>
+    {% if teacher.price_per_hour %}— €{{ teacher.price_per_hour }}/h{% endif %}
+    — {{ teacher.profile.municipality }}
+  </div>
+{% empty %}
+  <p>No teachers found.</p>
+{% endfor %}
+{% endblock %}
