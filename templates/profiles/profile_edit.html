@@ -29,18 +29,14 @@
       <div class="border-t border-slate-100 pt-5">
         <p class="text-sm font-medium text-slate-700 mb-3">My role on TeachAndLearn</p>
         <div class="flex flex-col gap-3">
-          {% for choice in form.is_teacher %}
-            <label class="flex items-center gap-3 cursor-pointer group">
-              {{ choice.tag }}
-              <span class="text-sm text-slate-700 group-hover:text-slate-900">{{ choice.choice_label }}</span>
-            </label>
-          {% endfor %}
-          {% for choice in form.is_student %}
-            <label class="flex items-center gap-3 cursor-pointer group">
-              {{ choice.tag }}
-              <span class="text-sm text-slate-700 group-hover:text-slate-900">{{ choice.choice_label }}</span>
-            </label>
-          {% endfor %}
+          <label class="flex items-center gap-3 cursor-pointer group">
+            {{ form.is_teacher }}
+            <span class="text-sm text-slate-700 group-hover:text-slate-900">I am a teacher</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer group">
+            {{ form.is_student }}
+            <span class="text-sm text-slate-700 group-hover:text-slate-900">I am a student</span>
+          </label>
         </div>
       </div>
 
