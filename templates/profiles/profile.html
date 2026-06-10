@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}My Profile — TeachAndLearn{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
+
+  {# User card #}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 flex items-start gap-5">
+    <div class="shrink-0">
+      {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="Avatar" class="w-20 h-20 rounded-full object-cover">
+      {% else %}
+        <div class="w-20 h-20 rounded-full bg-indigo-100 flex items-center justify-center text-2xl font-bold text-indigo-400">
+          {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="flex-1 min-w-0">
+      <h1 class="text-xl font-bold text-slate-900">{{ user.get_full_name|default:user.email }}</h1>
+      <p class="text-sm text-slate-500 mt-0.5">{{ user.email }}</p>
+      {% if profile.municipality %}
+        <p class="text-sm text-slate-500 mt-0.5">📍 {{ profile.municipality }}</p>
+      {% endif %}
+      {% if profile.bio %}
+        <p class="mt-3 text-sm text-slate-600">{{ profile.bio }}</p>
+      {% endif %}
+    </div>
+    <a href="/profiles/edit/" class="shrink-0 text-sm text-indigo-600 hover:underline font-medium">Edit</a>
+  </div>
+
+  {# Teacher section #}
+  {% if profile.is_teacher %}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-semibold text-slate-900">Teacher Profile</h2>
+      <a href="/teachers/profile/edit/" class="text-sm text-indigo-600 hover:underline font-medium">Edit</a>
+    </div>
+    {% if teacher_profile %}
+      <div class="flex items-center gap-2 mb-4">
+        {% if teacher_profile.state == "validated" %}
+          <span class="inline-flex items-center gap-1 bg-green-50 text-green-700 text-xs font-medium px-2.5 py-1 rounded-full">✓ Validated</span>
+        {% elif teacher_profile.state == "rejected" %}
+          <span class="inline-flex items-center gap-1 bg-red-50 text-red-700 text-xs font-medium px-2.5 py-1 rounded-full">✗ Rejected</span>
+          {% if teacher_profile.rejection_reason %}
+            <span class="text-xs text-red-500">— {{ teacher_profile.rejection_reason }}</span>
+          {% endif %}
+        {% else %}
+          <span class="inline-flex items-center gap-1 bg-amber-50 text-amber-700 text-xs font-medium px-2.5 py-1 rounded-full">⏳ Pending validation</span>
+        {% endif %}
+      </div>
+      <dl class="space-y-2 text-sm">
+        {% if teacher_profile.subjects.all %}
+          <div class="flex gap-2 flex-wrap">
+            {% for s in teacher_profile.subjects.all %}
+              <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full text-xs">{{ s }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% if teacher_profile.price_per_hour %}
+          <div><span class="text-slate-500">Price:</span> <span class="font-medium">€{{ teacher_profile.price_per_hour }}/h</span></div>
+        {% endif %}
+        {% if teacher_profile.native_language %}
+          <div><span class="text-slate-500">Native language:</span> {{ teacher_profile.native_language }}</div>
+        {% endif %}
+        {% if teacher_profile.availability %}
+          <div><span class="text-slate-500">Availability:</span> {{ teacher_profile.availability }}</div>
+        {% endif %}
+        {% if teacher_profile.certificates.all %}
+          <div>
+            <span class="text-slate-500">Certificates:</span>
+            <ul class="mt-1 space-y-0.5">
+              {% for cert in teacher_profile.certificates.all %}
+                <li class="text-slate-700">{{ cert.name }}{% if cert.issuing_org %} — {{ cert.issuing_org }}{% endif %}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+      </dl>
+    {% else %}
+      <p class="text-sm text-slate-400">No teacher profile yet. <a href="/teachers/profile/edit/" class="text-indigo-600 hover:underline">Set it up</a></p>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {# Student section #}
+  {% if profile.is_student %}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="font-semibold text-slate-900">Student Profile</h2>
+      <a href="/students/profile/edit/" class="text-sm text-indigo-600 hover:underline font-medium">Edit</a>
+    </div>
+    {% if student_profile %}
+      <dl class="space-y-2 text-sm">
+        {% if student_profile.subject_levels.all %}
+          <div>
+            <span class="text-slate-500">Subjects:</span>
+            <ul class="mt-1 space-y-1">
+              {% for ss in student_profile.subject_levels.select_related("subject") %}
+                <li class="flex items-center gap-2">
+                  <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full text-xs">{{ ss.subject }}</span>
+                  <span class="text-xs text-slate-500">{{ ss.get_level_display }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        {% if student_profile.learning_goals %}
+          <div><span class="text-slate-500">Goals:</span> {{ student_profile.learning_goals }}</div>
+        {% endif %}
+      </dl>
+    {% else %}
+      <p class="text-sm text-slate-400">No student profile yet. <a href="/students/profile/edit/" class="text-indigo-600 hover:underline">Set it up</a></p>
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if not profile.is_teacher and not profile.is_student %}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 text-center">
+    <p class="text-slate-500 text-sm mb-3">You haven't set a role yet.</p>
+    <a href="/profiles/edit/" class="inline-block bg-indigo-600 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-indigo-700">Set up your profile</a>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

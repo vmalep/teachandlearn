@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile — TeachAndLearn{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-10">
+
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-xl font-bold text-slate-900">Edit Profile</h1>
+    <a href="/profiles/" class="text-sm text-slate-500 hover:text-slate-900">← Back</a>
+  </div>
+
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 space-y-6">
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <div class="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+          {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {% include "components/field.html" with field=form.municipality %}
+        {% include "components/field.html" with field=form.address %}
+      </div>
+
+      {% include "components/field.html" with field=form.bio %}
+      {% include "components/field.html" with field=form.avatar %}
+
+      <div class="border-t border-slate-100 pt-5">
+        <p class="text-sm font-medium text-slate-700 mb-3">My role on TeachAndLearn</p>
+        <div class="flex flex-col gap-3">
+          {% for choice in form.is_teacher %}
+            <label class="flex items-center gap-3 cursor-pointer group">
+              {{ choice.tag }}
+              <span class="text-sm text-slate-700 group-hover:text-slate-900">{{ choice.choice_label }}</span>
+            </label>
+          {% endfor %}
+          {% for choice in form.is_student %}
+            <label class="flex items-center gap-3 cursor-pointer group">
+              {{ choice.tag }}
+              <span class="text-sm text-slate-700 group-hover:text-slate-900">{{ choice.choice_label }}</span>
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="pt-2 flex gap-3">
+        <button type="submit"
+          class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+          Save changes
+        </button>
+        <a href="/profiles/" class="px-6 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors text-sm font-medium">
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

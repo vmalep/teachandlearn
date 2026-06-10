@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Edit Student Profile — TeachAndLearn{% endblock %}
+{% block content %}
+<div class="max-w-2xl mx-auto px-4 py-10">
+
+  <div class="flex items-center justify-between mb-6">
+    <h1 class="text-xl font-bold text-slate-900">Edit Student Profile</h1>
+    <a href="/students/profile/" class="text-sm text-slate-500 hover:text-slate-900">← Back</a>
+  </div>
+
+  <form method="post" novalidate class="space-y-6">
+    {% csrf_token %}
+
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <h2 class="text-sm font-semibold text-slate-700 mb-4">Learning goals</h2>
+      {% include "components/field.html" with field=form.learning_goals %}
+    </div>
+
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+      <h2 class="text-sm font-semibold text-slate-700 mb-4">Subjects & levels</h2>
+      {{ subj_formset.management_form }}
+      <div class="space-y-3">
+        {% for subj_form in subj_formset %}
+          <div class="flex items-end gap-3 p-3 rounded-xl border border-slate-100 bg-slate-50">
+            {{ subj_form.id }}
+            <div class="flex-1">
+              {% include "components/field.html" with field=subj_form.subject %}
+            </div>
+            <div class="flex-1">
+              {% include "components/field.html" with field=subj_form.level %}
+            </div>
+            {% if subj_form.instance.pk %}
+              <label class="flex items-center gap-1 text-xs text-red-500 cursor-pointer pb-2 shrink-0">
+                {{ subj_form.DELETE }}
+                <span>Remove</span>
+              </label>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+      <p class="text-xs text-slate-400 mt-3">Save to add another subject row.</p>
+    </div>
+
+    <div class="flex gap-3">
+      <button type="submit"
+        class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+        Save changes
+      </button>
+      <a href="/students/profile/" class="px-6 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors text-sm font-medium">
+        Cancel
+      </a>
+    </div>
+  </form>
+
+</div>
+{% endblock %}
