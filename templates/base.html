@@ -1,25 +1,39 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full bg-slate-50">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}TeachAndLearn{% endblock %}</title>
   <link rel="stylesheet" href="/static/css/main.css">
 </head>
-<body>
-  <nav>
-    <a href="/">TeachAndLearn</a>
-    {% if user.is_authenticated %}
-      <a href="/profiles/">My Profile</a>
-      <a href="/messages/">Messages</a>
-      <a href="/accounts/logout/">Logout</a>
-    {% else %}
-      <a href="/accounts/login/">Login</a>
-      <a href="/accounts/register/">Register</a>
-    {% endif %}
-  </nav>
-  <main>
+<body class="h-full flex flex-col text-slate-800">
+
+  <header class="bg-white border-b border-slate-200">
+    <nav class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+      <a href="/" class="text-indigo-600 font-bold text-lg tracking-tight">TeachAndLearn</a>
+      <div class="flex items-center gap-4 text-sm font-medium">
+        {% if user.is_authenticated %}
+          <a href="/profiles/" class="text-slate-600 hover:text-slate-900">My Profile</a>
+          <a href="/messages/" class="text-slate-600 hover:text-slate-900">Messages</a>
+          <form method="post" action="/accounts/logout/" class="inline">
+            {% csrf_token %}
+            <button type="submit" class="text-slate-600 hover:text-slate-900 cursor-pointer">Logout</button>
+          </form>
+        {% else %}
+          <a href="/accounts/login/" class="text-slate-600 hover:text-slate-900">Login</a>
+          <a href="/accounts/register/" class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg hover:bg-indigo-700">Register</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main class="flex-1">
     {% block content %}{% endblock %}
   </main>
+
+  <footer class="border-t border-slate-200 py-6 text-center text-xs text-slate-400">
+    © {% now "Y" %} TeachAndLearn — Belgium
+  </footer>
+
 </body>
 </html>

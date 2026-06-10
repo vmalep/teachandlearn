@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Create an account — TeachAndLearn{% endblock %}
+{% block content %}
+<div class="min-h-full flex items-center justify-center py-12 px-4">
+  <div class="w-full max-w-md">
+
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold text-slate-900">Create your account</h1>
+      <p class="mt-2 text-sm text-slate-500">Already have one? <a href="/accounts/login/" class="text-indigo-600 hover:underline">Sign in</a></p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+      <form method="post" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+            {% for error in form.non_field_errors %}{{ error }}{% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          {% include "components/field.html" with field=form.first_name %}
+          {% include "components/field.html" with field=form.last_name %}
+        </div>
+
+        <div class="mb-4">
+          {% include "components/field.html" with field=form.email %}
+        </div>
+
+        <div class="mb-4">
+          {% include "components/field.html" with field=form.password1 %}
+        </div>
+
+        <div class="mb-6">
+          {% include "components/field.html" with field=form.password2 %}
+        </div>
+
+        <button type="submit"
+          class="w-full bg-indigo-600 text-white py-2.5 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
+          Create account
+        </button>
+      </form>
+    </div>
+
+    <p class="mt-6 text-center text-xs text-slate-400">
+      By registering you agree to use the platform responsibly.
+    </p>
+
+  </div>
+</div>
+{% endblock %}

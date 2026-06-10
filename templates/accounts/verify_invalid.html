@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Invalid link — TeachAndLearn{% endblock %}
+{% block content %}
+<div class="min-h-full flex items-center justify-center py-12 px-4">
+  <div class="w-full max-w-md text-center">
+    <div class="text-5xl mb-6">⚠️</div>
+    <h1 class="text-2xl font-bold text-slate-900 mb-2">Link expired or invalid</h1>
+    <p class="text-slate-500 mb-6">This verification link has already been used or has expired.</p>
+    <a href="/accounts/register/" class="text-indigo-600 hover:underline text-sm">Register again</a>
+  </div>
+</div>
+{% endblock %}
