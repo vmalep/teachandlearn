@@ -8,3 +8,5 @@ __pycache__/
 staticfiles/
 media/
 .DS_Store
+bin/
+static/css/main.css
