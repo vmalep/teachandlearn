@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg, Count, Q
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView, DetailView
@@ -81,6 +82,80 @@ class TeacherDetailView(LoginRequiredMixin, DetailView):
                 student=self.request.user, teacher=teacher.profile.user
             ).first()
         return ctx
+
+
+class MapView(View):
+    def get(self, request):
+        return render(request, "map.html", {"all_subjects": Subject.objects.all()})
+
+
+class MapDataView(View):
+    def get(self, request):
+        from students.models import StudentProfile
+
+        subject_id = request.GET.get("subject")
+
+        teacher_qs = (
+            TeacherProfile.objects
+            .filter(state=TeacherProfile.State.VALIDATED)
+            .filter(profile__municipality__gt="")
+            .filter(profile__latitude__isnull=False)
+        )
+        if subject_id:
+            teacher_qs = teacher_qs.filter(subjects__id=subject_id)
+
+        teacher_rows = (
+            teacher_qs
+            .values("profile__municipality")
+            .annotate(
+                count=Count("id", distinct=True),
+                lat=Avg("profile__latitude"),
+                lng=Avg("profile__longitude"),
+            )
+        )
+
+        student_qs = (
+            StudentProfile.objects
+            .filter(profile__municipality__gt="")
+            .filter(profile__latitude__isnull=False)
+        )
+        if subject_id:
+            student_qs = student_qs.filter(subject_levels__subject__id=subject_id)
+
+        student_rows = (
+            student_qs
+            .values("profile__municipality")
+            .annotate(
+                count=Count("id", distinct=True),
+                lat=Avg("profile__latitude"),
+                lng=Avg("profile__longitude"),
+            )
+        )
+
+        data = {}
+        for row in teacher_rows:
+            m = row["profile__municipality"]
+            data[m] = {
+                "municipality": m,
+                "lat": float(row["lat"]),
+                "lng": float(row["lng"]),
+                "teachers": row["count"],
+                "students": 0,
+            }
+        for row in student_rows:
+            m = row["profile__municipality"]
+            if m in data:
+                data[m]["students"] = row["count"]
+            else:
+                data[m] = {
+                    "municipality": m,
+                    "lat": float(row["lat"]),
+                    "lng": float(row["lng"]),
+                    "teachers": 0,
+                    "students": row["count"],
+                }
+
+        return JsonResponse(list(data.values()), safe=False)
 
 
 class TeacherProfileView(LoginRequiredMixin, View):

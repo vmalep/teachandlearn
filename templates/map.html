@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% trans "Map" %} — TeachAndLearn{% endblock %}
+{% block content %}
+
+<div class="bg-indigo-600 text-white py-10 px-4">
+  <div class="max-w-3xl mx-auto text-center">
+    <h1 class="text-3xl font-bold mb-2">{% trans "Teachers & Students by municipality" %}</h1>
+    <p class="text-indigo-200 text-sm">{% trans "Select a subject to see how many teachers and students are in each municipality." %}</p>
+
+    <form id="map-filter" class="mt-6 bg-white rounded-2xl p-3 flex flex-col sm:flex-row gap-2 shadow-lg max-w-lg mx-auto">
+      <select id="subject-select"
+        class="flex-1 rounded-xl border border-slate-200 px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        <option value="">{% trans "All subjects" %}</option>
+        {% for subj in all_subjects %}
+          <option value="{{ subj.pk }}">{{ subj.name }}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+</div>
+
+<div class="max-w-5xl mx-auto px-4 py-6">
+
+  <div id="map-container" class="rounded-2xl border border-slate-200 shadow-sm overflow-hidden" style="height:520px;"></div>
+
+  <div id="map-legend" class="mt-4 flex flex-wrap gap-4 text-sm text-slate-600 justify-center">
+    <span class="flex items-center gap-2">
+      <span class="inline-block w-4 h-4 rounded-full bg-indigo-500 opacity-80"></span>{% trans "Teachers" %}
+    </span>
+    <span class="flex items-center gap-2">
+      <span class="inline-block w-4 h-4 rounded-full bg-emerald-500 opacity-80"></span>{% trans "Students" %}
+    </span>
+    <span class="flex items-center gap-2">
+      <span class="inline-block w-4 h-4 rounded-full bg-amber-500 opacity-80"></span>{% trans "Both" %}
+    </span>
+  </div>
+
+  <p id="no-data" class="hidden text-center py-10 text-slate-400 text-sm">
+    {% trans "No data available for this selection." %}
+  </p>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function () {
+  var map = L.map('map-container', { scrollWheelZoom: false })
+              .setView([50.5, 4.5], 8);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
+    maxZoom: 18,
+  }).addTo(map);
+
+  var markers = [];
+
+  function circleColor(teachers, students) {
+    if (teachers > 0 && students > 0) return '#f59e0b'; // amber — both
+    if (teachers > 0) return '#6366f1';                  // indigo — teachers
+    return '#10b981';                                     // emerald — students
+  }
+
+  function circleRadius(count) {
+    return Math.max(8, Math.min(40, 8 + Math.sqrt(count) * 5));
+  }
+
+  function loadData(subjectId) {
+    var url = '/map/data/';
+    if (subjectId) url += '?subject=' + encodeURIComponent(subjectId);
+
+    fetch(url)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        markers.forEach(function (m) { map.removeLayer(m); });
+        markers = [];
+
+        var noData = document.getElementById('no-data');
+        if (data.length === 0) {
+          noData.classList.remove('hidden');
+          return;
+        }
+        noData.classList.add('hidden');
+
+        data.forEach(function (d) {
+          var total = d.teachers + d.students;
+          var color = circleColor(d.teachers, d.students);
+          var radius = circleRadius(total);
+
+          var lines = ['<strong>' + d.municipality + '</strong>'];
+          if (d.teachers > 0) lines.push('{% trans "Teachers" %}: ' + d.teachers);
+          if (d.students > 0) lines.push('{% trans "Students" %}: ' + d.students);
+
+          var circle = L.circleMarker([d.lat, d.lng], {
+            radius: radius,
+            color: color,
+            fillColor: color,
+            fillOpacity: 0.6,
+            weight: 2,
+          }).bindPopup(lines.join('<br>'));
+
+          circle.addTo(map);
+          markers.push(circle);
+        });
+      });
+  }
+
+  document.getElementById('subject-select').addEventListener('change', function () {
+    loadData(this.value);
+  });
+
+  loadData('');
+})();
+</script>
+{% endblock %}

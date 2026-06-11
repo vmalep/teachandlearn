@@ -4,4 +4,6 @@ from . import views
 urlpatterns = [
     path("", views.TeacherDirectoryView.as_view(), name="home"),
     path("teachers/<int:pk>/", views.TeacherDetailView.as_view(), name="teacher-detail"),
+    path("map/", views.MapView.as_view(), name="map"),
+    path("map/data/", views.MapDataView.as_view(), name="map-data"),
 ]

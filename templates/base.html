@@ -44,6 +44,7 @@
           </div>
         </div>
 
+        <a href="/map/" class="text-slate-600 hover:text-slate-900">{% trans "Map" %}</a>
         {% if user.is_authenticated %}
           <a href="/profiles/" class="text-slate-600 hover:text-slate-900">{% trans "My Profile" %}</a>
           <a href="/messages/" class="text-slate-600 hover:text-slate-900">{% trans "Messages" %}</a>
@@ -71,6 +72,7 @@
     {# Mobile menu #}
     <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-4 text-sm font-medium">
 
+      <a href="/map/" class="block text-slate-700 hover:text-slate-900">{% trans "Map" %}</a>
       {% if user.is_authenticated %}
         <a href="/profiles/" class="block text-slate-700 hover:text-slate-900">{% trans "My Profile" %}</a>
         <a href="/messages/" class="block text-slate-700 hover:text-slate-900">{% trans "Messages" %}</a>
