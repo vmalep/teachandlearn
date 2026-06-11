@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 from .models import Profile
 
 
@@ -31,12 +32,12 @@ class ProfileForm(forms.ModelForm):
             }),
         }
         labels = {
-            "postal_code": "Postal code",
-            "street": "Street",
-            "house_number": "Number",
-            "mailbox": "Complement",
-            "is_teacher": "I want to teach",
-            "is_student": "I want to learn",
+            "postal_code": _("Postal code"),
+            "street": _("Street"),
+            "house_number": _("Number"),
+            "mailbox": _("Address complement"),
+            "is_teacher": _("I want to teach"),
+            "is_student": _("I want to learn"),
         }
 
     def __init__(self, *args, **kwargs):

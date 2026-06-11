@@ -1,428 +1,695 @@
 # Dutch translations for TeachAndLearn
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-11 10:02+0200\n"
+"Language: nl\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Login"
-msgstr "Inloggen"
+#: config/settings.py:101
+msgid "English"
+msgstr ""
 
-msgid "Logout"
-msgstr "Uitloggen"
+#: config/settings.py:102
+msgid "French"
+msgstr ""
 
-msgid "Register"
-msgstr "Registreren"
+#: config/settings.py:103
+msgid "Spanish"
+msgstr ""
 
-msgid "My Profile"
-msgstr "Mijn profiel"
+#: config/settings.py:104
+msgid "Russian"
+msgstr ""
 
-msgid "Messages"
-msgstr "Berichten"
+#: config/settings.py:105
+msgid "Dutch"
+msgstr ""
 
+#: config/settings.py:106
+msgid "German"
+msgstr ""
+
+#: profiles/forms.py:35
+msgid "Postal code"
+msgstr "Postcode"
+
+#: profiles/forms.py:36
+msgid "Street"
+msgstr "Straat"
+
+#: profiles/forms.py:37
+msgid "Number"
+msgstr "Huisnummer"
+
+#: profiles/forms.py:38
+msgid "Address complement"
+msgstr "Adresaanvulling"
+
+#: profiles/forms.py:39
+#, fuzzy
+#| msgid "I am a teacher"
+msgid "I want to teach"
+msgstr "Ik ben een leraar"
+
+#: profiles/forms.py:40
+#, fuzzy
+#| msgid "Subjects I want to learn"
+msgid "I want to learn"
+msgstr "Vakken die ik wil leren"
+
+#: templates/accounts/login.html:3 templates/accounts/login.html:32
+#: templates/accounts/password_reset_complete.html:12
+#: templates/accounts/register.html:10
 msgid "Sign in"
 msgstr "Inloggen"
 
+#: templates/accounts/login.html:9
 msgid "Welcome back"
 msgstr "Welkom terug"
 
+#: templates/accounts/login.html:10
 msgid "No account?"
 msgstr "Geen account?"
 
+#: templates/accounts/login.html:10
 msgid "Create one"
 msgstr "Maak er een"
 
+#: templates/accounts/login.html:37
 msgid "Forgot your password?"
 msgstr "Wachtwoord vergeten?"
 
-msgid "Create an account"
-msgstr "Account aanmaken"
-
-msgid "Create your account"
-msgstr "Maak uw account aan"
-
-msgid "Already have one?"
-msgstr "Al een account?"
-
-msgid "Create account"
-msgstr "Account aanmaken"
-
-msgid "By registering you agree to use the platform responsibly."
-msgstr "Door te registreren stemt u ermee in het platform verantwoord te gebruiken."
-
-msgid "Check your email"
-msgstr "Controleer uw e-mail"
-
-msgid "Check your inbox"
-msgstr "Controleer uw inbox"
-
-msgid "We've sent a verification link to your email address."
-msgstr "We hebben een verificatielink naar uw e-mailadres gestuurd."
-
-msgid "Click the link to activate your account."
-msgstr "Klik op de link om uw account te activeren."
-
-msgid "Didn't receive it? Check your spam folder."
-msgstr "Niet ontvangen? Controleer uw spammap."
-
-msgid "Invalid link"
-msgstr "Ongeldige link"
-
-msgid "Link expired or invalid"
-msgstr "Link verlopen of ongeldig"
-
-msgid "This verification link has already been used or has expired."
-msgstr "Deze verificatielink is al gebruikt of verlopen."
-
-msgid "Register again"
-msgstr "Opnieuw registreren"
-
+#: templates/accounts/password_reset.html:3
+#: templates/accounts/password_reset.html:9
 msgid "Reset your password"
 msgstr "Wachtwoord opnieuw instellen"
 
+#: templates/accounts/password_reset.html:10
 msgid "Enter your email and we'll send you a reset link."
 msgstr "Voer uw e-mail in en we sturen u een resetlink."
 
+#: templates/accounts/password_reset.html:21
 msgid "Send reset link"
 msgstr "Resetlink sturen"
 
+#: templates/accounts/password_reset.html:25
 msgid "Back to sign in"
 msgstr "Terug naar inloggen"
 
-msgid "Reset link sent"
-msgstr "Resetlink verzonden"
-
-msgid "If an account exists for that email, you'll receive a password reset link shortly."
-msgstr "Als er een account bestaat voor dat e-mailadres, ontvangt u binnenkort een resetlink."
-
-msgid "Choose a new password"
-msgstr "Kies een nieuw wachtwoord"
-
-msgid "Set new password"
-msgstr "Nieuw wachtwoord instellen"
-
-msgid "This reset link is invalid or has expired."
-msgstr "Deze resetlink is ongeldig of verlopen."
-
-msgid "Request a new one"
-msgstr "Vraag een nieuwe aan"
-
+#: templates/accounts/password_reset_complete.html:3
+#: templates/accounts/password_reset_complete.html:8
 msgid "Password updated"
 msgstr "Wachtwoord bijgewerkt"
 
+#: templates/accounts/password_reset_complete.html:9
 msgid "Your password has been changed successfully."
 msgstr "Uw wachtwoord is succesvol gewijzigd."
 
-msgid "Edit Profile"
-msgstr "Profiel bewerken"
+#: templates/accounts/password_reset_confirm.html:3
+#: templates/accounts/password_reset_confirm.html:9
+msgid "Choose a new password"
+msgstr "Kies een nieuw wachtwoord"
 
-msgid "Back"
-msgstr "Terug"
+#: templates/accounts/password_reset_confirm.html:24
+msgid "Set new password"
+msgstr "Nieuw wachtwoord instellen"
 
-msgid "My role on TeachAndLearn"
-msgstr "Mijn rol op TeachAndLearn"
+#: templates/accounts/password_reset_confirm.html:28
+msgid "This reset link is invalid or has expired."
+msgstr "Deze resetlink is ongeldig of verlopen."
 
-msgid "I am a teacher"
-msgstr "Ik ben een leraar"
+#: templates/accounts/password_reset_confirm.html:30
+msgid "Request a new one"
+msgstr "Vraag een nieuwe aan"
 
-msgid "I am a student"
-msgstr "Ik ben een student"
+#: templates/accounts/password_reset_done.html:3
+#: templates/accounts/register_done.html:3
+msgid "Check your email"
+msgstr "Controleer uw e-mail"
 
-msgid "Save changes"
-msgstr "Wijzigingen opslaan"
+#: templates/accounts/password_reset_done.html:8
+msgid "Reset link sent"
+msgstr "Resetlink verzonden"
 
-msgid "Cancel"
-msgstr "Annuleren"
+#: templates/accounts/password_reset_done.html:9
+msgid ""
+"If an account exists for that email, you'll receive a password reset link "
+"shortly."
+msgstr ""
+"Als er een account bestaat voor dat e-mailadres, ontvangt u binnenkort een "
+"resetlink."
 
-msgid "Avatar"
-msgstr "Avatar"
+#: templates/accounts/register.html:3
+msgid "Create an account"
+msgstr "Account aanmaken"
 
-msgid "Edit"
-msgstr "Bewerken"
+#: templates/accounts/register.html:9
+msgid "Create your account"
+msgstr "Maak uw account aan"
 
-msgid "Teacher Profile"
-msgstr "Leraarsprofiel"
+#: templates/accounts/register.html:10
+msgid "Already have one?"
+msgstr "Al een account?"
 
-msgid "Validated"
-msgstr "Gevalideerd"
+#: templates/accounts/register.html:42
+msgid "Create account"
+msgstr "Account aanmaken"
 
-msgid "Rejected"
-msgstr "Afgewezen"
+#: templates/accounts/register.html:48
+msgid "By registering you agree to use the platform responsibly."
+msgstr ""
+"Door te registreren stemt u ermee in het platform verantwoord te gebruiken."
 
-msgid "Pending validation"
-msgstr "Wacht op validatie"
+#: templates/accounts/register_done.html:8
+msgid "Check your inbox"
+msgstr "Controleer uw inbox"
 
-msgid "Price:"
-msgstr "Prijs:"
+#: templates/accounts/register_done.html:10
+msgid "We've sent a verification link to your email address."
+msgstr "We hebben een verificatielink naar uw e-mailadres gestuurd."
 
-msgid "Native language:"
-msgstr "Moedertaal:"
+#: templates/accounts/register_done.html:11
+msgid "Click the link to activate your account."
+msgstr "Klik op de link om uw account te activeren."
 
-msgid "Availability:"
-msgstr "Beschikbaarheid:"
+#: templates/accounts/register_done.html:13
+msgid "Didn't receive it? Check your spam folder."
+msgstr "Niet ontvangen? Controleer uw spammap."
 
-msgid "Certificates:"
-msgstr "Certificaten:"
+#: templates/accounts/verify_invalid.html:3
+msgid "Invalid link"
+msgstr "Ongeldige link"
 
-msgid "No teacher profile yet."
-msgstr "Nog geen leraarsprofiel."
+#: templates/accounts/verify_invalid.html:8
+msgid "Link expired or invalid"
+msgstr "Link verlopen of ongeldig"
 
-msgid "Set it up"
-msgstr "Instellen"
+#: templates/accounts/verify_invalid.html:9
+msgid "This verification link has already been used or has expired."
+msgstr "Deze verificatielink is al gebruikt of verlopen."
 
-msgid "Student Profile"
-msgstr "Studentprofiel"
+#: templates/accounts/verify_invalid.html:10
+msgid "Register again"
+msgstr "Opnieuw registreren"
 
-msgid "Subjects:"
-msgstr "Vakken:"
+#: templates/base.html:48 templates/base.html:75
+#: templates/profiles/profile.html:3 templates/students/profile.html:10
+#: templates/teachers/profile.html:10
+msgid "My Profile"
+msgstr "Mijn profiel"
 
-msgid "Goals:"
-msgstr "Doelen:"
+#: templates/base.html:49 templates/base.html:76
+#: templates/messaging/detail.html:3 templates/messaging/list.html:3
+#: templates/messaging/list.html:7
+msgid "Messages"
+msgstr "Berichten"
 
-msgid "No student profile yet."
-msgstr "Nog geen studentprofiel."
+#: templates/base.html:52 templates/base.html:79
+msgid "Logout"
+msgstr "Uitloggen"
 
-msgid "You haven't set a role yet."
-msgstr "U heeft nog geen rol ingesteld."
+#: templates/base.html:55 templates/base.html:82
+msgid "Login"
+msgstr "Inloggen"
 
-msgid "Set up your profile"
-msgstr "Profiel instellen"
+#: templates/base.html:56 templates/base.html:83
+msgid "Register"
+msgstr "Registreren"
 
-msgid "ago"
-msgstr "geleden"
+#: templates/base.html:87
+#, fuzzy
+#| msgid "Native language"
+msgid "Language"
+msgstr "Moedertaal"
 
-msgid "No messages yet"
-msgstr "Nog geen berichten"
+#: templates/base.html:109
+msgid "This site is under construction — content and features may change."
+msgstr ""
 
-msgid "New"
-msgstr "Nieuw"
-
-msgid "Closed"
-msgstr "Gesloten"
-
-msgid "No conversations yet."
-msgstr "Nog geen gesprekken."
-
-msgid "Find a teacher"
-msgstr "Zoek een leraar"
-
+#: templates/messaging/detail.html:28
 msgid "Teacher"
 msgstr "Leraar"
 
+#: templates/messaging/detail.html:30
 msgid "Student"
 msgstr "Student"
 
+#: templates/messaging/detail.html:36 templates/messaging/list.html:44
+msgid "Closed"
+msgstr "Gesloten"
+
+#: templates/messaging/detail.html:38 templates/messaging/list.html:42
+msgid "New"
+msgstr "Nieuw"
+
+#: templates/messaging/detail.html:48
 msgid "Start the conversation by sending a message below."
 msgstr "Begin het gesprek door hieronder een bericht te sturen."
 
+#: templates/messaging/detail.html:89
 msgid "Write a message…"
 msgstr "Schrijf een bericht…"
 
+#: templates/messaging/detail.html:100
 msgid "Enter to send · Shift+Enter for new line"
 msgstr "Enter om te versturen · Shift+Enter voor nieuwe regel"
 
+#: templates/messaging/detail.html:106
 msgid "This conversation is closed."
 msgstr "Dit gesprek is gesloten."
 
-msgid "Find a Teacher"
+#: templates/messaging/list.html:32
+msgid "ago"
+msgstr "geleden"
+
+#: templates/messaging/list.html:39
+msgid "No messages yet"
+msgstr "Nog geen berichten"
+
+#: templates/messaging/list.html:61
+msgid "No conversations yet."
+msgstr "Nog geen gesprekken."
+
+#: templates/messaging/list.html:62
+msgid "Find a teacher"
 msgstr "Zoek een leraar"
 
-msgid "Find a private teacher"
-msgstr "Zoek een privéleraar"
+#: templates/profiles/municipality_options.html:5
+#, fuzzy
+#| msgid "Municipality"
+msgid "Select municipality"
+msgstr "Gemeente"
 
-msgid "Verified teachers for one-on-one lessons in Belgium"
-msgstr "Geverifieerde leraren voor privélessen in België"
+#: templates/profiles/municipality_options.html:12
+msgid "Service unavailable — enter manually"
+msgstr ""
 
-msgid "All subjects"
-msgstr "Alle vakken"
+#: templates/profiles/municipality_options.html:12
+msgid "No results — enter manually"
+msgstr ""
 
+#: templates/profiles/municipality_options.html:17
+#: templates/profiles/profile_edit.html:42
+msgid "Enter postal code first"
+msgstr ""
+
+#: templates/profiles/profile.html:11
+msgid "Avatar"
+msgstr "Avatar"
+
+#: templates/profiles/profile.html:28 templates/profiles/profile.html:36
+#: templates/profiles/profile.html:90 templates/students/profile.html:11
+#: templates/teachers/profile.html:11
+msgid "Edit"
+msgstr "Bewerken"
+
+#: templates/profiles/profile.html:35
+msgid "Teacher Profile"
+msgstr "Leraarsprofiel"
+
+#: templates/profiles/profile.html:41
+msgid "Validated"
+msgstr "Gevalideerd"
+
+#: templates/profiles/profile.html:43
+msgid "Rejected"
+msgstr "Afgewezen"
+
+#: templates/profiles/profile.html:48
+msgid "Pending validation"
+msgstr "Wacht op validatie"
+
+#: templates/profiles/profile.html:60
+msgid "Price:"
+msgstr "Prijs:"
+
+#: templates/profiles/profile.html:63
+msgid "Native language:"
+msgstr "Moedertaal:"
+
+#: templates/profiles/profile.html:66
+msgid "Availability:"
+msgstr "Beschikbaarheid:"
+
+#: templates/profiles/profile.html:70
+msgid "Certificates:"
+msgstr "Certificaten:"
+
+#: templates/profiles/profile.html:80
+msgid "No teacher profile yet."
+msgstr "Nog geen leraarsprofiel."
+
+#: templates/profiles/profile.html:80 templates/profiles/profile.html:112
+msgid "Set it up"
+msgstr "Instellen"
+
+#: templates/profiles/profile.html:89
+msgid "Student Profile"
+msgstr "Studentprofiel"
+
+#: templates/profiles/profile.html:96
+msgid "Subjects:"
+msgstr "Vakken:"
+
+#: templates/profiles/profile.html:108
+msgid "Goals:"
+msgstr "Doelen:"
+
+#: templates/profiles/profile.html:112
+msgid "No student profile yet."
+msgstr "Nog geen studentprofiel."
+
+#: templates/profiles/profile.html:119
+msgid "You haven't set a role yet."
+msgstr "U heeft nog geen rol ingesteld."
+
+#: templates/profiles/profile.html:120
+msgid "Set up your profile"
+msgstr "Profiel instellen"
+
+#: templates/profiles/profile_edit.html:3
+#: templates/profiles/profile_edit.html:8
+msgid "Edit Profile"
+msgstr "Profiel bewerken"
+
+#: templates/profiles/profile_edit.html:9
+#: templates/students/profile_edit.html:9
+#: templates/teachers/profile_edit.html:9
+msgid "Back"
+msgstr "Terug"
+
+#: templates/profiles/profile_edit.html:24
+#, fuzzy
+#| msgid "optional"
+msgid "Location"
+msgstr "optioneel"
+
+#: templates/profiles/profile_edit.html:33 templates/teachers/directory.html:23
 msgid "Municipality"
 msgstr "Gemeente"
 
-msgid "Max €/h"
-msgstr "Max €/u"
+#: templates/profiles/profile_edit.html:57
+msgid "Street address"
+msgstr ""
 
-msgid "Search"
-msgstr "Zoeken"
+#: templates/profiles/profile_edit.html:57
+msgid "optional — private, used for map only"
+msgstr ""
 
-msgid "%(num)s teacher found"
-msgid_plural "%(num)s teachers found"
-msgstr[0] "%(num)s leraar gevonden"
-msgstr[1] "%(num)s leraren gevonden"
+#: templates/profiles/profile_edit.html:71
+msgid "My role on TeachAndLearn"
+msgstr "Mijn rol op TeachAndLearn"
 
-msgid "Clear filters"
-msgstr "Filters wissen"
+#: templates/profiles/profile_edit.html:75
+msgid "I am a teacher"
+msgstr "Ik ben een leraar"
 
-msgid "Price on request"
-msgstr "Prijs op aanvraag"
+#: templates/profiles/profile_edit.html:79
+msgid "I am a student"
+msgstr "Ik ben een student"
 
-msgid "No teachers found for these filters."
-msgstr "Geen leraren gevonden voor deze filters."
+#: templates/profiles/profile_edit.html:87
+#: templates/students/profile_edit.html:48
+#: templates/teachers/profile_edit.html:78
+msgid "Save changes"
+msgstr "Wijzigingen opslaan"
 
-msgid "See all teachers"
-msgstr "Alle leraren bekijken"
+#: templates/profiles/profile_edit.html:90 templates/reviews/write.html:67
+#: templates/students/profile_edit.html:51
+#: templates/teachers/profile_edit.html:81
+msgid "Cancel"
+msgstr "Annuleren"
 
+#: templates/reviews/write.html:3
+msgid "Write a Review"
+msgstr "Schrijf een beoordeling"
+
+#: templates/reviews/write.html:9
+msgid "Back to profile"
+msgstr "Terug naar profiel"
+
+#: templates/reviews/write.html:15
+msgid "Edit your review"
+msgstr "Uw beoordeling bewerken"
+
+#: templates/reviews/write.html:15 templates/teachers/detail.html:126
+msgid "Write a review"
+msgstr "Schrijf een beoordeling"
+
+#: templates/reviews/write.html:18
+msgid "For"
+msgstr "Voor"
+
+#: templates/reviews/write.html:25
+msgid "Your rating"
+msgstr "Uw beoordeling"
+
+#: templates/reviews/write.html:42
+#, python-format
+msgid "%(val)s out of 5"
+msgstr "%(val)s van de 5"
+
+#: templates/reviews/write.html:42
+msgid "Click to rate"
+msgstr "Klik om te beoordelen"
+
+#: templates/reviews/write.html:53
+msgid "Comment"
+msgstr "Opmerking"
+
+#: templates/reviews/write.html:53
+msgid "optional"
+msgstr "optioneel"
+
+#: templates/reviews/write.html:64
+msgid "Update review"
+msgstr "Beoordeling bijwerken"
+
+#: templates/reviews/write.html:64
+msgid "Submit review"
+msgstr "Beoordeling indienen"
+
+#: templates/reviews/write.html:71
+msgid "Your review will appear after admin validation."
+msgstr "Uw beoordeling verschijnt na validatie door een beheerder."
+
+#: templates/reviews/write.html:84
+msgid "out of 5"
+msgstr "van de 5"
+
+#: templates/students/profile.html:3 templates/students/profile.html:8
+msgid "My Student Profile"
+msgstr "Mijn studentprofiel"
+
+#: templates/students/profile.html:18
+msgid "Subjects I want to learn"
+msgstr "Vakken die ik wil leren"
+
+#: templates/students/profile.html:29 templates/teachers/profile.html:52
+msgid "No subjects added yet."
+msgstr "Nog geen vakken toegevoegd."
+
+#: templates/students/profile.html:35 templates/students/profile_edit.html:16
+msgid "Learning goals"
+msgstr "Leerdoelen"
+
+#: templates/students/profile_edit.html:3
+#: templates/students/profile_edit.html:8
+msgid "Edit Student Profile"
+msgstr "Studentprofiel bewerken"
+
+#: templates/students/profile_edit.html:21
+msgid "Subjects & levels"
+msgstr "Vakken en niveaus"
+
+#: templates/students/profile_edit.html:36
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: templates/students/profile_edit.html:42
+msgid "Save to add another subject row."
+msgstr "Sla op om een ander vak toe te voegen."
+
+#: templates/teachers/detail.html:41
 msgid "hour"
 msgstr "uur"
 
+#: templates/teachers/detail.html:49
+#, python-format
 msgid "%(num)s review"
 msgid_plural "%(num)s reviews"
 msgstr[0] "%(num)s beoordeling"
 msgstr[1] "%(num)s beoordelingen"
 
+#: templates/teachers/detail.html:60
 msgid "Continue conversation"
 msgstr "Gesprek voortzetten"
 
+#: templates/teachers/detail.html:67
 msgid "Contact this teacher"
 msgstr "Neem contact op met deze leraar"
 
+#: templates/teachers/detail.html:77
 msgid "About"
 msgstr "Over"
 
+#: templates/teachers/detail.html:86 templates/teachers/profile.html:64
 msgid "Native language"
 msgstr "Moedertaal"
 
+#: templates/teachers/detail.html:92 templates/teachers/profile.html:73
 msgid "Availability"
 msgstr "Beschikbaarheid"
 
+#: templates/teachers/detail.html:101 templates/teachers/profile.html:81
+#: templates/teachers/profile_edit.html:46
 msgid "Certificates & Credentials"
 msgstr "Certificaten en referenties"
 
+#: templates/teachers/detail.html:108 templates/teachers/profile.html:89
 msgid "Obtained:"
 msgstr "Behaald:"
 
+#: templates/teachers/detail.html:109 templates/teachers/profile.html:90
 msgid "Expires:"
 msgstr "Verloopt:"
 
+#: templates/teachers/detail.html:120
 msgid "Reviews"
 msgstr "Beoordelingen"
 
+#: templates/teachers/detail.html:123
 msgid "You already reviewed this teacher"
 msgstr "U heeft deze leraar al beoordeeld"
 
-msgid "Write a review"
-msgstr "Schrijf een beoordeling"
-
+#: templates/teachers/detail.html:139
 msgid "Anonymous"
 msgstr "Anoniem"
 
+#: templates/teachers/detail.html:155
 msgid "No reviews yet."
 msgstr "Nog geen beoordelingen."
 
+#: templates/teachers/directory.html:3
+msgid "Find a Teacher"
+msgstr "Zoek een leraar"
+
+#: templates/teachers/directory.html:9
+msgid "Find a private teacher"
+msgstr "Zoek een privéleraar"
+
+#: templates/teachers/directory.html:10
+msgid "Verified teachers for one-on-one lessons in Belgium"
+msgstr "Geverifieerde leraren voor privélessen in België"
+
+#: templates/teachers/directory.html:15
+msgid "All subjects"
+msgstr "Alle vakken"
+
+#: templates/teachers/directory.html:27
+msgid "Max €/h"
+msgstr "Max €/u"
+
+#: templates/teachers/directory.html:33
+msgid "Search"
+msgstr "Zoeken"
+
+#: templates/teachers/directory.html:45
+#, python-format
+msgid "%(num)s teacher found"
+msgid_plural "%(num)s teachers found"
+msgstr[0] "%(num)s leraar gevonden"
+msgstr[1] "%(num)s leraren gevonden"
+
+#: templates/teachers/directory.html:47
+msgid "Clear filters"
+msgstr "Filters wissen"
+
+#: templates/teachers/directory.html:86
+msgid "Price on request"
+msgstr "Prijs op aanvraag"
+
+#: templates/teachers/directory.html:103
+msgid "No teachers found for these filters."
+msgstr "Geen leraren gevonden voor deze filters."
+
+#: templates/teachers/directory.html:104
+msgid "See all teachers"
+msgstr "Alle leraren bekijken"
+
+#: templates/teachers/profile.html:3 templates/teachers/profile.html:8
 msgid "My Teacher Profile"
 msgstr "Mijn leraarsprofiel"
 
+#: templates/teachers/profile.html:19
 msgid "Your profile is published"
 msgstr "Uw profiel is gepubliceerd"
 
+#: templates/teachers/profile.html:20
 msgid "Students can find you in the directory."
 msgstr "Studenten kunnen u vinden in de gids."
 
+#: templates/teachers/profile.html:25
 msgid "Your profile was rejected"
 msgstr "Uw profiel is afgewezen"
 
+#: templates/teachers/profile.html:29
 msgid "Update your profile and it will be reviewed again."
 msgstr "Werk uw profiel bij en het wordt opnieuw beoordeeld."
 
+#: templates/teachers/profile.html:35
 msgid "Awaiting validation"
 msgstr "Wacht op validatie"
 
+#: templates/teachers/profile.html:36
 msgid "An admin will review your profile before it goes live."
 msgstr "Een beheerder beoordeelt uw profiel voordat het gepubliceerd wordt."
 
+#: templates/teachers/profile.html:44
 msgid "Subjects"
 msgstr "Vakken"
 
-msgid "No subjects added yet."
-msgstr "Nog geen vakken toegevoegd."
-
+#: templates/teachers/profile.html:58
 msgid "Price per hour"
 msgstr "Prijs per uur"
 
+#: templates/teachers/profile.html:60 templates/teachers/profile.html:66
 msgid "Not set"
 msgstr "Niet ingesteld"
 
+#: templates/teachers/profile.html:96
 msgid "No certificates added yet."
 msgstr "Nog geen certificaten toegevoegd."
 
+#: templates/teachers/profile_edit.html:3
+#: templates/teachers/profile_edit.html:8
 msgid "Edit Teacher Profile"
 msgstr "Leraarsprofiel bewerken"
 
+#: templates/teachers/profile_edit.html:16
 msgid "Teaching info"
 msgstr "Onderwijsinformatie"
 
+#: templates/teachers/profile_edit.html:27
 msgid "Subjects you teach"
 msgstr "Vakken die u onderwijst"
 
+#: templates/teachers/profile_edit.html:29
 msgid "No subjects available yet — an admin must add them first."
 msgstr "Nog geen vakken beschikbaar — een beheerder moet ze eerst toevoegen."
 
+#: templates/teachers/profile_edit.html:52
+#, python-format
 msgid "Certificate #%(num)s"
 msgstr "Certificaat nr. %(num)s"
 
+#: templates/teachers/profile_edit.html:54
 msgid "Add new"
 msgstr "Toevoegen"
 
+#: templates/teachers/profile_edit.html:67
 msgid "Remove this certificate"
 msgstr "Dit certificaat verwijderen"
-
-msgid "My Student Profile"
-msgstr "Mijn studentprofiel"
-
-msgid "Subjects I want to learn"
-msgstr "Vakken die ik wil leren"
-
-msgid "Learning goals"
-msgstr "Leerdoelen"
-
-msgid "Edit Student Profile"
-msgstr "Studentprofiel bewerken"
-
-msgid "Subjects & levels"
-msgstr "Vakken en niveaus"
-
-msgid "Remove"
-msgstr "Verwijderen"
-
-msgid "Save to add another subject row."
-msgstr "Sla op om een ander vak toe te voegen."
-
-msgid "Write a Review"
-msgstr "Schrijf een beoordeling"
-
-msgid "Back to profile"
-msgstr "Terug naar profiel"
-
-msgid "Edit your review"
-msgstr "Uw beoordeling bewerken"
-
-msgid "For"
-msgstr "Voor"
-
-msgid "Your rating"
-msgstr "Uw beoordeling"
-
-msgid "%(val)s out of 5"
-msgstr "%(val)s van de 5"
-
-msgid "out of 5"
-msgstr "van de 5"
-
-msgid "Click to rate"
-msgstr "Klik om te beoordelen"
-
-msgid "Comment"
-msgstr "Opmerking"
-
-msgid "optional"
-msgstr "optioneel"
-
-msgid "Update review"
-msgstr "Beoordeling bijwerken"
-
-msgid "Submit review"
-msgstr "Beoordeling indienen"
-
-msgid "Your review will appear after admin validation."
-msgstr "Uw beoordeling verschijnt na validatie door een beheerder."

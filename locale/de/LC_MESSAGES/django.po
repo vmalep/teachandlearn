@@ -1,428 +1,699 @@
 # German translations for TeachAndLearn
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-11 10:02+0200\n"
+"Language: de\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Login"
-msgstr "Anmelden"
+#: config/settings.py:101
+msgid "English"
+msgstr ""
 
-msgid "Logout"
-msgstr "Abmelden"
+#: config/settings.py:102
+msgid "French"
+msgstr ""
 
-msgid "Register"
-msgstr "Registrieren"
+#: config/settings.py:103
+msgid "Spanish"
+msgstr ""
 
-msgid "My Profile"
-msgstr "Mein Profil"
+#: config/settings.py:104
+msgid "Russian"
+msgstr ""
 
-msgid "Messages"
-msgstr "Nachrichten"
+#: config/settings.py:105
+msgid "Dutch"
+msgstr ""
 
+#: config/settings.py:106
+msgid "German"
+msgstr ""
+
+#: profiles/forms.py:35
+msgid "Postal code"
+msgstr "Postleitzahl"
+
+#: profiles/forms.py:36
+msgid "Street"
+msgstr "Straße"
+
+#: profiles/forms.py:37
+msgid "Number"
+msgstr "Hausnummer"
+
+#: profiles/forms.py:38
+msgid "Address complement"
+msgstr "Adresszusatz"
+
+#: profiles/forms.py:39
+#, fuzzy
+#| msgid "I am a teacher"
+msgid "I want to teach"
+msgstr "Ich bin Lehrer/in"
+
+#: profiles/forms.py:40
+#, fuzzy
+#| msgid "Subjects I want to learn"
+msgid "I want to learn"
+msgstr "Fächer, die ich lernen möchte"
+
+#: templates/accounts/login.html:3 templates/accounts/login.html:32
+#: templates/accounts/password_reset_complete.html:12
+#: templates/accounts/register.html:10
 msgid "Sign in"
 msgstr "Anmelden"
 
+#: templates/accounts/login.html:9
 msgid "Welcome back"
 msgstr "Willkommen zurück"
 
+#: templates/accounts/login.html:10
 msgid "No account?"
 msgstr "Kein Konto?"
 
+#: templates/accounts/login.html:10
 msgid "Create one"
 msgstr "Jetzt erstellen"
 
+#: templates/accounts/login.html:37
 msgid "Forgot your password?"
 msgstr "Passwort vergessen?"
 
-msgid "Create an account"
-msgstr "Konto erstellen"
-
-msgid "Create your account"
-msgstr "Erstellen Sie Ihr Konto"
-
-msgid "Already have one?"
-msgstr "Bereits ein Konto?"
-
-msgid "Create account"
-msgstr "Konto erstellen"
-
-msgid "By registering you agree to use the platform responsibly."
-msgstr "Mit der Registrierung stimmen Sie einer verantwortungsvollen Nutzung der Plattform zu."
-
-msgid "Check your email"
-msgstr "E-Mail überprüfen"
-
-msgid "Check your inbox"
-msgstr "Posteingang prüfen"
-
-msgid "We've sent a verification link to your email address."
-msgstr "Wir haben einen Bestätigungslink an Ihre E-Mail-Adresse gesendet."
-
-msgid "Click the link to activate your account."
-msgstr "Klicken Sie auf den Link, um Ihr Konto zu aktivieren."
-
-msgid "Didn't receive it? Check your spam folder."
-msgstr "Nicht erhalten? Prüfen Sie Ihren Spam-Ordner."
-
-msgid "Invalid link"
-msgstr "Ungültiger Link"
-
-msgid "Link expired or invalid"
-msgstr "Link abgelaufen oder ungültig"
-
-msgid "This verification link has already been used or has expired."
-msgstr "Dieser Bestätigungslink wurde bereits verwendet oder ist abgelaufen."
-
-msgid "Register again"
-msgstr "Erneut registrieren"
-
+#: templates/accounts/password_reset.html:3
+#: templates/accounts/password_reset.html:9
 msgid "Reset your password"
 msgstr "Passwort zurücksetzen"
 
+#: templates/accounts/password_reset.html:10
 msgid "Enter your email and we'll send you a reset link."
 msgstr "Geben Sie Ihre E-Mail ein und wir senden Ihnen einen Reset-Link."
 
+#: templates/accounts/password_reset.html:21
 msgid "Send reset link"
 msgstr "Reset-Link senden"
 
+#: templates/accounts/password_reset.html:25
 msgid "Back to sign in"
 msgstr "Zurück zur Anmeldung"
 
-msgid "Reset link sent"
-msgstr "Reset-Link gesendet"
-
-msgid "If an account exists for that email, you'll receive a password reset link shortly."
-msgstr "Falls ein Konto für diese E-Mail existiert, erhalten Sie in Kürze einen Reset-Link."
-
-msgid "Choose a new password"
-msgstr "Neues Passwort wählen"
-
-msgid "Set new password"
-msgstr "Neues Passwort festlegen"
-
-msgid "This reset link is invalid or has expired."
-msgstr "Dieser Reset-Link ist ungültig oder abgelaufen."
-
-msgid "Request a new one"
-msgstr "Neuen anfordern"
-
+#: templates/accounts/password_reset_complete.html:3
+#: templates/accounts/password_reset_complete.html:8
 msgid "Password updated"
 msgstr "Passwort aktualisiert"
 
+#: templates/accounts/password_reset_complete.html:9
 msgid "Your password has been changed successfully."
 msgstr "Ihr Passwort wurde erfolgreich geändert."
 
-msgid "Edit Profile"
-msgstr "Profil bearbeiten"
+#: templates/accounts/password_reset_confirm.html:3
+#: templates/accounts/password_reset_confirm.html:9
+msgid "Choose a new password"
+msgstr "Neues Passwort wählen"
 
-msgid "Back"
-msgstr "Zurück"
+#: templates/accounts/password_reset_confirm.html:24
+msgid "Set new password"
+msgstr "Neues Passwort festlegen"
 
-msgid "My role on TeachAndLearn"
-msgstr "Meine Rolle auf TeachAndLearn"
+#: templates/accounts/password_reset_confirm.html:28
+msgid "This reset link is invalid or has expired."
+msgstr "Dieser Reset-Link ist ungültig oder abgelaufen."
 
-msgid "I am a teacher"
-msgstr "Ich bin Lehrer/in"
+#: templates/accounts/password_reset_confirm.html:30
+msgid "Request a new one"
+msgstr "Neuen anfordern"
 
-msgid "I am a student"
-msgstr "Ich bin Schüler/in"
+#: templates/accounts/password_reset_done.html:3
+#: templates/accounts/register_done.html:3
+msgid "Check your email"
+msgstr "E-Mail überprüfen"
 
-msgid "Save changes"
-msgstr "Änderungen speichern"
+#: templates/accounts/password_reset_done.html:8
+msgid "Reset link sent"
+msgstr "Reset-Link gesendet"
 
-msgid "Cancel"
-msgstr "Abbrechen"
+#: templates/accounts/password_reset_done.html:9
+msgid ""
+"If an account exists for that email, you'll receive a password reset link "
+"shortly."
+msgstr ""
+"Falls ein Konto für diese E-Mail existiert, erhalten Sie in Kürze einen "
+"Reset-Link."
 
-msgid "Avatar"
-msgstr "Avatar"
+#: templates/accounts/register.html:3
+msgid "Create an account"
+msgstr "Konto erstellen"
 
-msgid "Edit"
-msgstr "Bearbeiten"
+#: templates/accounts/register.html:9
+msgid "Create your account"
+msgstr "Erstellen Sie Ihr Konto"
 
-msgid "Teacher Profile"
-msgstr "Lehrerprofil"
+#: templates/accounts/register.html:10
+msgid "Already have one?"
+msgstr "Bereits ein Konto?"
 
-msgid "Validated"
-msgstr "Bestätigt"
+#: templates/accounts/register.html:42
+msgid "Create account"
+msgstr "Konto erstellen"
 
-msgid "Rejected"
-msgstr "Abgelehnt"
+#: templates/accounts/register.html:48
+msgid "By registering you agree to use the platform responsibly."
+msgstr ""
+"Mit der Registrierung stimmen Sie einer verantwortungsvollen Nutzung der "
+"Plattform zu."
 
-msgid "Pending validation"
-msgstr "Ausstehende Validierung"
+#: templates/accounts/register_done.html:8
+msgid "Check your inbox"
+msgstr "Posteingang prüfen"
 
-msgid "Price:"
-msgstr "Preis:"
+#: templates/accounts/register_done.html:10
+msgid "We've sent a verification link to your email address."
+msgstr "Wir haben einen Bestätigungslink an Ihre E-Mail-Adresse gesendet."
 
-msgid "Native language:"
-msgstr "Muttersprache:"
+#: templates/accounts/register_done.html:11
+msgid "Click the link to activate your account."
+msgstr "Klicken Sie auf den Link, um Ihr Konto zu aktivieren."
 
-msgid "Availability:"
-msgstr "Verfügbarkeit:"
+#: templates/accounts/register_done.html:13
+msgid "Didn't receive it? Check your spam folder."
+msgstr "Nicht erhalten? Prüfen Sie Ihren Spam-Ordner."
 
-msgid "Certificates:"
-msgstr "Zertifikate:"
+#: templates/accounts/verify_invalid.html:3
+msgid "Invalid link"
+msgstr "Ungültiger Link"
 
-msgid "No teacher profile yet."
-msgstr "Noch kein Lehrerprofil."
+#: templates/accounts/verify_invalid.html:8
+msgid "Link expired or invalid"
+msgstr "Link abgelaufen oder ungültig"
 
-msgid "Set it up"
-msgstr "Einrichten"
+#: templates/accounts/verify_invalid.html:9
+msgid "This verification link has already been used or has expired."
+msgstr "Dieser Bestätigungslink wurde bereits verwendet oder ist abgelaufen."
 
-msgid "Student Profile"
-msgstr "Schülerprofil"
+#: templates/accounts/verify_invalid.html:10
+msgid "Register again"
+msgstr "Erneut registrieren"
 
-msgid "Subjects:"
-msgstr "Fächer:"
+#: templates/base.html:48 templates/base.html:75
+#: templates/profiles/profile.html:3 templates/students/profile.html:10
+#: templates/teachers/profile.html:10
+msgid "My Profile"
+msgstr "Mein Profil"
 
-msgid "Goals:"
-msgstr "Ziele:"
+#: templates/base.html:49 templates/base.html:76
+#: templates/messaging/detail.html:3 templates/messaging/list.html:3
+#: templates/messaging/list.html:7
+msgid "Messages"
+msgstr "Nachrichten"
 
-msgid "No student profile yet."
-msgstr "Noch kein Schülerprofil."
+#: templates/base.html:52 templates/base.html:79
+msgid "Logout"
+msgstr "Abmelden"
 
-msgid "You haven't set a role yet."
-msgstr "Sie haben noch keine Rolle festgelegt."
+#: templates/base.html:55 templates/base.html:82
+msgid "Login"
+msgstr "Anmelden"
 
-msgid "Set up your profile"
-msgstr "Profil einrichten"
+#: templates/base.html:56 templates/base.html:83
+msgid "Register"
+msgstr "Registrieren"
 
-msgid "ago"
-msgstr "vor"
+#: templates/base.html:87
+#, fuzzy
+#| msgid "Native language"
+msgid "Language"
+msgstr "Muttersprache"
 
-msgid "No messages yet"
-msgstr "Noch keine Nachrichten"
+#: templates/base.html:109
+msgid "This site is under construction — content and features may change."
+msgstr ""
 
-msgid "New"
-msgstr "Neu"
-
-msgid "Closed"
-msgstr "Geschlossen"
-
-msgid "No conversations yet."
-msgstr "Noch keine Gespräche."
-
-msgid "Find a teacher"
-msgstr "Lehrer suchen"
-
+#: templates/messaging/detail.html:28
 msgid "Teacher"
 msgstr "Lehrer/in"
 
+#: templates/messaging/detail.html:30
 msgid "Student"
 msgstr "Schüler/in"
 
+#: templates/messaging/detail.html:36 templates/messaging/list.html:44
+msgid "Closed"
+msgstr "Geschlossen"
+
+#: templates/messaging/detail.html:38 templates/messaging/list.html:42
+msgid "New"
+msgstr "Neu"
+
+#: templates/messaging/detail.html:48
 msgid "Start the conversation by sending a message below."
 msgstr "Beginnen Sie das Gespräch, indem Sie unten eine Nachricht senden."
 
+#: templates/messaging/detail.html:89
 msgid "Write a message…"
 msgstr "Nachricht schreiben…"
 
+#: templates/messaging/detail.html:100
 msgid "Enter to send · Shift+Enter for new line"
 msgstr "Enter zum Senden · Shift+Enter für neue Zeile"
 
+#: templates/messaging/detail.html:106
 msgid "This conversation is closed."
 msgstr "Dieses Gespräch ist geschlossen."
 
-msgid "Find a Teacher"
+#: templates/messaging/list.html:32
+msgid "ago"
+msgstr "vor"
+
+#: templates/messaging/list.html:39
+msgid "No messages yet"
+msgstr "Noch keine Nachrichten"
+
+#: templates/messaging/list.html:61
+msgid "No conversations yet."
+msgstr "Noch keine Gespräche."
+
+#: templates/messaging/list.html:62
+msgid "Find a teacher"
 msgstr "Lehrer suchen"
 
-msgid "Find a private teacher"
-msgstr "Einen Privatlehrer finden"
+#: templates/profiles/municipality_options.html:5
+#, fuzzy
+#| msgid "Municipality"
+msgid "Select municipality"
+msgstr "Gemeinde"
 
-msgid "Verified teachers for one-on-one lessons in Belgium"
-msgstr "Geprüfte Lehrer für Einzelunterricht in Belgien"
+#: templates/profiles/municipality_options.html:12
+msgid "Service unavailable — enter manually"
+msgstr ""
 
-msgid "All subjects"
-msgstr "Alle Fächer"
+#: templates/profiles/municipality_options.html:12
+msgid "No results — enter manually"
+msgstr ""
 
+#: templates/profiles/municipality_options.html:17
+#: templates/profiles/profile_edit.html:42
+msgid "Enter postal code first"
+msgstr ""
+
+#: templates/profiles/profile.html:11
+msgid "Avatar"
+msgstr "Avatar"
+
+#: templates/profiles/profile.html:28 templates/profiles/profile.html:36
+#: templates/profiles/profile.html:90 templates/students/profile.html:11
+#: templates/teachers/profile.html:11
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: templates/profiles/profile.html:35
+msgid "Teacher Profile"
+msgstr "Lehrerprofil"
+
+#: templates/profiles/profile.html:41
+msgid "Validated"
+msgstr "Bestätigt"
+
+#: templates/profiles/profile.html:43
+msgid "Rejected"
+msgstr "Abgelehnt"
+
+#: templates/profiles/profile.html:48
+msgid "Pending validation"
+msgstr "Ausstehende Validierung"
+
+#: templates/profiles/profile.html:60
+msgid "Price:"
+msgstr "Preis:"
+
+#: templates/profiles/profile.html:63
+msgid "Native language:"
+msgstr "Muttersprache:"
+
+#: templates/profiles/profile.html:66
+msgid "Availability:"
+msgstr "Verfügbarkeit:"
+
+#: templates/profiles/profile.html:70
+msgid "Certificates:"
+msgstr "Zertifikate:"
+
+#: templates/profiles/profile.html:80
+msgid "No teacher profile yet."
+msgstr "Noch kein Lehrerprofil."
+
+#: templates/profiles/profile.html:80 templates/profiles/profile.html:112
+msgid "Set it up"
+msgstr "Einrichten"
+
+#: templates/profiles/profile.html:89
+msgid "Student Profile"
+msgstr "Schülerprofil"
+
+#: templates/profiles/profile.html:96
+msgid "Subjects:"
+msgstr "Fächer:"
+
+#: templates/profiles/profile.html:108
+msgid "Goals:"
+msgstr "Ziele:"
+
+#: templates/profiles/profile.html:112
+msgid "No student profile yet."
+msgstr "Noch kein Schülerprofil."
+
+#: templates/profiles/profile.html:119
+msgid "You haven't set a role yet."
+msgstr "Sie haben noch keine Rolle festgelegt."
+
+#: templates/profiles/profile.html:120
+msgid "Set up your profile"
+msgstr "Profil einrichten"
+
+#: templates/profiles/profile_edit.html:3
+#: templates/profiles/profile_edit.html:8
+msgid "Edit Profile"
+msgstr "Profil bearbeiten"
+
+#: templates/profiles/profile_edit.html:9
+#: templates/students/profile_edit.html:9
+#: templates/teachers/profile_edit.html:9
+msgid "Back"
+msgstr "Zurück"
+
+#: templates/profiles/profile_edit.html:24
+#, fuzzy
+#| msgid "optional"
+msgid "Location"
+msgstr "optional"
+
+#: templates/profiles/profile_edit.html:33 templates/teachers/directory.html:23
 msgid "Municipality"
 msgstr "Gemeinde"
 
-msgid "Max €/h"
-msgstr "Max €/Std."
+#: templates/profiles/profile_edit.html:57
+msgid "Street address"
+msgstr ""
 
-msgid "Search"
-msgstr "Suchen"
+#: templates/profiles/profile_edit.html:57
+msgid "optional — private, used for map only"
+msgstr ""
 
-msgid "%(num)s teacher found"
-msgid_plural "%(num)s teachers found"
-msgstr[0] "%(num)s Lehrer gefunden"
-msgstr[1] "%(num)s Lehrer gefunden"
+#: templates/profiles/profile_edit.html:71
+msgid "My role on TeachAndLearn"
+msgstr "Meine Rolle auf TeachAndLearn"
 
-msgid "Clear filters"
-msgstr "Filter löschen"
+#: templates/profiles/profile_edit.html:75
+msgid "I am a teacher"
+msgstr "Ich bin Lehrer/in"
 
-msgid "Price on request"
-msgstr "Preis auf Anfrage"
+#: templates/profiles/profile_edit.html:79
+msgid "I am a student"
+msgstr "Ich bin Schüler/in"
 
-msgid "No teachers found for these filters."
-msgstr "Keine Lehrer für diese Filter gefunden."
+#: templates/profiles/profile_edit.html:87
+#: templates/students/profile_edit.html:48
+#: templates/teachers/profile_edit.html:78
+msgid "Save changes"
+msgstr "Änderungen speichern"
 
-msgid "See all teachers"
-msgstr "Alle Lehrer anzeigen"
+#: templates/profiles/profile_edit.html:90 templates/reviews/write.html:67
+#: templates/students/profile_edit.html:51
+#: templates/teachers/profile_edit.html:81
+msgid "Cancel"
+msgstr "Abbrechen"
 
+#: templates/reviews/write.html:3
+msgid "Write a Review"
+msgstr "Bewertung schreiben"
+
+#: templates/reviews/write.html:9
+msgid "Back to profile"
+msgstr "Zurück zum Profil"
+
+#: templates/reviews/write.html:15
+msgid "Edit your review"
+msgstr "Bewertung bearbeiten"
+
+#: templates/reviews/write.html:15 templates/teachers/detail.html:126
+msgid "Write a review"
+msgstr "Bewertung schreiben"
+
+#: templates/reviews/write.html:18
+msgid "For"
+msgstr "Für"
+
+#: templates/reviews/write.html:25
+msgid "Your rating"
+msgstr "Ihre Bewertung"
+
+#: templates/reviews/write.html:42
+#, python-format
+msgid "%(val)s out of 5"
+msgstr "%(val)s von 5"
+
+#: templates/reviews/write.html:42
+msgid "Click to rate"
+msgstr "Zum Bewerten klicken"
+
+#: templates/reviews/write.html:53
+msgid "Comment"
+msgstr "Kommentar"
+
+#: templates/reviews/write.html:53
+msgid "optional"
+msgstr "optional"
+
+#: templates/reviews/write.html:64
+msgid "Update review"
+msgstr "Bewertung aktualisieren"
+
+#: templates/reviews/write.html:64
+msgid "Submit review"
+msgstr "Bewertung einreichen"
+
+#: templates/reviews/write.html:71
+msgid "Your review will appear after admin validation."
+msgstr ""
+"Ihre Bewertung erscheint nach der Validierung durch einen Administrator."
+
+#: templates/reviews/write.html:84
+msgid "out of 5"
+msgstr "von 5"
+
+#: templates/students/profile.html:3 templates/students/profile.html:8
+msgid "My Student Profile"
+msgstr "Mein Schülerprofil"
+
+#: templates/students/profile.html:18
+msgid "Subjects I want to learn"
+msgstr "Fächer, die ich lernen möchte"
+
+#: templates/students/profile.html:29 templates/teachers/profile.html:52
+msgid "No subjects added yet."
+msgstr "Noch keine Fächer hinzugefügt."
+
+#: templates/students/profile.html:35 templates/students/profile_edit.html:16
+msgid "Learning goals"
+msgstr "Lernziele"
+
+#: templates/students/profile_edit.html:3
+#: templates/students/profile_edit.html:8
+msgid "Edit Student Profile"
+msgstr "Schülerprofil bearbeiten"
+
+#: templates/students/profile_edit.html:21
+msgid "Subjects & levels"
+msgstr "Fächer und Niveaus"
+
+#: templates/students/profile_edit.html:36
+msgid "Remove"
+msgstr "Entfernen"
+
+#: templates/students/profile_edit.html:42
+msgid "Save to add another subject row."
+msgstr "Speichern, um ein weiteres Fach hinzuzufügen."
+
+#: templates/teachers/detail.html:41
 msgid "hour"
 msgstr "Stunde"
 
+#: templates/teachers/detail.html:49
+#, python-format
 msgid "%(num)s review"
 msgid_plural "%(num)s reviews"
 msgstr[0] "%(num)s Bewertung"
 msgstr[1] "%(num)s Bewertungen"
 
+#: templates/teachers/detail.html:60
 msgid "Continue conversation"
 msgstr "Gespräch fortsetzen"
 
+#: templates/teachers/detail.html:67
 msgid "Contact this teacher"
 msgstr "Diesen Lehrer kontaktieren"
 
+#: templates/teachers/detail.html:77
 msgid "About"
 msgstr "Über"
 
+#: templates/teachers/detail.html:86 templates/teachers/profile.html:64
 msgid "Native language"
 msgstr "Muttersprache"
 
+#: templates/teachers/detail.html:92 templates/teachers/profile.html:73
 msgid "Availability"
 msgstr "Verfügbarkeit"
 
+#: templates/teachers/detail.html:101 templates/teachers/profile.html:81
+#: templates/teachers/profile_edit.html:46
 msgid "Certificates & Credentials"
 msgstr "Zertifikate und Qualifikationen"
 
+#: templates/teachers/detail.html:108 templates/teachers/profile.html:89
 msgid "Obtained:"
 msgstr "Erworben:"
 
+#: templates/teachers/detail.html:109 templates/teachers/profile.html:90
 msgid "Expires:"
 msgstr "Läuft ab:"
 
+#: templates/teachers/detail.html:120
 msgid "Reviews"
 msgstr "Bewertungen"
 
+#: templates/teachers/detail.html:123
 msgid "You already reviewed this teacher"
 msgstr "Sie haben diesen Lehrer bereits bewertet"
 
-msgid "Write a review"
-msgstr "Bewertung schreiben"
-
+#: templates/teachers/detail.html:139
 msgid "Anonymous"
 msgstr "Anonym"
 
+#: templates/teachers/detail.html:155
 msgid "No reviews yet."
 msgstr "Noch keine Bewertungen."
 
+#: templates/teachers/directory.html:3
+msgid "Find a Teacher"
+msgstr "Lehrer suchen"
+
+#: templates/teachers/directory.html:9
+msgid "Find a private teacher"
+msgstr "Einen Privatlehrer finden"
+
+#: templates/teachers/directory.html:10
+msgid "Verified teachers for one-on-one lessons in Belgium"
+msgstr "Geprüfte Lehrer für Einzelunterricht in Belgien"
+
+#: templates/teachers/directory.html:15
+msgid "All subjects"
+msgstr "Alle Fächer"
+
+#: templates/teachers/directory.html:27
+msgid "Max €/h"
+msgstr "Max €/Std."
+
+#: templates/teachers/directory.html:33
+msgid "Search"
+msgstr "Suchen"
+
+#: templates/teachers/directory.html:45
+#, python-format
+msgid "%(num)s teacher found"
+msgid_plural "%(num)s teachers found"
+msgstr[0] "%(num)s Lehrer gefunden"
+msgstr[1] "%(num)s Lehrer gefunden"
+
+#: templates/teachers/directory.html:47
+msgid "Clear filters"
+msgstr "Filter löschen"
+
+#: templates/teachers/directory.html:86
+msgid "Price on request"
+msgstr "Preis auf Anfrage"
+
+#: templates/teachers/directory.html:103
+msgid "No teachers found for these filters."
+msgstr "Keine Lehrer für diese Filter gefunden."
+
+#: templates/teachers/directory.html:104
+msgid "See all teachers"
+msgstr "Alle Lehrer anzeigen"
+
+#: templates/teachers/profile.html:3 templates/teachers/profile.html:8
 msgid "My Teacher Profile"
 msgstr "Mein Lehrerprofil"
 
+#: templates/teachers/profile.html:19
 msgid "Your profile is published"
 msgstr "Ihr Profil ist veröffentlicht"
 
+#: templates/teachers/profile.html:20
 msgid "Students can find you in the directory."
 msgstr "Schüler können Sie im Verzeichnis finden."
 
+#: templates/teachers/profile.html:25
 msgid "Your profile was rejected"
 msgstr "Ihr Profil wurde abgelehnt"
 
+#: templates/teachers/profile.html:29
 msgid "Update your profile and it will be reviewed again."
 msgstr "Aktualisieren Sie Ihr Profil und es wird erneut überprüft."
 
+#: templates/teachers/profile.html:35
 msgid "Awaiting validation"
 msgstr "Warte auf Validierung"
 
+#: templates/teachers/profile.html:36
 msgid "An admin will review your profile before it goes live."
-msgstr "Ein Administrator wird Ihr Profil prüfen, bevor es veröffentlicht wird."
+msgstr ""
+"Ein Administrator wird Ihr Profil prüfen, bevor es veröffentlicht wird."
 
+#: templates/teachers/profile.html:44
 msgid "Subjects"
 msgstr "Fächer"
 
-msgid "No subjects added yet."
-msgstr "Noch keine Fächer hinzugefügt."
-
+#: templates/teachers/profile.html:58
 msgid "Price per hour"
 msgstr "Preis pro Stunde"
 
+#: templates/teachers/profile.html:60 templates/teachers/profile.html:66
 msgid "Not set"
 msgstr "Nicht festgelegt"
 
+#: templates/teachers/profile.html:96
 msgid "No certificates added yet."
 msgstr "Noch keine Zertifikate hinzugefügt."
 
+#: templates/teachers/profile_edit.html:3
+#: templates/teachers/profile_edit.html:8
 msgid "Edit Teacher Profile"
 msgstr "Lehrerprofil bearbeiten"
 
+#: templates/teachers/profile_edit.html:16
 msgid "Teaching info"
 msgstr "Unterrichtsinformationen"
 
+#: templates/teachers/profile_edit.html:27
 msgid "Subjects you teach"
 msgstr "Fächer, die Sie unterrichten"
 
+#: templates/teachers/profile_edit.html:29
 msgid "No subjects available yet — an admin must add them first."
-msgstr "Noch keine Fächer verfügbar — ein Administrator muss sie zuerst hinzufügen."
+msgstr ""
+"Noch keine Fächer verfügbar — ein Administrator muss sie zuerst hinzufügen."
 
+#: templates/teachers/profile_edit.html:52
+#, python-format
 msgid "Certificate #%(num)s"
 msgstr "Zertifikat Nr. %(num)s"
 
+#: templates/teachers/profile_edit.html:54
 msgid "Add new"
 msgstr "Hinzufügen"
 
+#: templates/teachers/profile_edit.html:67
 msgid "Remove this certificate"
 msgstr "Dieses Zertifikat entfernen"
-
-msgid "My Student Profile"
-msgstr "Mein Schülerprofil"
-
-msgid "Subjects I want to learn"
-msgstr "Fächer, die ich lernen möchte"
-
-msgid "Learning goals"
-msgstr "Lernziele"
-
-msgid "Edit Student Profile"
-msgstr "Schülerprofil bearbeiten"
-
-msgid "Subjects & levels"
-msgstr "Fächer und Niveaus"
-
-msgid "Remove"
-msgstr "Entfernen"
-
-msgid "Save to add another subject row."
-msgstr "Speichern, um ein weiteres Fach hinzuzufügen."
-
-msgid "Write a Review"
-msgstr "Bewertung schreiben"
-
-msgid "Back to profile"
-msgstr "Zurück zum Profil"
-
-msgid "Edit your review"
-msgstr "Bewertung bearbeiten"
-
-msgid "For"
-msgstr "Für"
-
-msgid "Your rating"
-msgstr "Ihre Bewertung"
-
-msgid "%(val)s out of 5"
-msgstr "%(val)s von 5"
-
-msgid "out of 5"
-msgstr "von 5"
-
-msgid "Click to rate"
-msgstr "Zum Bewerten klicken"
-
-msgid "Comment"
-msgstr "Kommentar"
-
-msgid "optional"
-msgstr "optional"
-
-msgid "Update review"
-msgstr "Bewertung aktualisieren"
-
-msgid "Submit review"
-msgstr "Bewertung einreichen"
-
-msgid "Your review will appear after admin validation."
-msgstr "Ihre Bewertung erscheint nach der Validierung durch einen Administrator."
