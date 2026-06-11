@@ -54,8 +54,8 @@
       var zoom = hasStreet ? 16 : 13;
       var map = L.map('profile-map', { zoomControl: true, scrollWheelZoom: false })
                  .setView([lat, lon], zoom);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
         maxZoom: 19
       }).addTo(map);
       L.marker([lat, lon]).addTo(map);
