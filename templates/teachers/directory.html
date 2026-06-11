@@ -60,12 +60,12 @@
                 class="w-12 h-12 rounded-full object-cover shrink-0">
             {% else %}
               <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-base font-bold text-indigo-400 shrink-0">
-                {{ teacher.profile.user.first_name|first|upper }}{{ teacher.profile.user.last_name|first|upper }}
+                {{ teacher.profile.user.first_name|first|upper }}
               </div>
             {% endif %}
             <div class="min-w-0">
               <p class="font-semibold text-slate-900 truncate group-hover:text-indigo-600 transition-colors">
-                {{ teacher.profile.user.get_full_name|default:teacher.profile.user.email }}
+                {{ teacher.profile.user.first_name|default:teacher.profile.user.email }}
               </p>
               {% if teacher.profile.municipality %}
                 <p class="text-xs text-slate-400 truncate">📍 {{ teacher.profile.municipality }}</p>

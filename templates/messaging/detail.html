@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{{ other.get_full_name|default:other.email }} — {% trans "Messages" %}{% endblock %}
+{% block title %}{{ other.first_name|default:other.email }} — {% trans "Messages" %}{% endblock %}
 {% block content %}
 
 {# Sticky header #}
@@ -16,13 +16,13 @@
       <img src="{{ other.profile.avatar.url }}" alt="" class="w-8 h-8 rounded-full object-cover">
     {% else %}
       <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-400">
-        {{ other.first_name|first|upper }}{{ other.last_name|first|upper }}
+        {{ other.first_name|first|upper }}
       </div>
     {% endif %}
 
     <div class="flex-1 min-w-0">
       <p class="text-sm font-semibold text-slate-900 truncate">
-        {{ other.get_full_name|default:other.email }}
+        {{ other.first_name|default:other.email }}
       </p>
       {% if other.profile.is_teacher %}
         <p class="text-xs text-slate-400">{% trans "Teacher" %}</p>

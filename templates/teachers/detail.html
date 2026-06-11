@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{{ teacher.profile.user.get_full_name }} — TeachAndLearn{% endblock %}
+{% block title %}{{ teacher.profile.user.first_name }} — TeachAndLearn{% endblock %}
 {% block content %}
 <div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
 
@@ -13,13 +13,13 @@
           class="w-24 h-24 rounded-2xl object-cover shrink-0">
       {% else %}
         <div class="w-24 h-24 rounded-2xl bg-indigo-100 flex items-center justify-center text-3xl font-bold text-indigo-400 shrink-0">
-          {{ teacher.profile.user.first_name|first|upper }}{{ teacher.profile.user.last_name|first|upper }}
+          {{ teacher.profile.user.first_name|first|upper }}
         </div>
       {% endif %}
 
       <div class="flex-1 min-w-0">
         <h1 class="text-2xl font-bold text-slate-900">
-          {{ teacher.profile.user.get_full_name|default:teacher.profile.user.email }}
+          {{ teacher.profile.user.first_name|default:teacher.profile.user.email }}
         </h1>
 
         {% if teacher.profile.municipality %}
@@ -137,7 +137,7 @@
                 {{ review.student.first_name|first|upper }}
               </div>
               {% trans "Anonymous" as anon_label %}
-              <span class="text-sm font-medium text-slate-800">{{ review.student.get_full_name|default:anon_label }}</span>
+              <span class="text-sm font-medium text-slate-800">{{ review.student.first_name|default:anon_label }}</span>
               <span class="text-slate-300 text-xs ml-auto">{{ review.created_at|date:"N j, Y" }}</span>
             </div>
             <div class="flex items-center gap-1 mb-2">
