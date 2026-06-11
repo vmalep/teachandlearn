@@ -1,6 +1,6 @@
 import json
+import os
 import urllib.request
-import urllib.parse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import redirect
@@ -12,65 +12,48 @@ from .forms import ProfileForm
 from .models import Profile
 
 _UA = "TeachAndLearn/1.0 vmalep@pm.me"
+_POSTAL_FILE = os.path.join(os.path.dirname(__file__), "postal_codes_be.json")
+
+with open(_POSTAL_FILE, encoding="utf-8") as _f:
+    _POSTAL_DATA = json.load(_f)
 
 
 def _fetch_municipalities(postal_code):
     """Return sorted list of locality names for a Belgian postal code.
 
-    Tries Overpass first (good for sub-localities); falls back to Nominatim
-    when Overpass returns nothing (e.g. large cities like Brussels).
+    Merges official municipality names (static JSON from statbel) with
+    sub-localities returned by Overpass (e.g. Jambes for 5100).
     """
-    # 1. Overpass — place nodes tagged with postal_code
-    overpass_query = (
-        '[out:json][timeout:10];'
-        'area["ISO3166-1:alpha2"="BE"]->.be;'
-        f'(node["place"]["postal_code"="{postal_code}"](area.be);'
-        f'node["place"]["addr:postcode"="{postal_code}"](area.be););'
-        'out tags;'
-    )
-    req = urllib.request.Request(
-        "https://overpass-api.de/api/interpreter",
-        data=overpass_query.encode(),
-        headers={"User-Agent": _UA},
-    )
-    with urllib.request.urlopen(req, timeout=10) as resp:
-        elements = json.loads(resp.read()).get("elements", [])
-
     seen = set()
     results = []
-    for e in elements:
-        name = e.get("tags", {}).get("name", "").strip()
-        if name and name not in seen:
-            seen.add(name)
-            results.append(name)
 
-    if results:
-        return sorted(results)
-
-    # 2. Nominatim fallback — extracts city from the postal code boundary
-    params = urllib.parse.urlencode({
-        "postalcode": postal_code,
-        "countrycodes": "be",
-        "format": "json",
-        "addressdetails": "1",
-        "limit": "5",
-    })
-    req = urllib.request.Request(
-        f"https://nominatim.openstreetmap.org/search?{params}",
-        headers={"User-Agent": _UA},
-    )
-    with urllib.request.urlopen(req, timeout=5) as resp:
-        nom_results = json.loads(resp.read())
-
-    for r in nom_results:
-        addr = r.get("address", {})
-        name = (
-            addr.get("city")
-            or addr.get("town")
-            or addr.get("village")
-            or addr.get("municipality")
+    # 1. Overpass — place nodes tagged with postal_code (sub-localities)
+    try:
+        overpass_query = (
+            '[out:json][timeout:10];'
+            'area["ISO3166-1:alpha2"="BE"]->.be;'
+            f'(node["place"]["postal_code"="{postal_code}"](area.be);'
+            f'node["place"]["addr:postcode"="{postal_code}"](area.be););'
+            'out tags;'
         )
-        if name and name not in seen:
+        req = urllib.request.Request(
+            "https://overpass-api.de/api/interpreter",
+            data=overpass_query.encode(),
+            headers={"User-Agent": _UA},
+        )
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            elements = json.loads(resp.read()).get("elements", [])
+        for e in elements:
+            name = e.get("tags", {}).get("name", "").strip()
+            if name and name not in seen:
+                seen.add(name)
+                results.append(name)
+    except Exception:
+        pass
+
+    # 2. Static file — official municipality names (always available)
+    for name in _POSTAL_DATA.get(postal_code, []):
+        if name not in seen:
             seen.add(name)
             results.append(name)
 
