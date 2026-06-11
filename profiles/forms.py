@@ -24,6 +24,7 @@ class ProfileForm(forms.ModelForm):
                 "inputmode": "numeric",
                 "autocomplete": "postal-code",
                 "pattern": "[0-9]{4}",
+                "placeholder": "----",
                 "hx-get": "/profiles/municipalities/",
                 "hx-trigger": "input changed delay:600ms",
                 "hx-target": "#municipality-wrapper",
@@ -33,7 +34,7 @@ class ProfileForm(forms.ModelForm):
             "postal_code": "Postal code",
             "street": "Street",
             "house_number": "Number",
-            "mailbox": "Mailbox",
+            "mailbox": "Complement",
             "is_teacher": "I want to teach",
             "is_student": "I want to learn",
         }
