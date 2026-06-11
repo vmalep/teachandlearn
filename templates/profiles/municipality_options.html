@@ -1,13 +1,18 @@
 {% load i18n %}
-{% if municipalities %}
-<select name="municipality" id="id_municipality" class="field-input" required>
-  <option value="">— {% trans "Select municipality" %} —</option>
-  {% for muni in municipalities %}
-    <option value="{{ muni }}">{{ muni }}</option>
-  {% endfor %}
-</select>
+{% if postal_code|length == 4 %}
+  {% if municipalities %}
+    <select name="municipality" id="id_municipality" class="field-input" required>
+      <option value="">— {% trans "Select municipality" %} —</option>
+      {% for muni in municipalities %}
+        <option value="{{ muni }}">{{ muni }}</option>
+      {% endfor %}
+    </select>
+  {% else %}
+    <input type="text" name="municipality" id="id_municipality" class="field-input"
+      placeholder="{% if error %}{% trans "Service unavailable — enter manually" %}{% else %}{% trans "No results — enter manually" %}{% endif %}"
+      required>
+  {% endif %}
 {% else %}
-<input type="text" name="municipality" id="id_municipality" class="field-input"
-  placeholder="{% if error %}{% trans "Service unavailable — enter manually" %}{% elif postal_code|length == 4 %}{% trans "No results — enter manually" %}{% else %}{% trans "Enter postal code first" %}{% endif %}"
-  required>
+  <input type="text" name="municipality" id="id_municipality" class="field-input"
+    placeholder="{% trans "Enter postal code first" %}" disabled>
 {% endif %}

@@ -33,13 +33,15 @@
               {% trans "Municipality" %} <span class="text-red-500">*</span>
             </label>
             <div id="municipality-wrapper">
-              {% if form.municipality.value %}
+              {% with pc=form.postal_code.value|default:"" %}
+              {% if pc|length == 4 %}
                 <input type="text" name="municipality" id="id_municipality"
-                  value="{{ form.municipality.value }}" class="field-input" required>
+                  value="{{ form.municipality.value|default:'' }}" class="field-input" required>
               {% else %}
                 <input type="text" name="municipality" id="id_municipality"
-                  class="field-input" placeholder="{% trans "Enter postal code first" %}" required>
+                  class="field-input" placeholder="{% trans "Enter postal code first" %}" disabled>
               {% endif %}
+              {% endwith %}
             </div>
             {% if form.municipality.errors %}
               <ul class="text-xs text-red-600 space-y-0.5">
@@ -92,4 +94,18 @@
   </div>
 
 </div>
+
+<script>
+  (function () {
+    var pc = document.getElementById('id_postal_code');
+    if (!pc) return;
+    pc.addEventListener('input', function () {
+      this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4);
+      if (this.value.length < 4) {
+        var el = document.querySelector('#municipality-wrapper [name="municipality"]');
+        if (el) el.disabled = true;
+      }
+    });
+  })();
+</script>
 {% endblock %}

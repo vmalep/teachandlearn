@@ -23,6 +23,7 @@ class ProfileForm(forms.ModelForm):
                 "maxlength": "4",
                 "inputmode": "numeric",
                 "autocomplete": "postal-code",
+                "pattern": "[0-9]{4}",
                 "hx-get": "/profiles/municipalities/",
                 "hx-trigger": "input changed delay:600ms",
                 "hx-target": "#municipality-wrapper",
