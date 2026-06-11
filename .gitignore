@@ -10,3 +10,4 @@ media/
 .DS_Store
 bin/
 static/css/main.css
+*.mo
