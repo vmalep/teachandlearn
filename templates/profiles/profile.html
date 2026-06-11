@@ -28,6 +28,41 @@
     <a href="/profiles/edit/" class="shrink-0 text-sm text-indigo-600 hover:underline font-medium">{% trans "Edit" %}</a>
   </div>
 
+  {# Location map #}
+  {% if profile.latitude and profile.longitude %}
+  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="px-6 pt-5 pb-3 flex items-center justify-between">
+      <h2 class="font-semibold text-slate-900">{% trans "Location" %}</h2>
+      <a href="/profiles/edit/" class="text-sm text-indigo-600 hover:underline font-medium">{% trans "Edit" %}</a>
+    </div>
+    {% if profile.street %}
+      <p class="px-6 pb-3 text-sm text-slate-500">
+        {{ profile.house_number }} {{ profile.street }}{% if profile.mailbox %}, {{ profile.mailbox }}{% endif %}<br>
+        {{ profile.postal_code }} {{ profile.municipality }}
+      </p>
+    {% else %}
+      <p class="px-6 pb-3 text-sm text-slate-500">{{ profile.postal_code }} {{ profile.municipality }}</p>
+    {% endif %}
+    <div id="profile-map" style="height:260px;"></div>
+  </div>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var lat = {{ profile.latitude }}, lon = {{ profile.longitude }};
+      var hasStreet = {% if profile.street %}true{% else %}false{% endif %};
+      var zoom = hasStreet ? 16 : 13;
+      var map = L.map('profile-map', { zoomControl: true, scrollWheelZoom: false })
+                 .setView([lat, lon], zoom);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19
+      }).addTo(map);
+      L.marker([lat, lon]).addTo(map);
+    })();
+  </script>
+  {% endif %}
+
   {# Teacher section #}
   {% if profile.is_teacher %}
   <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">

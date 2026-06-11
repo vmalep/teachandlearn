@@ -1,5 +1,6 @@
 import json
 import os
+import urllib.parse
 import urllib.request
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
@@ -60,6 +61,38 @@ def _fetch_municipalities(postal_code):
     return sorted(results)
 
 
+def _geocode_profile(profile):
+    """Geocode a profile's address via Nominatim. Updates lat/lon in place (no save)."""
+    parts = []
+    if profile.street:
+        street = f"{profile.house_number} {profile.street}".strip() if profile.house_number else profile.street
+        parts.append(street)
+    # Strip bilingual suffix e.g. "Namur / Namen" → "Namur"
+    municipality = profile.municipality.split("/")[0].strip() if profile.municipality else ""
+    if profile.postal_code:
+        parts.append(profile.postal_code)
+    if municipality:
+        parts.append(municipality)
+    parts.append("Belgium")
+
+    params = urllib.parse.urlencode({"q": ", ".join(parts), "format": "json", "limit": "1"})
+    req = urllib.request.Request(
+        f"https://nominatim.openstreetmap.org/search?{params}",
+        headers={"User-Agent": _UA},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            results = json.loads(resp.read())
+        if results:
+            profile.latitude = results[0]["lat"]
+            profile.longitude = results[0]["lon"]
+        else:
+            profile.latitude = None
+            profile.longitude = None
+    except Exception:
+        pass  # keep existing coordinates if geocoding fails
+
+
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = "profiles/profile.html"
 
@@ -82,15 +115,17 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
         return self.request.user.profile
 
     def form_valid(self, form):
-        response = super().form_valid(form)
-        profile = form.instance
+        profile = form.save(commit=False)
+        _geocode_profile(profile)
+        profile.save()
+        form.save_m2m()
         if profile.is_teacher:
             from teachers.models import TeacherProfile
             TeacherProfile.objects.get_or_create(profile=profile)
         if profile.is_student:
             from students.models import StudentProfile
             StudentProfile.objects.get_or_create(profile=profile)
-        return response
+        return redirect(self.success_url)
 
 
 class MunicipalityLookupView(LoginRequiredMixin, View):
