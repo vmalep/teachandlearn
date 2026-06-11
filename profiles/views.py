@@ -58,7 +58,7 @@ class MunicipalityLookupView(LoginRequiredMixin, View):
                     "countrycodes": "be",
                     "format": "json",
                     "addressdetails": "1",
-                    "limit": "20",
+                    "limit": "50",
                 })
                 url = f"https://nominatim.openstreetmap.org/search?{params}"
                 req = urllib.request.Request(
@@ -67,16 +67,19 @@ class MunicipalityLookupView(LoginRequiredMixin, View):
                 with urllib.request.urlopen(req, timeout=5) as resp:
                     results = json.loads(resp.read())
 
+                # Keep only place/boundary features; use their own name (not parent city)
+                locality_classes = {
+                    ("place", "city"), ("place", "town"), ("place", "village"),
+                    ("place", "suburb"), ("place", "quarter"), ("place", "hamlet"),
+                    ("place", "neighbourhood"), ("place", "borough"),
+                    ("boundary", "administrative"),
+                }
                 seen = set()
                 for r in results:
-                    addr = r.get("address", {})
-                    name = (
-                        addr.get("city")
-                        or addr.get("town")
-                        or addr.get("village")
-                        or addr.get("municipality")
-                        or addr.get("county")
-                    )
+                    key = (r.get("class", ""), r.get("type", ""))
+                    if key not in locality_classes:
+                        continue
+                    name = r.get("name", "").strip()
                     if name and name not in seen:
                         seen.add(name)
                         municipalities.append(name)
