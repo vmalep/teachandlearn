@@ -1,0 +1,31 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<p>{{ description }}</p>
+
+<ul>
+  {% for obj in queryset %}
+    <li>{{ obj }}</li>
+  {% endfor %}
+</ul>
+
+<form method="post">
+  {% csrf_token %}
+  {% for obj in queryset %}
+    <input type="hidden" name="{{ action_checkbox_name }}" value="{{ obj.pk }}">
+  {% endfor %}
+  <input type="hidden" name="action" value="{{ action_name }}">
+  <input type="hidden" name="select_across" value="0">
+
+  <p>
+    <label for="rejection_reason"><strong>Rejection reason (optional):</strong></label><br>
+    <textarea name="rejection_reason" id="rejection_reason" rows="4" cols="60" placeholder="Explain why this is being rejected…"></textarea>
+  </p>
+
+  <input type="submit" name="apply" value="Confirm rejection" class="button">
+  &nbsp;
+  <a href="../" class="button cancel-link">Cancel</a>
+</form>
+{% endblock %}

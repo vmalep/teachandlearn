@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.admin import helpers
+from django.template.response import TemplateResponse
 from .models import TeacherProfile, Certificate
 
 
@@ -19,7 +21,25 @@ class TeacherProfileAdmin(admin.ModelAdmin):
     @admin.action(description="Validate selected teacher profiles")
     def validate_profiles(self, request, queryset):
         queryset.update(state=TeacherProfile.State.VALIDATED)
+        self.message_user(request, f"{queryset.count()} teacher profile(s) validated.")
 
     @admin.action(description="Reject selected teacher profiles")
     def reject_profiles(self, request, queryset):
-        queryset.update(state=TeacherProfile.State.REJECTED)
+        if "apply" in request.POST:
+            reason = request.POST.get("rejection_reason", "")
+            selected_ids = request.POST.getlist(helpers.ACTION_CHECKBOX_NAME)
+            updated = TeacherProfile.objects.filter(pk__in=selected_ids).update(
+                state=TeacherProfile.State.REJECTED,
+                rejection_reason=reason,
+            )
+            self.message_user(request, f"{updated} teacher profile(s) rejected.")
+            return None
+
+        return TemplateResponse(request, "admin/reject_with_reason.html", {
+            "title": "Reject teacher profiles",
+            "description": f"You are about to reject {queryset.count()} teacher profile(s). Optionally enter a reason:",
+            "queryset": queryset,
+            "action_name": "reject_profiles",
+            "action_checkbox_name": helpers.ACTION_CHECKBOX_NAME,
+            "opts": self.model._meta,
+        })

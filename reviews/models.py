@@ -24,6 +24,7 @@ class Review(models.Model):
     )
     comment = models.TextField(blank=True)
     state = models.CharField(max_length=20, choices=State.choices, default=State.DRAFT)
+    rejection_reason = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
