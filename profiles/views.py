@@ -1,6 +1,12 @@
+import json
+import urllib.request
+import urllib.parse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView, UpdateView
 from .forms import ProfileForm
 from .models import Profile
@@ -37,3 +43,54 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
             from students.models import StudentProfile
             StudentProfile.objects.get_or_create(profile=profile)
         return response
+
+
+class MunicipalityLookupView(LoginRequiredMixin, View):
+    def get(self, request):
+        postal_code = request.GET.get("postal_code", "").strip()
+        municipalities = []
+        error = False
+
+        if len(postal_code) == 4 and postal_code.isdigit():
+            try:
+                params = urllib.parse.urlencode({
+                    "postalcode": postal_code,
+                    "countrycodes": "be",
+                    "format": "json",
+                    "addressdetails": "1",
+                    "limit": "20",
+                })
+                url = f"https://nominatim.openstreetmap.org/search?{params}"
+                req = urllib.request.Request(
+                    url, headers={"User-Agent": "TeachAndLearn/1.0 vmalep@pm.me"}
+                )
+                with urllib.request.urlopen(req, timeout=5) as resp:
+                    results = json.loads(resp.read())
+
+                seen = set()
+                for r in results:
+                    addr = r.get("address", {})
+                    name = (
+                        addr.get("city")
+                        or addr.get("town")
+                        or addr.get("village")
+                        or addr.get("municipality")
+                        or addr.get("county")
+                    )
+                    if name and name not in seen:
+                        seen.add(name)
+                        municipalities.append(name)
+                municipalities.sort()
+            except Exception:
+                error = True
+
+        html = render_to_string(
+            "profiles/municipality_options.html",
+            {
+                "municipalities": municipalities,
+                "error": error,
+                "postal_code": postal_code,
+            },
+            request=request,
+        )
+        return HttpResponse(html)

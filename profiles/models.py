@@ -10,8 +10,11 @@ class Profile(models.Model):
     is_student = models.BooleanField(default=False)
     bio = models.TextField(blank=True)
     avatar = models.ImageField(upload_to="avatars/", blank=True)
+    postal_code = models.CharField(max_length=10, blank=True)
     municipality = models.CharField(max_length=100, blank=True)
-    address = models.CharField(max_length=255, blank=True)
+    street = models.CharField(max_length=200, blank=True)
+    house_number = models.CharField(max_length=20, blank=True)
+    mailbox = models.CharField(max_length=20, blank=True)
     latitude = models.DecimalField(
         max_digits=9, decimal_places=6, null=True, blank=True
     )

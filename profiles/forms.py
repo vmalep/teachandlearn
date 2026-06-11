@@ -12,17 +12,33 @@ def apply_input_class(form):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ["bio", "avatar", "municipality", "address", "is_teacher", "is_student"]
+        fields = [
+            "bio", "avatar",
+            "postal_code", "municipality", "street", "house_number", "mailbox",
+            "is_teacher", "is_student",
+        ]
         widgets = {
             "bio": forms.Textarea(attrs={"rows": 4}),
-            "address": forms.TextInput(),
+            "postal_code": forms.TextInput(attrs={
+                "maxlength": "4",
+                "inputmode": "numeric",
+                "autocomplete": "postal-code",
+                "hx-get": "/profiles/municipalities/",
+                "hx-trigger": "input changed delay:600ms",
+                "hx-target": "#municipality-wrapper",
+            }),
         }
         labels = {
-            "address": "Full address (private — used for map only)",
+            "postal_code": "Postal code",
+            "street": "Street",
+            "house_number": "Number",
+            "mailbox": "Mailbox",
             "is_teacher": "I want to teach",
             "is_student": "I want to learn",
         }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields["postal_code"].required = True
+        self.fields["municipality"].required = True
         apply_input_class(self)
