@@ -4,5 +4,6 @@ from .models import Subject
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
-    list_display = ["name"]
+    list_display = ["name", "category"]
+    list_filter = ["category"]
     search_fields = ["name"]
