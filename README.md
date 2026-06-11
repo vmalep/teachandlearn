@@ -155,4 +155,6 @@ Teacher profiles and reviews go through an admin validation workflow:
 
 ## License
 
-_To be defined._
+This project is licensed under the [GNU Affero General Public License v3.0](LICENSE).
+
+In short: you can use, modify, and distribute this software freely, but any modified version — including one run as a web service — must also be released under AGPL v3.
