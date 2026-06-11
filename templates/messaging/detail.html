@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% block title %}{{ other.first_name|default:other.email }} — {% trans "Messages" %}{% endblock %}
+{% block title %}{{ other.get_full_name|default:other.email }} — {% trans "Messages" %}{% endblock %}
 {% block content %}
 
 {# Sticky header #}
@@ -22,7 +22,7 @@
 
     <div class="flex-1 min-w-0">
       <p class="text-sm font-semibold text-slate-900 truncate">
-        {{ other.first_name|default:other.email }}
+        {{ other.get_full_name|default:other.email }}
       </p>
       {% if other.profile.is_teacher %}
         <p class="text-xs text-slate-400">{% trans "Teacher" %}</p>

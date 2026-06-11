@@ -65,7 +65,7 @@
             {% endif %}
             <div class="min-w-0">
               <p class="font-semibold text-slate-900 truncate group-hover:text-indigo-600 transition-colors">
-                {{ teacher.profile.user.first_name|default:teacher.profile.user.email }}
+                {% if user.is_authenticated %}{{ teacher.profile.user.get_full_name|default:teacher.profile.user.email }}{% else %}{{ teacher.profile.user.first_name|default:teacher.profile.user.email }}{% endif %}
               </p>
               {% if teacher.profile.municipality %}
                 <p class="text-xs text-slate-400 truncate">📍 {{ teacher.profile.municipality }}</p>
