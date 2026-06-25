@@ -9,7 +9,7 @@
     <a href="/profiles/" class="text-sm text-slate-500 hover:text-slate-900">← {% trans "Back" %}</a>
   </div>
 
-  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 space-y-6">
+  <div class="bg-white rounded-2xl shadow p-8 space-y-6">
     <form method="post" enctype="multipart/form-data" novalidate>
       {% csrf_token %}
 
@@ -83,7 +83,7 @@
 
       <div class="pt-2 flex gap-3">
         <button type="submit"
-          class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition-colors">
+          class="bg-violet-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-violet-700 transition-colors">
           {% trans "Save changes" %}
         </button>
         <a href="/profiles/" class="px-6 py-2.5 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors text-sm font-medium">

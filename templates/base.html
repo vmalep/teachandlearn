@@ -1,10 +1,13 @@
 {% load i18n %}
 <!doctype html>
-<html lang="{{ LANGUAGE_CODE }}" class="h-full bg-slate-50">
+<html lang="{{ LANGUAGE_CODE }}" class="h-full bg-stone-50">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}TeachAndLearn{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/css/main.css">
   <script src="https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js" defer></script>
 </head>
@@ -12,7 +15,7 @@
 
   <header class="bg-white border-b border-slate-200 relative">
     <nav class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-      <a href="/" class="text-indigo-600 font-bold text-lg tracking-tight">TeachAndLearn</a>
+      <a href="/" class="text-violet-600 font-bold text-lg tracking-tight">TeachAndLearn</a>
 
       {# Desktop nav #}
       <div class="hidden md:flex items-center gap-4 text-sm font-medium">
@@ -35,7 +38,7 @@
                   <input type="hidden" name="language" value="{{ lang_code }}">
                   <input type="hidden" name="next" value="{{ request.get_full_path }}">
                   <button type="submit"
-                    class="w-full text-left px-4 py-1.5 text-sm {% if lang_code == current_lang %}text-indigo-600 font-semibold{% else %}text-slate-600 hover:text-slate-900{% endif %}">
+                    class="w-full text-left px-4 py-1.5 text-sm {% if lang_code == current_lang %}text-violet-600 font-semibold{% else %}text-slate-600 hover:text-slate-900{% endif %}">
                     {{ li.name_local }}
                   </button>
                 </form>
@@ -54,7 +57,7 @@
           </form>
         {% else %}
           <a href="/accounts/login/" class="text-slate-600 hover:text-slate-900">{% trans "Login" %}</a>
-          <a href="/accounts/register/" class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg hover:bg-indigo-700">{% trans "Register" %}</a>
+          <a href="/accounts/register/" class="bg-violet-600 text-white px-4 py-1.5 rounded-lg hover:bg-violet-700">{% trans "Register" %}</a>
         {% endif %}
       </div>
 
@@ -82,7 +85,7 @@
         </form>
       {% else %}
         <a href="/accounts/login/" class="block text-slate-700 hover:text-slate-900">{% trans "Login" %}</a>
-        <a href="/accounts/register/" class="inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">{% trans "Register" %}</a>
+        <a href="/accounts/register/" class="inline-block bg-violet-600 text-white px-4 py-2 rounded-lg hover:bg-violet-700">{% trans "Register" %}</a>
       {% endif %}
 
       <div class="border-t border-slate-100 pt-3">
@@ -97,7 +100,7 @@
               <input type="hidden" name="language" value="{{ lang_code }}">
               <input type="hidden" name="next" value="{{ request.get_full_path }}">
               <button type="submit"
-                class="px-3 py-1 rounded-full text-xs {% if lang_code == current_lang %}bg-indigo-600 text-white{% else %}bg-slate-100 text-slate-600 hover:bg-slate-200{% endif %}">
+                class="px-3 py-1 rounded-full text-xs {% if lang_code == current_lang %}bg-violet-600 text-white{% else %}bg-slate-100 text-slate-600 hover:bg-slate-200{% endif %}">
                 {{ li.name_local }}
               </button>
             </form>
@@ -107,8 +110,8 @@
     </div>
   </header>
 
-  <div class="bg-amber-400 text-amber-900 text-center text-sm font-medium py-2 px-4">
-    🚧 {% trans "This site is under construction — content and features may change." %}
+  <div class="bg-amber-50 border-b border-amber-200 text-amber-800 text-center text-xs py-2 px-4">
+    {% trans "This site is under construction — content and features may change." %}
   </div>
 
   <main class="flex-1">

@@ -5,14 +5,14 @@
 <div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
 
   {# Hero card #}
-  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+  <div class="bg-white rounded-2xl shadow p-6">
     <div class="flex items-start gap-5">
 
       {% if teacher.profile.avatar %}
         <img src="{{ teacher.profile.avatar.url }}" alt=""
           class="w-24 h-24 rounded-2xl object-cover shrink-0">
       {% else %}
-        <div class="w-24 h-24 rounded-2xl bg-indigo-100 flex items-center justify-center text-3xl font-bold text-indigo-400 shrink-0">
+        <div class="w-24 h-24 rounded-2xl bg-violet-100 flex items-center justify-center text-3xl font-bold text-violet-400 shrink-0">
           {{ teacher.profile.user.first_name|first|upper }}
         </div>
       {% endif %}
@@ -23,13 +23,16 @@
         </h1>
 
         {% if teacher.profile.municipality %}
-          <p class="text-sm text-slate-500 mt-1">📍 {{ teacher.profile.municipality }}</p>
+          <p class="text-sm text-slate-500 mt-1 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd"/></svg>
+            {{ teacher.profile.municipality }}
+          </p>
         {% endif %}
 
         {% if teacher.subjects.all %}
           <div class="flex flex-wrap gap-2 mt-3">
             {% for s in teacher.subjects.all %}
-              <span class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-sm">{{ s }}</span>
+              <span class="bg-violet-50 text-violet-700 px-3 py-1 rounded-full text-sm">{{ s }}</span>
             {% endfor %}
           </div>
         {% endif %}
@@ -56,14 +59,14 @@
     <div class="mt-6 pt-5 border-t border-slate-100">
       {% if conversation %}
         <a href="/messages/{{ conversation.pk }}/"
-          class="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-indigo-700 transition-colors">
+          class="inline-block bg-violet-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-violet-700 transition-colors">
           {% trans "Continue conversation" %}
         </a>
       {% else %}
         <form method="post" action="/messages/start/{{ teacher.profile.user.pk }}/" class="inline">
           {% csrf_token %}
           <button type="submit"
-            class="bg-indigo-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-indigo-700 transition-colors">
+            class="bg-violet-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-violet-700 transition-colors">
             {% trans "Contact this teacher" %}
           </button>
         </form>
@@ -73,14 +76,14 @@
 
   {# Bio #}
   {% if teacher.profile.bio %}
-  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+  <div class="bg-white rounded-2xl shadow p-6">
     <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">{% trans "About" %}</h2>
     <p class="text-sm text-slate-700 leading-relaxed">{{ teacher.profile.bio }}</p>
   </div>
   {% endif %}
 
   {# Details #}
-  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
+  <div class="bg-white rounded-2xl shadow p-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
     {% if teacher.native_language %}
     <div>
       <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">{% trans "Native language" %}</p>
@@ -97,7 +100,7 @@
 
   {# Certificates #}
   {% if teacher.certificates.all %}
-  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+  <div class="bg-white rounded-2xl shadow p-6">
     <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">{% trans "Certificates & Credentials" %}</h2>
     <ul class="divide-y divide-slate-100">
       {% for cert in teacher.certificates.all %}
@@ -115,7 +118,7 @@
   {% endif %}
 
   {# Reviews #}
-  <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+  <div class="bg-white rounded-2xl shadow p-6">
     <div class="flex items-center justify-between mb-5">
       <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">{% trans "Reviews" %}</h2>
       {% if user.is_authenticated and user.profile.is_student and user != teacher.profile.user %}
@@ -123,7 +126,7 @@
           <span class="text-xs text-slate-400">{% trans "You already reviewed this teacher" %}</span>
         {% else %}
           <a href="/reviews/write/{{ teacher.profile.user.pk }}/"
-            class="text-sm text-indigo-600 hover:underline font-medium">{% trans "Write a review" %}</a>
+            class="text-sm text-violet-600 hover:underline font-medium">{% trans "Write a review" %}</a>
         {% endif %}
       {% endif %}
     </div>

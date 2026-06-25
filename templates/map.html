@@ -3,14 +3,14 @@
 {% block title %}{% trans "Map" %} — TeachAndLearn{% endblock %}
 {% block content %}
 
-<div class="bg-indigo-600 text-white py-10 px-4">
+<div class="bg-violet-600 text-white py-10 px-4">
   <div class="max-w-3xl mx-auto text-center">
     <h1 class="text-3xl font-bold mb-2">{% trans "Teachers & Students by municipality" %}</h1>
-    <p class="text-indigo-200 text-sm">{% trans "Select a subject to see how many teachers and students are in each municipality." %}</p>
+    <p class="text-violet-200 text-sm">{% trans "Select a subject to see how many teachers and students are in each municipality." %}</p>
 
     <form id="map-filter" class="mt-6 bg-white rounded-2xl p-3 flex flex-col sm:flex-row gap-2 shadow-lg max-w-lg mx-auto">
       <select id="subject-select"
-        class="flex-1 rounded-xl border border-slate-200 px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400">
+        class="flex-1 rounded-xl border border-slate-200 px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
         <option value="">{% trans "All subjects" %}</option>
         {% for subj in all_subjects %}
           <option value="{{ subj.pk }}">{{ subj.name }}</option>
@@ -22,11 +22,11 @@
 
 <div class="max-w-5xl mx-auto px-4 py-6">
 
-  <div id="map-container" class="rounded-2xl border border-slate-200 shadow-sm overflow-hidden" style="height:520px;"></div>
+  <div id="map-container" class="rounded-2xl shadow overflow-hidden" style="height:520px;"></div>
 
   <div id="map-legend" class="mt-4 flex flex-wrap gap-4 text-sm text-slate-600 justify-center">
     <span class="flex items-center gap-2">
-      <span class="inline-block w-4 h-4 rounded-full bg-indigo-500 opacity-80"></span>{% trans "Teachers" %}
+      <span class="inline-block w-4 h-4 rounded-full bg-violet-500 opacity-80"></span>{% trans "Teachers" %}
     </span>
     <span class="flex items-center gap-2">
       <span class="inline-block w-4 h-4 rounded-full bg-emerald-500 opacity-80"></span>{% trans "Students" %}

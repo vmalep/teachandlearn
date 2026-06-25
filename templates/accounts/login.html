@@ -7,10 +7,10 @@
 
     <div class="text-center mb-8">
       <h1 class="text-2xl font-bold text-slate-900">{% trans "Welcome back" %}</h1>
-      <p class="mt-2 text-sm text-slate-500">{% trans "No account?" %} <a href="/accounts/register/" class="text-indigo-600 hover:underline">{% trans "Create one" %}</a></p>
+      <p class="mt-2 text-sm text-slate-500">{% trans "No account?" %} <a href="/accounts/register/" class="text-violet-600 hover:underline">{% trans "Create one" %}</a></p>
     </div>
 
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+    <div class="bg-white rounded-2xl shadow p-8">
       <form method="post" novalidate>
         {% csrf_token %}
 
@@ -28,13 +28,13 @@
         </div>
 
         <button type="submit"
-          class="w-full bg-indigo-600 text-white py-2.5 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
+          class="w-full bg-violet-600 text-white py-2.5 rounded-lg font-medium hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 transition-colors">
           {% trans "Sign in" %}
         </button>
       </form>
 
       <p class="mt-4 text-center text-sm">
-        <a href="/accounts/password-reset/" class="text-indigo-600 hover:underline">{% trans "Forgot your password?" %}</a>
+        <a href="/accounts/password-reset/" class="text-violet-600 hover:underline">{% trans "Forgot your password?" %}</a>
       </p>
     </div>
 
