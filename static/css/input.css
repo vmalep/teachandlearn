@@ -5,6 +5,45 @@
 
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Background palette centred on #e5c185 (warm golden) */
+  --color-orange-50:  #e5c185;
+  --color-orange-200: #c9a05a;
+  --color-orange-600: #7a5c1e;
+  --color-orange-700: #5e4416;
+  --color-orange-800: #3e2d0e;
+
+  /* Button palette centred on #74a892 (sage teal) */
+  --color-violet-50:  #eef5f3;
+  --color-violet-100: #d5ebe5;
+  --color-violet-200: #aad3c9;
+  --color-violet-400: #8fc0af;
+  --color-violet-500: #74a892;
+  --color-violet-600: #74a892;
+  --color-violet-700: #5a8a7a;
+
+  /* Near-black text palette */
+  --color-slate-200: #cccccc;
+  --color-slate-300: #aaaaaa;
+  --color-slate-400: #888888;
+  --color-slate-500: #666666;
+  --color-slate-600: #444444;
+  --color-slate-700: #222222;
+  --color-slate-800: #111111;
+  --color-slate-900: #000000;
+  --color-stone-500: #666666;
+  --color-stone-900: #000000;
+}
+
+@layer base {
+  html {
+    background: #ffffff;
+  }
+  body {
+    background: linear-gradient(to bottom, #e5c185 0%, #ffffff 50%);
+    background-attachment: scroll;
+    min-height: 100vh;
+  }
 }
 
 @layer components {

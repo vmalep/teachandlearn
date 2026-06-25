@@ -29,7 +29,7 @@
       <span class="inline-block w-4 h-4 rounded-full bg-violet-500 opacity-80"></span>{% trans "Teachers" %}
     </span>
     <span class="flex items-center gap-2">
-      <span class="inline-block w-4 h-4 rounded-full bg-emerald-500 opacity-80"></span>{% trans "Students" %}
+      <span class="inline-block w-4 h-4 rounded-full bg-orange-500 opacity-80"></span>{% trans "Students" %}
     </span>
     <span class="flex items-center gap-2">
       <span class="inline-block w-4 h-4 rounded-full bg-amber-500 opacity-80"></span>{% trans "Both" %}
@@ -58,7 +58,7 @@
   function circleColor(teachers, students) {
     if (teachers > 0 && students > 0) return '#f59e0b'; // amber — both
     if (teachers > 0) return '#6366f1';                  // indigo — teachers
-    return '#10b981';                                     // emerald — students
+    return '#74a892';                                     // sage — students
   }
 
   function circleRadius(count) {

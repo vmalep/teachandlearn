@@ -13,11 +13,11 @@
   </div>
 
   {% if teacher_profile.state == "validated" %}
-    <div class="bg-green-50 border border-green-200 rounded-xl px-5 py-4 flex items-center gap-3">
-      <span class="text-green-600 text-lg">✓</span>
+    <div class="bg-orange-50 border border-orange-200 rounded-xl px-5 py-4 flex items-center gap-3">
+      <span class="text-orange-600 text-lg">✓</span>
       <div>
-        <p class="text-sm font-medium text-green-800">{% trans "Your profile is published" %}</p>
-        <p class="text-xs text-green-600 mt-0.5">{% trans "Students can find you in the directory." %}</p>
+        <p class="text-sm font-medium text-orange-800">{% trans "Your profile is published" %}</p>
+        <p class="text-xs text-orange-600 mt-0.5">{% trans "Students can find you in the directory." %}</p>
       </div>
     </div>
   {% elif teacher_profile.state == "rejected" %}

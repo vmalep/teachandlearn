@@ -76,7 +76,7 @@
     {% if teacher_profile %}
       <div class="flex items-center gap-2 mb-4">
         {% if teacher_profile.state == "validated" %}
-          <span class="inline-flex items-center gap-1 bg-green-50 text-green-700 text-xs font-medium px-2.5 py-1 rounded-full">✓ {% trans "Validated" %}</span>
+          <span class="inline-flex items-center gap-1 bg-orange-50 text-orange-700 text-xs font-medium px-2.5 py-1 rounded-full">✓ {% trans "Validated" %}</span>
         {% elif teacher_profile.state == "rejected" %}
           <span class="inline-flex items-center gap-1 bg-red-50 text-red-700 text-xs font-medium px-2.5 py-1 rounded-full">✗ {% trans "Rejected" %}</span>
           {% if teacher_profile.rejection_reason %}
