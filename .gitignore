@@ -11,3 +11,4 @@ media/
 bin/
 static/css/main.css
 *.mo
+.env.local
