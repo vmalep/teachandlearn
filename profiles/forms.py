@@ -27,7 +27,7 @@ class ProfileForm(forms.ModelForm):
                 "pattern": "[0-9]{4}",
                 "placeholder": "----",
                 "hx-get": "/profiles/municipalities/",
-                "hx-trigger": "input changed delay:600ms",
+                "hx-trigger": "input changed delay:300ms",
                 "hx-target": "#municipality-wrapper",
             }),
         }

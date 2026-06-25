@@ -66,6 +66,10 @@
           {% if teacher_profile.native_language %}{{ teacher_profile.native_language }}{% else %}<span class="text-slate-400">{% trans "Not set" %}</span>{% endif %}
         </p>
       </div>
+      <div>
+        <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">{% trans "Teaching mode" %}</p>
+        <p class="text-sm font-medium text-slate-800">{{ teacher_profile.get_teaching_mode_display }}</p>
+      </div>
     </div>
 
     {% if teacher_profile.availability %}

@@ -7,7 +7,7 @@ from profiles.forms import apply_input_class
 class TeacherProfileForm(forms.ModelForm):
     class Meta:
         model = TeacherProfile
-        fields = ["subjects", "native_language", "price_per_hour", "availability"]
+        fields = ["subjects", "native_language", "price_per_hour", "teaching_mode", "availability"]
         widgets = {
             "subjects": forms.CheckboxSelectMultiple(),
             "availability": forms.Textarea(attrs={"rows": 3}),

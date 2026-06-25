@@ -1,4 +1,9 @@
+import urllib.request
+import urllib.parse
+import json as _json
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.db.models import Avg, Count, Q
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
@@ -7,6 +12,32 @@ from django.views.generic import ListView, DetailView
 from .forms import CertificateFormSet, TeacherProfileForm
 from .models import TeacherProfile
 from subjects.models import Subject
+
+
+def _municipality_coords(name):
+    """Return (lat, lng) for a Belgian municipality using Nominatim, cached 24 h."""
+    key = f"muni_coords:{name}"
+    cached = cache.get(key)
+    if cached:
+        return cached
+    query = urllib.parse.urlencode({
+        "q": f"{name}, Belgium",
+        "format": "json",
+        "limit": "1",
+        "countrycodes": "be",
+    })
+    url = f"https://nominatim.openstreetmap.org/search?{query}"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "TeachAndLearn/1.0"})
+        with urllib.request.urlopen(req, timeout=3) as resp:
+            results = _json.loads(resp.read())
+        if results:
+            coords = (float(results[0]["lat"]), float(results[0]["lon"]))
+            cache.set(key, coords, 86400)
+            return coords
+    except Exception:
+        pass
+    return None
 
 
 def _rating_qs(qs):
@@ -99,7 +130,6 @@ class MapDataView(View):
             TeacherProfile.objects
             .filter(state=TeacherProfile.State.VALIDATED)
             .filter(profile__municipality__gt="")
-            .filter(profile__latitude__isnull=False)
         )
         if subject_id:
             teacher_qs = teacher_qs.filter(subjects__id=subject_id)
@@ -107,17 +137,12 @@ class MapDataView(View):
         teacher_rows = (
             teacher_qs
             .values("profile__municipality")
-            .annotate(
-                count=Count("id", distinct=True),
-                lat=Avg("profile__latitude"),
-                lng=Avg("profile__longitude"),
-            )
+            .annotate(count=Count("id", distinct=True))
         )
 
         student_qs = (
             StudentProfile.objects
             .filter(profile__municipality__gt="")
-            .filter(profile__latitude__isnull=False)
         )
         if subject_id:
             student_qs = student_qs.filter(subject_levels__subject__id=subject_id)
@@ -125,37 +150,29 @@ class MapDataView(View):
         student_rows = (
             student_qs
             .values("profile__municipality")
-            .annotate(
-                count=Count("id", distinct=True),
-                lat=Avg("profile__latitude"),
-                lng=Avg("profile__longitude"),
-            )
+            .annotate(count=Count("id", distinct=True))
         )
 
         data = {}
         for row in teacher_rows:
             m = row["profile__municipality"]
-            data[m] = {
-                "municipality": m,
-                "lat": float(row["lat"]),
-                "lng": float(row["lng"]),
-                "teachers": row["count"],
-                "students": 0,
-            }
+            data[m] = {"municipality": m, "teachers": row["count"], "students": 0}
         for row in student_rows:
             m = row["profile__municipality"]
             if m in data:
                 data[m]["students"] = row["count"]
             else:
-                data[m] = {
-                    "municipality": m,
-                    "lat": float(row["lat"]),
-                    "lng": float(row["lng"]),
-                    "teachers": 0,
-                    "students": row["count"],
-                }
+                data[m] = {"municipality": m, "teachers": 0, "students": row["count"]}
 
-        return JsonResponse(list(data.values()), safe=False)
+        # Resolve each municipality to its centroid via Nominatim (cached)
+        result = []
+        for entry in data.values():
+            coords = _municipality_coords(entry["municipality"])
+            if coords:
+                entry["lat"], entry["lng"] = coords
+                result.append(entry)
+
+        return JsonResponse(result, safe=False)
 
 
 class TeacherProfileView(LoginRequiredMixin, View):

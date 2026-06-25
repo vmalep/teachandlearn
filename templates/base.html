@@ -49,8 +49,14 @@
 
         <a href="/map/" class="text-slate-600 hover:text-slate-900">{% trans "Map" %}</a>
         {% if user.is_authenticated %}
+          <span class="text-slate-400 text-xs">{{ user.get_full_name|default:user.email }}</span>
           <a href="/profiles/" class="text-slate-600 hover:text-slate-900">{% trans "My Profile" %}</a>
-          <a href="/messages/" class="text-slate-600 hover:text-slate-900">{% trans "Messages" %}</a>
+          <a href="/messages/" class="relative text-slate-600 hover:text-slate-900">
+            {% trans "Messages" %}
+            {% if unread_message_count %}
+              <span class="absolute -top-1 -right-3 bg-violet-600 text-white text-xs font-bold rounded-full w-4 h-4 flex items-center justify-center leading-none">{{ unread_message_count }}</span>
+            {% endif %}
+          </a>
           <form method="post" action="/accounts/logout/" class="inline">
             {% csrf_token %}
             <button type="submit" class="text-slate-600 hover:text-slate-900 cursor-pointer">{% trans "Logout" %}</button>
@@ -78,7 +84,12 @@
       <a href="/map/" class="block text-slate-700 hover:text-slate-900">{% trans "Map" %}</a>
       {% if user.is_authenticated %}
         <a href="/profiles/" class="block text-slate-700 hover:text-slate-900">{% trans "My Profile" %}</a>
-        <a href="/messages/" class="block text-slate-700 hover:text-slate-900">{% trans "Messages" %}</a>
+        <a href="/messages/" class="relative inline-block text-slate-700 hover:text-slate-900">
+          {% trans "Messages" %}
+          {% if unread_message_count %}
+            <span class="ml-1 bg-violet-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5 leading-none">{{ unread_message_count }}</span>
+          {% endif %}
+        </a>
         <form method="post" action="/accounts/logout/">
           {% csrf_token %}
           <button type="submit" class="text-slate-700 hover:text-slate-900 cursor-pointer">{% trans "Logout" %}</button>

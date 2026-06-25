@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.db.models import OuterRef, Q, Subquery
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
@@ -46,6 +47,8 @@ class ConversationDetailView(LoginRequiredMixin, View):
     def get(self, request, pk):
         conversation = self._get_conversation(request, pk)
         other = conversation.teacher if request.user == conversation.student else conversation.student
+        # Mark incoming messages as read
+        conversation.messages.exclude(sender=request.user).filter(is_read=False).update(is_read=True)
         return render(request, self.template_name, {
             "conversation": conversation,
             "thread": conversation.messages.all(),
@@ -62,6 +65,15 @@ class ConversationDetailView(LoginRequiredMixin, View):
             if conversation.state == Conversation.State.NEW:
                 conversation.state = Conversation.State.ONGOING
                 conversation.save(update_fields=["state", "updated_at"])
+            # Email notification to recipient
+            recipient = conversation.teacher if request.user == conversation.student else conversation.student
+            send_mail(
+                subject="New message on TeachAndLearn",
+                message=f"You have a new message from {request.user.email}.\n\nLog in to read it: https://teachandlearn.cloud/messages/{pk}/",
+                from_email=None,
+                recipient_list=[recipient.email],
+                fail_silently=True,
+            )
         return redirect("messaging:detail", pk=pk)
 
 

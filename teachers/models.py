@@ -8,6 +8,11 @@ class TeacherProfile(models.Model):
         VALIDATED = "validated", "Validated"
         REJECTED = "rejected", "Rejected"
 
+    class TeachingMode(models.TextChoices):
+        ONLINE = "online", "Online"
+        PRESENTIAL = "presential", "Presential"
+        BOTH = "both", "Both"
+
     profile = models.OneToOneField(
         "profiles.Profile", on_delete=models.CASCADE, related_name="teacher_profile"
     )
@@ -19,6 +24,9 @@ class TeacherProfile(models.Model):
         null=True,
         blank=True,
         validators=[MinValueValidator(0)],
+    )
+    teaching_mode = models.CharField(
+        max_length=20, choices=TeachingMode.choices, default=TeachingMode.BOTH
     )
     availability = models.TextField(blank=True)
     state = models.CharField(max_length=20, choices=State.choices, default=State.DRAFT)
