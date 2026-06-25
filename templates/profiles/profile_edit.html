@@ -99,11 +99,35 @@
   (function () {
     var pc = document.getElementById('id_postal_code');
     if (!pc) return;
+
+    var tabPending = false;
+
     pc.addEventListener('input', function () {
       this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4);
       if (this.value.length < 4) {
         var el = document.querySelector('#municipality-wrapper [name="municipality"]');
         if (el) el.disabled = true;
+      }
+    });
+
+    pc.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab' || this.value.length !== 4) return;
+      var muni = document.querySelector('#municipality-wrapper [name="municipality"]:not([disabled])');
+      if (muni) {
+        e.preventDefault();
+        muni.focus();
+      } else {
+        e.preventDefault();
+        tabPending = true;
+        htmx.trigger(this, 'input');
+      }
+    });
+
+    document.body.addEventListener('htmx:afterSwap', function (e) {
+      if (e.detail.target.id === 'municipality-wrapper' && tabPending) {
+        tabPending = false;
+        var muni = document.querySelector('#municipality-wrapper [name="municipality"]:not([disabled])');
+        if (muni) muni.focus();
       }
     });
   })();

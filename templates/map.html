@@ -45,7 +45,7 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function () {
-  var map = L.map('map-container', { scrollWheelZoom: false })
+  var map = L.map('map-container', { scrollWheelZoom: true })
               .setView([50.5, 4.5], 8);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
