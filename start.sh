@@ -13,6 +13,12 @@ set +a
 # Activate virtual environment
 source .venv/bin/activate
 
+# Build CSS if missing or if input.css is newer
+if [ ! -f static/css/main.css ] || [ static/css/input.css -nt static/css/main.css ]; then
+  echo "Building CSS..."
+  tailwindcss -i static/css/input.css -o static/css/main.css --minify
+fi
+
 # Apply any pending migrations
 python manage.py migrate --run-syncdb 2>/dev/null || python manage.py migrate
 
