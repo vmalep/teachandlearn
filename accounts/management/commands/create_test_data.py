@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 from accounts.models import User
 from profiles.models import Profile
-from teachers.models import TeacherProfile
+from teachers.models import ClassOffering, TeacherProfile
 from students.models import StudentProfile, StudentSubject
 from subjects.models import Subject
 
@@ -29,6 +29,13 @@ USERS = [
                 "sun": {"morning": False, "afternoon": False, "evening": False},
             },
             "state": "validated",
+            "offerings": [
+                {"subject": "French", "teaching_mode": "presential", "format": "individual",
+                 "level": "all", "price_per_hour": 35, "is_active": True},
+                {"subject": "English", "teaching_mode": "online", "format": "group",
+                 "level": "intermediate", "price_per_hour": 25,
+                 "description": "Conversation practice", "is_active": True},
+            ],
         },
         "profile": {
             "bio": "Certified French teacher with 10 years of experience in Brussels.",
@@ -150,6 +157,13 @@ USERS = [
                 "sun": {"morning": False, "afternoon": False, "evening": False},
             },
             "state": "validated",
+            "offerings": [
+                {"subject": "Arabic", "teaching_mode": "both", "format": "individual",
+                 "level": "all", "price_per_hour": 25, "is_active": True},
+                {"subject": "Arabic", "teaching_mode": "online", "format": "group",
+                 "level": "beginner", "price_per_hour": 15,
+                 "description": "Group intro sessions", "is_active": False},
+            ],
         },
         "student": {
             "learning_goals": "Improving my French writing skills.",
@@ -215,6 +229,12 @@ class Command(BaseCommand):
                     subject = Subject.objects.filter(name=subject_name).first()
                     if subject:
                         tp.subjects.add(subject)
+                for offering_data in td.get("offerings", []):
+                    od = {**offering_data}
+                    subject_name = od.pop("subject")
+                    subject = Subject.objects.filter(name=subject_name).first()
+                    if subject:
+                        ClassOffering.objects.create(teacher=tp, subject=subject, **od)
 
             if data["role"] in ("student", "both"):
                 sd = data["student"]

@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import inlineformset_factory
-from .models import Certificate, TeacherProfile
+from .models import Certificate, ClassOffering, TeacherProfile
 from .widgets import AvailabilityWidget
 from profiles.forms import apply_input_class
 
@@ -51,4 +51,24 @@ CertificateFormSet = inlineformset_factory(
     form=CertificateForm,
     extra=1,
     can_delete=True,
+)
+
+
+class ClassOfferingForm(forms.ModelForm):
+    class Meta:
+        model = ClassOffering
+        fields = [
+            "subject", "teaching_mode", "format", "level",
+            "price_per_hour", "description", "is_active",
+        ]
+        widgets = {"description": forms.Textarea(attrs={"rows": 2})}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        apply_input_class(self)
+
+
+ClassOfferingFormSet = inlineformset_factory(
+    TeacherProfile, ClassOffering, form=ClassOfferingForm,
+    extra=1, can_delete=True,
 )

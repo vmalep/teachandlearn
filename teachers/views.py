@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView, DetailView
-from .forms import CertificateFormSet, TeacherProfileForm
+from .forms import CertificateFormSet, ClassOfferingFormSet, TeacherProfileForm
 from .models import TeacherProfile
 from subjects.models import Subject
 
@@ -93,7 +93,7 @@ class TeacherDetailView(LoginRequiredMixin, DetailView):
         return _rating_qs(
             TeacherProfile.objects.filter(state=TeacherProfile.State.VALIDATED)
             .select_related("profile__user")
-            .prefetch_related("subjects", "certificates")
+            .prefetch_related("subjects", "certificates", "offerings__subject")
         )
 
     def get_context_data(self, **kwargs):
@@ -104,6 +104,7 @@ class TeacherDetailView(LoginRequiredMixin, DetailView):
             teacher=teacher.profile.user, state=Review.State.VALIDATED
         ).select_related("student").order_by("-created_at")
 
+        ctx["offerings"] = teacher.offerings.filter(is_active=True)
         if self.request.user.is_authenticated:
             ctx["user_review"] = Review.objects.filter(
                 student=self.request.user, teacher=teacher.profile.user
@@ -183,7 +184,10 @@ class TeacherProfileView(LoginRequiredMixin, View):
         if not profile.is_teacher:
             return redirect("profiles:profile")
         tp, _ = TeacherProfile.objects.get_or_create(profile=profile)
-        return render(request, self.template_name, {"teacher_profile": tp})
+        return render(request, self.template_name, {
+            "teacher_profile": tp,
+            "offerings": tp.offerings.select_related("subject").all(),
+        })
 
 
 class TeacherProfileEditView(LoginRequiredMixin, View):
@@ -202,7 +206,13 @@ class TeacherProfileEditView(LoginRequiredMixin, View):
             return redirect("profiles:profile")
         form = TeacherProfileForm(instance=tp)
         cert_formset = CertificateFormSet(instance=tp)
-        return render(request, self.template_name, {"form": form, "cert_formset": cert_formset, "teacher_profile": tp})
+        offering_formset = ClassOfferingFormSet(instance=tp)
+        return render(request, self.template_name, {
+            "form": form,
+            "cert_formset": cert_formset,
+            "offering_formset": offering_formset,
+            "teacher_profile": tp,
+        })
 
     def post(self, request):
         tp = self._get_tp(request)
@@ -210,8 +220,15 @@ class TeacherProfileEditView(LoginRequiredMixin, View):
             return redirect("profiles:profile")
         form = TeacherProfileForm(request.POST, instance=tp)
         cert_formset = CertificateFormSet(request.POST, request.FILES, instance=tp)
-        if form.is_valid() and cert_formset.is_valid():
+        offering_formset = ClassOfferingFormSet(request.POST, instance=tp)
+        if form.is_valid() and cert_formset.is_valid() and offering_formset.is_valid():
             form.save()
             cert_formset.save()
+            offering_formset.save()
             return redirect("teachers:profile")
-        return render(request, self.template_name, {"form": form, "cert_formset": cert_formset, "teacher_profile": tp})
+        return render(request, self.template_name, {
+            "form": form,
+            "cert_formset": cert_formset,
+            "offering_formset": offering_formset,
+            "teacher_profile": tp,
+        })

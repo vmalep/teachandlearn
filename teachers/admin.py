@@ -1,11 +1,16 @@
 from django.contrib import admin
 from django.contrib.admin import helpers
 from django.template.response import TemplateResponse
-from .models import TeacherProfile, Certificate
+from .models import ClassOffering, TeacherProfile, Certificate
 
 
 class CertificateInline(admin.TabularInline):
     model = Certificate
+    extra = 0
+
+
+class ClassOfferingInline(admin.TabularInline):
+    model = ClassOffering
     extra = 0
 
 
@@ -15,7 +20,7 @@ class TeacherProfileAdmin(admin.ModelAdmin):
     list_filter = ["state"]
     search_fields = ["profile__user__email"]
     filter_horizontal = ["subjects"]
-    inlines = [CertificateInline]
+    inlines = [CertificateInline, ClassOfferingInline]
     actions = ["validate_profiles", "reject_profiles"]
 
     @admin.action(description="Validate selected teacher profiles")
