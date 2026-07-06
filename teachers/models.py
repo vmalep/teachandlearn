@@ -29,6 +29,7 @@ class TeacherProfile(models.Model):
         max_length=20, choices=TeachingMode.choices, default=TeachingMode.BOTH
     )
     availability = models.TextField(blank=True)
+    availability_schedule = models.JSONField(default=dict, blank=True)
     state = models.CharField(max_length=20, choices=State.choices, default=State.DRAFT)
     rejection_reason = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
