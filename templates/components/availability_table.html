@@ -1,0 +1,52 @@
+{% load i18n %}
+{# Renders a read-only weekly availability grid. Requires: schedule (JSON dict) #}
+{% with mon=schedule.mon tue=schedule.tue wed=schedule.wed thu=schedule.thu fri=schedule.fri sat=schedule.sat sun=schedule.sun %}
+<div class="overflow-x-auto">
+  <table class="border-collapse text-xs">
+    <thead>
+      <tr>
+        <th class="w-20"></th>
+        <th class="text-center font-medium text-slate-600 py-1 px-2">{% trans "Mon" %}</th>
+        <th class="text-center font-medium text-slate-600 py-1 px-2">{% trans "Tue" %}</th>
+        <th class="text-center font-medium text-slate-600 py-1 px-2">{% trans "Wed" %}</th>
+        <th class="text-center font-medium text-slate-600 py-1 px-2">{% trans "Thu" %}</th>
+        <th class="text-center font-medium text-slate-600 py-1 px-2">{% trans "Fri" %}</th>
+        <th class="text-center font-medium text-slate-600 py-1 px-2">{% trans "Sat" %}</th>
+        <th class="text-center font-medium text-slate-600 py-1 px-2">{% trans "Sun" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="pr-3 py-1 text-slate-500">{% trans "Morning" %}</td>
+        <td class="text-center px-2 py-1">{% if mon.morning %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if tue.morning %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if wed.morning %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if thu.morning %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if fri.morning %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if sat.morning %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if sun.morning %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+      </tr>
+      <tr>
+        <td class="pr-3 py-1 text-slate-500">{% trans "Afternoon" %}</td>
+        <td class="text-center px-2 py-1">{% if mon.afternoon %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if tue.afternoon %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if wed.afternoon %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if thu.afternoon %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if fri.afternoon %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if sat.afternoon %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if sun.afternoon %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+      </tr>
+      <tr>
+        <td class="pr-3 py-1 text-slate-500">{% trans "Evening" %}</td>
+        <td class="text-center px-2 py-1">{% if mon.evening %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if tue.evening %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if wed.evening %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if thu.evening %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if fri.evening %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if sat.evening %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+        <td class="text-center px-2 py-1">{% if sun.evening %}<span class="inline-block w-5 h-5 rounded-sm bg-violet-500"></span>{% else %}<span class="inline-block w-5 h-5 rounded-sm bg-slate-100"></span>{% endif %}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endwith %}

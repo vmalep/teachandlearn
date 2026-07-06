@@ -98,6 +98,13 @@
     {% endif %}
   </div>
 
+  {% if teacher.availability_schedule %}
+  <div class="bg-white rounded-2xl shadow p-6">
+    <p class="text-xs text-slate-400 uppercase tracking-wider mb-3">{% trans "Weekly schedule" %}</p>
+    {% include "components/availability_table.html" with schedule=teacher.availability_schedule %}
+  </div>
+  {% endif %}
+
   {# Certificates #}
   {% if teacher.certificates.all %}
   <div class="bg-white rounded-2xl shadow p-6">

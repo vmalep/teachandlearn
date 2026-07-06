@@ -79,6 +79,13 @@
     </div>
     {% endif %}
 
+    {% if teacher_profile.availability_schedule %}
+    <div class="pt-2 border-t border-slate-100">
+      <p class="text-xs text-slate-400 uppercase tracking-wider mb-3">{% trans "Weekly schedule" %}</p>
+      {% include "components/availability_table.html" with schedule=teacher_profile.availability_schedule %}
+    </div>
+    {% endif %}
+
   </div>
 
   <div class="bg-white rounded-2xl shadow p-6">
