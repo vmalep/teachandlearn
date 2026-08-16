@@ -2,33 +2,33 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-11 10:02+0200\n"
+"POT-Creation-Date: 2026-08-16 19:44+0200\n"
 "Language: fr\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: config/settings.py:101
+#: config/settings.py:102
 msgid "English"
 msgstr ""
 
-#: config/settings.py:102
+#: config/settings.py:103
 msgid "French"
 msgstr ""
 
-#: config/settings.py:103
+#: config/settings.py:104
 msgid "Spanish"
 msgstr ""
 
-#: config/settings.py:104
+#: config/settings.py:105
 msgid "Russian"
 msgstr ""
 
-#: config/settings.py:105
+#: config/settings.py:106
 msgid "Dutch"
 msgstr ""
 
-#: config/settings.py:106
+#: config/settings.py:107
 msgid "German"
 msgstr ""
 
@@ -60,8 +60,60 @@ msgstr "Je suis enseignant"
 msgid "I want to learn"
 msgstr "Matières que je veux apprendre"
 
+#: teachers/models.py:65
+msgid "Individual lesson"
+msgstr "Cours individuel"
+
+#: teachers/models.py:66
+msgid "Group"
+msgstr "Groupe"
+
+#: teachers/widgets.py:9 templates/components/availability_table.html:9
+msgid "Mon"
+msgstr ""
+
+#: teachers/widgets.py:9 templates/components/availability_table.html:10
+msgid "Tue"
+msgstr ""
+
+#: teachers/widgets.py:9 templates/components/availability_table.html:11
+msgid "Wed"
+msgstr ""
+
+#: teachers/widgets.py:10 templates/components/availability_table.html:12
+msgid "Thu"
+msgstr ""
+
+#: teachers/widgets.py:10 templates/components/availability_table.html:13
+#, fuzzy
+#| msgid "For"
+msgid "Fri"
+msgstr "Pour"
+
+#: teachers/widgets.py:10 templates/components/availability_table.html:14
+msgid "Sat"
+msgstr ""
+
+#: teachers/widgets.py:10 templates/components/availability_table.html:15
+#, fuzzy
+#| msgid "Student"
+msgid "Sun"
+msgstr "Étudiant"
+
+#: teachers/widgets.py:14 templates/components/availability_table.html:20
+msgid "Morning"
+msgstr ""
+
+#: teachers/widgets.py:14 templates/components/availability_table.html:30
+msgid "Afternoon"
+msgstr ""
+
+#: teachers/widgets.py:14 templates/components/availability_table.html:40
+msgid "Evening"
+msgstr ""
+
 #: templates/accounts/login.html:3 templates/accounts/login.html:32
-#: templates/accounts/password_reset_complete.html:12
+#: templates/accounts/password_reset_complete.html:11
 #: templates/accounts/register.html:10
 msgid "Sign in"
 msgstr "Se connecter"
@@ -101,11 +153,11 @@ msgid "Back to sign in"
 msgstr "Retour à la connexion"
 
 #: templates/accounts/password_reset_complete.html:3
-#: templates/accounts/password_reset_complete.html:8
+#: templates/accounts/password_reset_complete.html:7
 msgid "Password updated"
 msgstr "Mot de passe mis à jour"
 
-#: templates/accounts/password_reset_complete.html:9
+#: templates/accounts/password_reset_complete.html:8
 msgid "Your password has been changed successfully."
 msgstr "Votre mot de passe a été modifié avec succès."
 
@@ -131,11 +183,11 @@ msgstr "Demander un nouveau lien"
 msgid "Check your email"
 msgstr "Vérifiez vos emails"
 
-#: templates/accounts/password_reset_done.html:8
+#: templates/accounts/password_reset_done.html:7
 msgid "Reset link sent"
 msgstr "Lien de réinitialisation envoyé"
 
-#: templates/accounts/password_reset_done.html:9
+#: templates/accounts/password_reset_done.html:8
 msgid ""
 "If an account exists for that email, you'll receive a password reset link "
 "shortly."
@@ -165,19 +217,19 @@ msgstr ""
 "En vous inscrivant, vous acceptez d'utiliser la plateforme de manière "
 "responsable."
 
-#: templates/accounts/register_done.html:8
+#: templates/accounts/register_done.html:7
 msgid "Check your inbox"
 msgstr "Vérifiez votre boîte de réception"
 
-#: templates/accounts/register_done.html:10
+#: templates/accounts/register_done.html:9
 msgid "We've sent a verification link to your email address."
 msgstr "Nous avons envoyé un lien de vérification à votre adresse e-mail."
 
-#: templates/accounts/register_done.html:11
+#: templates/accounts/register_done.html:10
 msgid "Click the link to activate your account."
 msgstr "Cliquez sur le lien pour activer votre compte."
 
-#: templates/accounts/register_done.html:13
+#: templates/accounts/register_done.html:12
 msgid "Didn't receive it? Check your spam folder."
 msgstr "Vous ne l'avez pas reçu ? Vérifiez vos spams."
 
@@ -185,50 +237,88 @@ msgstr "Vous ne l'avez pas reçu ? Vérifiez vos spams."
 msgid "Invalid link"
 msgstr "Lien invalide"
 
-#: templates/accounts/verify_invalid.html:8
+#: templates/accounts/verify_invalid.html:7
 msgid "Link expired or invalid"
 msgstr "Lien expiré ou invalide"
 
-#: templates/accounts/verify_invalid.html:9
+#: templates/accounts/verify_invalid.html:8
 msgid "This verification link has already been used or has expired."
 msgstr "Ce lien de vérification a déjà été utilisé ou a expiré."
 
-#: templates/accounts/verify_invalid.html:10
+#: templates/accounts/verify_invalid.html:9
 msgid "Register again"
 msgstr "S'inscrire à nouveau"
 
-#: templates/base.html:48 templates/base.html:75
+#: templates/base.html:50 templates/base.html:84 templates/map.html:3
+msgid "Map"
+msgstr ""
+
+#: templates/base.html:53 templates/base.html:86
 #: templates/profiles/profile.html:3 templates/students/profile.html:10
 #: templates/teachers/profile.html:10
 msgid "My Profile"
 msgstr "Mon profil"
 
-#: templates/base.html:49 templates/base.html:76
+#: templates/base.html:55 templates/base.html:88
 #: templates/messaging/detail.html:3 templates/messaging/list.html:3
 #: templates/messaging/list.html:7
 msgid "Messages"
 msgstr "Messages"
 
-#: templates/base.html:52 templates/base.html:79
+#: templates/base.html:62 templates/base.html:95
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: templates/base.html:55 templates/base.html:82
+#: templates/base.html:65 templates/base.html:98
 msgid "Login"
 msgstr "Connexion"
 
-#: templates/base.html:56 templates/base.html:83
+#: templates/base.html:66 templates/base.html:99
 msgid "Register"
 msgstr "S'inscrire"
 
-#: templates/base.html:87
+#: templates/base.html:103
 #, fuzzy
 #| msgid "Native language"
 msgid "Language"
 msgstr "Langue maternelle"
 
-#: templates/base.html:109
+#: templates/base.html:125
 msgid "This site is under construction — content and features may change."
+msgstr ""
+
+#: templates/map.html:8
+msgid "Teachers & Students by municipality"
+msgstr ""
+
+#: templates/map.html:9
+msgid ""
+"Select a subject to see how many teachers and students are in each "
+"municipality."
+msgstr ""
+
+#: templates/map.html:14 templates/teachers/directory.html:16
+msgid "All subjects"
+msgstr "Toutes les matières"
+
+#: templates/map.html:29 templates/map.html:91
+#, fuzzy
+#| msgid "Teacher"
+msgid "Teachers"
+msgstr "Enseignant"
+
+#: templates/map.html:32 templates/map.html:92
+#, fuzzy
+#| msgid "Student"
+msgid "Students"
+msgstr "Étudiant"
+
+#: templates/map.html:35
+msgid "Both"
+msgstr ""
+
+#: templates/map.html:40
+msgid "No data available for this selection."
 msgstr ""
 
 #: templates/messaging/detail.html:28
@@ -271,11 +361,11 @@ msgstr "il y a"
 msgid "No messages yet"
 msgstr "Aucun message"
 
-#: templates/messaging/list.html:61
+#: templates/messaging/list.html:60
 msgid "No conversations yet."
 msgstr "Aucune conversation pour l'instant."
 
-#: templates/messaging/list.html:62
+#: templates/messaging/list.html:61
 msgid "Find a teacher"
 msgstr "Trouver un enseignant"
 
@@ -302,73 +392,75 @@ msgstr ""
 msgid "Avatar"
 msgstr "Avatar"
 
-#: templates/profiles/profile.html:28 templates/profiles/profile.html:36
-#: templates/profiles/profile.html:90 templates/students/profile.html:11
-#: templates/teachers/profile.html:11
+#: templates/profiles/profile.html:31 templates/profiles/profile.html:39
+#: templates/profiles/profile.html:74 templates/profiles/profile.html:118
+#: templates/students/profile.html:11 templates/teachers/profile.html:11
 msgid "Edit"
 msgstr "Modifier"
 
-#: templates/profiles/profile.html:35
+#: templates/profiles/profile.html:38 templates/profiles/profile_edit.html:24
+#, fuzzy
+#| msgid "optional"
+msgid "Location"
+msgstr "facultatif"
+
+#: templates/profiles/profile.html:73
 msgid "Teacher Profile"
 msgstr "Profil enseignant"
 
-#: templates/profiles/profile.html:41
+#: templates/profiles/profile.html:79
 msgid "Validated"
 msgstr "Validé"
 
-#: templates/profiles/profile.html:43
+#: templates/profiles/profile.html:81
 msgid "Rejected"
 msgstr "Refusé"
 
-#: templates/profiles/profile.html:48
+#: templates/profiles/profile.html:86
 msgid "Pending validation"
 msgstr "En attente de validation"
 
-#: templates/profiles/profile.html:60
+#: templates/profiles/profile.html:91
 msgid "Price:"
 msgstr "Prix :"
 
-#: templates/profiles/profile.html:63
-msgid "Native language:"
-msgstr "Langue maternelle :"
-
-#: templates/profiles/profile.html:66
+#: templates/profiles/profile.html:94
 msgid "Availability:"
 msgstr "Disponibilité :"
 
-#: templates/profiles/profile.html:70
+#: templates/profiles/profile.html:98
 msgid "Certificates:"
 msgstr "Certificats :"
 
-#: templates/profiles/profile.html:80
+#: templates/profiles/profile.html:108
 msgid "No teacher profile yet."
 msgstr "Pas encore de profil enseignant."
 
-#: templates/profiles/profile.html:80 templates/profiles/profile.html:112
+#: templates/profiles/profile.html:108 templates/profiles/profile.html:140
 msgid "Set it up"
 msgstr "Le configurer"
 
-#: templates/profiles/profile.html:89
+#: templates/profiles/profile.html:117
 msgid "Student Profile"
 msgstr "Profil étudiant"
 
-#: templates/profiles/profile.html:96
+#: templates/profiles/profile.html:124
 msgid "Subjects:"
 msgstr "Matières :"
 
-#: templates/profiles/profile.html:108
+#: templates/profiles/profile.html:136
 msgid "Goals:"
 msgstr "Objectifs :"
 
-#: templates/profiles/profile.html:112
+#: templates/profiles/profile.html:140
 msgid "No student profile yet."
 msgstr "Pas encore de profil étudiant."
 
-#: templates/profiles/profile.html:119
+#: templates/profiles/profile.html:147
 msgid "You haven't set a role yet."
 msgstr "Vous n'avez pas encore défini de rôle."
 
-#: templates/profiles/profile.html:120
+#: templates/profiles/profile.html:148
 msgid "Set up your profile"
 msgstr "Configurer votre profil"
 
@@ -383,13 +475,7 @@ msgstr "Modifier le profil"
 msgid "Back"
 msgstr "Retour"
 
-#: templates/profiles/profile_edit.html:24
-#, fuzzy
-#| msgid "optional"
-msgid "Location"
-msgstr "facultatif"
-
-#: templates/profiles/profile_edit.html:33 templates/teachers/directory.html:23
+#: templates/profiles/profile_edit.html:33
 msgid "Municipality"
 msgstr "Commune"
 
@@ -415,13 +501,13 @@ msgstr "Je suis étudiant"
 
 #: templates/profiles/profile_edit.html:87
 #: templates/students/profile_edit.html:48
-#: templates/teachers/profile_edit.html:78
+#: templates/teachers/profile_edit.html:105
 msgid "Save changes"
 msgstr "Enregistrer"
 
 #: templates/profiles/profile_edit.html:90 templates/reviews/write.html:67
 #: templates/students/profile_edit.html:51
-#: templates/teachers/profile_edit.html:81
+#: templates/teachers/profile_edit.html:108
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -437,7 +523,7 @@ msgstr "Retour au profil"
 msgid "Edit your review"
 msgstr "Modifier votre avis"
 
-#: templates/reviews/write.html:15 templates/teachers/detail.html:126
+#: templates/reviews/write.html:15 templates/teachers/detail.html:147
 msgid "Write a review"
 msgstr "Écrire un avis"
 
@@ -490,7 +576,7 @@ msgstr "Mon profil étudiant"
 msgid "Subjects I want to learn"
 msgstr "Matières que je veux apprendre"
 
-#: templates/students/profile.html:29 templates/teachers/profile.html:52
+#: templates/students/profile.html:29
 msgid "No subjects added yet."
 msgstr "Aucune matière ajoutée pour l'instant."
 
@@ -515,63 +601,68 @@ msgstr "Supprimer"
 msgid "Save to add another subject row."
 msgstr "Enregistrez pour ajouter une autre matière."
 
-#: templates/teachers/detail.html:41
+#: templates/teachers/detail.html:36
 msgid "hour"
 msgstr "heure"
 
-#: templates/teachers/detail.html:49
+#: templates/teachers/detail.html:44
 #, python-format
 msgid "%(num)s review"
 msgid_plural "%(num)s reviews"
 msgstr[0] "%(num)s avis"
 msgstr[1] "%(num)s avis"
 
-#: templates/teachers/detail.html:60
+#: templates/teachers/detail.html:55
 msgid "Continue conversation"
 msgstr "Continuer la conversation"
 
-#: templates/teachers/detail.html:67
+#: templates/teachers/detail.html:62
 msgid "Contact this teacher"
 msgstr "Contacter cet enseignant"
 
-#: templates/teachers/detail.html:77
+#: templates/teachers/detail.html:72
 msgid "About"
 msgstr "À propos"
 
-#: templates/teachers/detail.html:86 templates/teachers/profile.html:64
-msgid "Native language"
-msgstr "Langue maternelle"
-
-#: templates/teachers/detail.html:92 templates/teachers/profile.html:73
+#: templates/teachers/detail.html:81 templates/teachers/profile.html:58
 msgid "Availability"
 msgstr "Disponibilité"
 
-#: templates/teachers/detail.html:101 templates/teachers/profile.html:81
-#: templates/teachers/profile_edit.html:46
+#: templates/teachers/detail.html:89 templates/teachers/profile.html:65
+msgid "Weekly schedule"
+msgstr ""
+
+#: templates/teachers/detail.html:97 templates/teachers/profile.html:73
+#: templates/teachers/profile_edit.html:30
+msgid "Class Offerings"
+msgstr ""
+
+#: templates/teachers/detail.html:122 templates/teachers/profile.html:106
+#: templates/teachers/profile_edit.html:73
 msgid "Certificates & Credentials"
 msgstr "Certificats et diplômes"
 
-#: templates/teachers/detail.html:108 templates/teachers/profile.html:89
+#: templates/teachers/detail.html:129 templates/teachers/profile.html:114
 msgid "Obtained:"
 msgstr "Obtenu :"
 
-#: templates/teachers/detail.html:109 templates/teachers/profile.html:90
+#: templates/teachers/detail.html:130 templates/teachers/profile.html:115
 msgid "Expires:"
 msgstr "Expire :"
 
-#: templates/teachers/detail.html:120
+#: templates/teachers/detail.html:141
 msgid "Reviews"
 msgstr "Avis"
 
-#: templates/teachers/detail.html:123
+#: templates/teachers/detail.html:144
 msgid "You already reviewed this teacher"
 msgstr "Vous avez déjà évalué cet enseignant"
 
-#: templates/teachers/detail.html:139
+#: templates/teachers/detail.html:160
 msgid "Anonymous"
 msgstr "Anonyme"
 
-#: templates/teachers/detail.html:155
+#: templates/teachers/detail.html:176
 msgid "No reviews yet."
 msgstr "Pas encore d'avis."
 
@@ -587,38 +678,88 @@ msgstr "Trouver un enseignant particulier"
 msgid "Verified teachers for one-on-one lessons in Belgium"
 msgstr "Enseignants vérifiés pour des cours particuliers en Belgique"
 
-#: templates/teachers/directory.html:15
-msgid "All subjects"
-msgstr "Toutes les matières"
+#: templates/teachers/directory.html:26
+msgid "Online or in person"
+msgstr ""
 
-#: templates/teachers/directory.html:27
+#: templates/teachers/directory.html:34
+msgid "Individual or group"
+msgstr ""
+
+#: templates/teachers/directory.html:40
 msgid "Max €/h"
 msgstr "Max €/h"
 
-#: templates/teachers/directory.html:33
+#: templates/teachers/directory.html:47
+msgid "Location — pick one"
+msgstr ""
+
+#: templates/teachers/directory.html:54
+#, fuzzy
+#| msgid "Municipality"
+msgid "All municipalities"
+msgstr "Commune"
+
+#: templates/teachers/directory.html:60
+#, fuzzy
+#| msgid "For"
+msgid "or"
+msgstr "Pour"
+
+#: templates/teachers/directory.html:62
+#, fuzzy
+#| msgid "Municipality"
+msgid "Address or municipality"
+msgstr "Commune"
+
+#: templates/teachers/directory.html:68
+msgid "within 5 km"
+msgstr ""
+
+#: templates/teachers/directory.html:69
+msgid "within 10 km"
+msgstr ""
+
+#: templates/teachers/directory.html:70
+msgid "within 20 km"
+msgstr ""
+
+#: templates/teachers/directory.html:71
+msgid "within 50 km"
+msgstr ""
+
+#: templates/teachers/directory.html:77
 msgid "Search"
 msgstr "Rechercher"
 
-#: templates/teachers/directory.html:45
-#, python-format
-msgid "%(num)s teacher found"
-msgid_plural "%(num)s teachers found"
+#: templates/teachers/directory.html:81
+msgid "Could not find that location — try a different spelling."
+msgstr ""
+
+#: templates/teachers/directory.html:92
+#, fuzzy, python-format
+#| msgid "%(num)s teacher found"
+#| msgid_plural "%(num)s teachers found"
+msgid "%(num)s class found"
+msgid_plural "%(num)s classes found"
 msgstr[0] "%(num)s enseignant trouvé"
 msgstr[1] "%(num)s enseignants trouvés"
 
-#: templates/teachers/directory.html:47
+#: templates/teachers/directory.html:94
 msgid "Clear filters"
 msgstr "Effacer les filtres"
 
-#: templates/teachers/directory.html:86
+#: templates/teachers/directory.html:136
 msgid "Price on request"
 msgstr "Prix sur demande"
 
-#: templates/teachers/directory.html:103
-msgid "No teachers found for these filters."
+#: templates/teachers/directory.html:152
+#, fuzzy
+#| msgid "No teachers found for these filters."
+msgid "No classes found for these filters."
 msgstr "Aucun enseignant trouvé pour ces filtres."
 
-#: templates/teachers/directory.html:104
+#: templates/teachers/directory.html:153
 msgid "See all teachers"
 msgstr "Voir tous les enseignants"
 
@@ -650,19 +791,35 @@ msgstr "En attente de validation"
 msgid "An admin will review your profile before it goes live."
 msgstr "Un administrateur examinera votre profil avant qu'il soit publié."
 
-#: templates/teachers/profile.html:44
-msgid "Subjects"
-msgstr "Matières"
-
-#: templates/teachers/profile.html:58
+#: templates/teachers/profile.html:45
 msgid "Price per hour"
 msgstr "Prix par heure"
 
-#: templates/teachers/profile.html:60 templates/teachers/profile.html:66
+#: templates/teachers/profile.html:47
 msgid "Not set"
 msgstr "Non défini"
 
-#: templates/teachers/profile.html:96
+#: templates/teachers/profile.html:51
+#, fuzzy
+#| msgid "Teaching info"
+msgid "Teaching mode"
+msgstr "Informations d'enseignement"
+
+#: templates/teachers/profile.html:91
+msgid "Active"
+msgstr ""
+
+#: templates/teachers/profile.html:93
+msgid "Hidden"
+msgstr ""
+
+#: templates/teachers/profile.html:101
+#, fuzzy
+#| msgid "No certificates added yet."
+msgid "No offerings added yet."
+msgstr "Aucun certificat ajouté pour l'instant."
+
+#: templates/teachers/profile.html:121
 msgid "No certificates added yet."
 msgstr "Aucun certificat ajouté pour l'instant."
 
@@ -675,25 +832,63 @@ msgstr "Modifier le profil enseignant"
 msgid "Teaching info"
 msgstr "Informations d'enseignement"
 
-#: templates/teachers/profile_edit.html:27
-msgid "Subjects you teach"
-msgstr "Matières que vous enseignez"
+#: templates/teachers/profile_edit.html:23
+#, fuzzy
+#| msgid "Availability"
+msgid "Weekly availability"
+msgstr "Disponibilité"
 
-#: templates/teachers/profile_edit.html:29
-msgid "No subjects available yet — an admin must add them first."
+#: templates/teachers/profile_edit.html:31
+msgid "At least one required"
 msgstr ""
-"Aucune matière disponible pour l'instant — un administrateur doit d'abord "
-"les ajouter."
 
-#: templates/teachers/profile_edit.html:52
+#: templates/teachers/profile_edit.html:33
+msgid "Each offering is a class students can find and book — e.g. \\"
+msgstr ""
+
+#: templates/teachers/profile_edit.html:43
+#, fuzzy, python-format
+#| msgid "Certificate #%(num)s"
+msgid "Offering #%(num)s"
+msgstr "Certificat n°%(num)s"
+
+#: templates/teachers/profile_edit.html:46
+#: templates/teachers/profile_edit.html:81
+msgid "Add new"
+msgstr "Ajouter"
+
+#: templates/teachers/profile_edit.html:59
+msgid "Active (visible to students)"
+msgstr ""
+
+#: templates/teachers/profile_edit.html:64
+#, fuzzy
+#| msgid "Remove this certificate"
+msgid "Remove this offering"
+msgstr "Supprimer ce certificat"
+
+#: templates/teachers/profile_edit.html:79
 #, python-format
 msgid "Certificate #%(num)s"
 msgstr "Certificat n°%(num)s"
 
-#: templates/teachers/profile_edit.html:54
-msgid "Add new"
-msgstr "Ajouter"
-
-#: templates/teachers/profile_edit.html:67
+#: templates/teachers/profile_edit.html:94
 msgid "Remove this certificate"
 msgstr "Supprimer ce certificat"
+
+#~ msgid "Native language:"
+#~ msgstr "Langue maternelle :"
+
+#~ msgid "Native language"
+#~ msgstr "Langue maternelle"
+
+#~ msgid "Subjects"
+#~ msgstr "Matières"
+
+#~ msgid "Subjects you teach"
+#~ msgstr "Matières que vous enseignez"
+
+#~ msgid "No subjects available yet — an admin must add them first."
+#~ msgstr ""
+#~ "Aucune matière disponible pour l'instant — un administrateur doit d'abord "
+#~ "les ajouter."

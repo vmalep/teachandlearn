@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator
+from django.utils.translation import gettext_lazy as _
 
 
 class TeachingMode(models.TextChoices):
@@ -61,8 +62,8 @@ class Certificate(models.Model):
 
 class ClassOffering(models.Model):
     class Format(models.TextChoices):
-        INDIVIDUAL = "individual", "Individual lesson"
-        GROUP = "group", "Group / Conversation table"
+        INDIVIDUAL = "individual", _("Individual lesson")
+        GROUP = "group", _("Group")
 
     class Level(models.TextChoices):
         ALL = "all", "All levels"
