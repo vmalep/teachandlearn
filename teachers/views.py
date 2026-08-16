@@ -4,7 +4,8 @@ import json as _json
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
-from django.db.models import Avg, Count, Q
+from django.db.models import Avg, Count, F, FloatField, Q, Value
+from django.db.models.functions import ACos, Cast, Cos, Greatest, Least, Radians, Sin
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
@@ -13,15 +14,17 @@ from .forms import CertificateFormSet, TeacherProfileForm
 from .models import TeacherProfile
 from subjects.models import Subject
 
+EARTH_RADIUS_KM = 6371.0
 
-def _municipality_coords(name):
-    """Return (lat, lng) for a Belgian municipality using Nominatim, cached 24 h."""
-    key = f"muni_coords:{name}"
+
+def _geocode_text(text):
+    """Return (lat, lng) for a free-text location (municipality or address) via Nominatim, cached 24 h."""
+    key = f"geocode_text:{text}"
     cached = cache.get(key)
     if cached:
         return cached
     query = urllib.parse.urlencode({
-        "q": f"{name}, Belgium",
+        "q": f"{text}, Belgium",
         "format": "json",
         "limit": "1",
         "countrycodes": "be",
@@ -38,6 +41,22 @@ def _municipality_coords(name):
     except Exception:
         pass
     return None
+
+
+def _annotate_distance_km(qs, lat, lng):
+    """Annotate queryset with great-circle distance (km) from (lat, lng) to profile__latitude/longitude."""
+    lat_rad = Radians(Value(lat, output_field=FloatField()))
+    lng_rad = Radians(Value(lng, output_field=FloatField()))
+    profile_lat_rad = Radians(Cast("profile__latitude", FloatField()))
+    profile_lng_rad = Radians(Cast("profile__longitude", FloatField()))
+    cos_angle = (
+        Cos(lat_rad) * Cos(profile_lat_rad) * Cos(profile_lng_rad - lng_rad)
+        + Sin(lat_rad) * Sin(profile_lat_rad)
+    )
+    # Clamp to [-1, 1] — floating-point rounding can push it just outside that
+    # range for near-identical points, which would make ACos raise in Postgres.
+    clamped = Least(Value(1.0), Greatest(Value(-1.0), cos_angle))
+    return qs.annotate(distance_km=ACos(clamped) * EARTH_RADIUS_KM)
 
 
 def _rating_qs(qs):
@@ -67,20 +86,51 @@ class TeacherDirectoryView(ListView):
         subject = self.request.GET.get("subject")
         municipality = self.request.GET.get("municipality")
         max_price = self.request.GET.get("max_price")
+        near = self.request.GET.get("near", "").strip()
+        radius_km = self.request.GET.get("radius_km")
+
         if subject:
             qs = qs.filter(subjects__id=subject)
-        if municipality:
-            qs = qs.filter(profile__municipality__icontains=municipality)
         if max_price:
             try:
                 qs = qs.filter(price_per_hour__lte=float(max_price))
             except ValueError:
                 pass
+
+        self.near_error = False
+        if near and radius_km:
+            try:
+                radius = float(radius_km)
+            except ValueError:
+                radius = None
+            if radius:
+                coords = _geocode_text(near)
+                if coords:
+                    lat, lng = coords
+                    qs = _annotate_distance_km(qs, lat, lng).filter(
+                        profile__latitude__isnull=False,
+                        profile__longitude__isnull=False,
+                        distance_km__lte=radius,
+                    )
+                else:
+                    self.near_error = True
+                    qs = qs.none()
+        elif municipality:
+            qs = qs.filter(profile__municipality=municipality)
+
         return qs.order_by("-avg_rating", "price_per_hour")
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["all_subjects"] = Subject.objects.all()
+        ctx["all_municipalities"] = (
+            TeacherProfile.objects.filter(state=TeacherProfile.State.VALIDATED)
+            .exclude(profile__municipality="")
+            .order_by("profile__municipality")
+            .values_list("profile__municipality", flat=True)
+            .distinct()
+        )
+        ctx["near_error"] = getattr(self, "near_error", False)
         return ctx
 
 
@@ -167,7 +217,7 @@ class MapDataView(View):
         # Resolve each municipality to its centroid via Nominatim (cached)
         result = []
         for entry in data.values():
-            coords = _municipality_coords(entry["municipality"])
+            coords = _geocode_text(entry["municipality"])
             if coords:
                 entry["lat"], entry["lng"] = coords
                 result.append(entry)

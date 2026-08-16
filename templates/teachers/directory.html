@@ -20,9 +20,13 @@
         {% endfor %}
       </select>
 
-      <input type="text" name="municipality" placeholder="{% trans "Municipality" %}"
-        value="{{ request.GET.municipality }}"
+      <select name="municipality"
         class="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
+        <option value="">{% trans "All municipalities" %}</option>
+        {% for m in all_municipalities %}
+          <option value="{{ m }}" {% if request.GET.municipality == m %}selected{% endif %}>{{ m }}</option>
+        {% endfor %}
+      </select>
 
       <input type="number" name="max_price" placeholder="{% trans "Max €/h" %}" min="0" step="5"
         value="{{ request.GET.max_price }}"
@@ -33,13 +37,38 @@
         {% trans "Search" %}
       </button>
     </form>
+
+    <form method="get" class="mt-3 bg-white rounded-2xl p-3 flex flex-col sm:flex-row gap-2 shadow-md">
+      {% if request.GET.subject %}<input type="hidden" name="subject" value="{{ request.GET.subject }}">{% endif %}
+      {% if request.GET.max_price %}<input type="hidden" name="max_price" value="{{ request.GET.max_price }}">{% endif %}
+
+      <input type="text" name="near" placeholder="{% trans "Or search near an address / municipality" %}"
+        value="{{ request.GET.near }}"
+        class="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
+
+      <select name="radius_km"
+        class="w-32 rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
+        <option value="5" {% if request.GET.radius_km == "5" %}selected{% endif %}>{% blocktrans %}within 5 km{% endblocktrans %}</option>
+        <option value="10" {% if request.GET.radius_km == "10" %}selected{% endif %}>{% blocktrans %}within 10 km{% endblocktrans %}</option>
+        <option value="20" {% if request.GET.radius_km == "20" %}selected{% endif %}>{% blocktrans %}within 20 km{% endblocktrans %}</option>
+        <option value="50" {% if request.GET.radius_km == "50" %}selected{% endif %}>{% blocktrans %}within 50 km{% endblocktrans %}</option>
+      </select>
+
+      <button type="submit"
+        class="bg-slate-700 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-slate-800 transition-colors text-sm shrink-0">
+        {% trans "Search nearby" %}
+      </button>
+    </form>
+    {% if near_error %}
+      <p class="text-sm text-red-500 mt-2">{% trans "Could not find that location — try a different spelling." %}</p>
+    {% endif %}
   </div>
 </div>
 
 {# Results #}
 <div class="max-w-5xl mx-auto px-4 py-10">
 
-  {% if request.GET.subject or request.GET.municipality or request.GET.max_price %}
+  {% if request.GET.subject or request.GET.municipality or request.GET.max_price or request.GET.near %}
     <div class="flex items-center justify-between mb-6">
       <p class="text-sm text-slate-500">
         {% blocktrans count num=teachers|length %}{{ num }} teacher found{% plural %}{{ num }} teachers found{% endblocktrans %}
