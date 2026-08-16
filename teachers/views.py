@@ -93,6 +93,7 @@ class TeacherDirectoryView(ListView):
         radius_km = self.request.GET.get("radius_km")
         teaching_mode = self.request.GET.get("teaching_mode")
         format_ = self.request.GET.get("format")
+        sort = self.request.GET.get("sort", "rating")
 
         if subject:
             qs = qs.filter(subject__id=subject)
@@ -106,30 +107,56 @@ class TeacherDirectoryView(ListView):
             except ValueError:
                 pass
 
+        ref_point = None
         self.near_error = False
-        if near and radius_km:
+        if near:
+            coords = _geocode_text(near)
+            if coords:
+                ref_point = coords
+            else:
+                self.near_error = True
+                qs = qs.none()
+        elif municipality:
+            qs = qs.filter(teacher__profile__municipality=municipality)
+
+        distance_annotated = False
+        if ref_point and radius_km and not self.near_error:
             try:
                 radius = float(radius_km)
             except ValueError:
                 radius = None
             if radius:
-                coords = _geocode_text(near)
-                if coords:
-                    lat, lng = coords
+                lat, lng = ref_point
+                qs = _annotate_distance_km(
+                    qs, lat, lng,
+                    lat_field="teacher__profile__latitude",
+                    lng_field="teacher__profile__longitude",
+                ).filter(
+                    teacher__profile__latitude__isnull=False,
+                    teacher__profile__longitude__isnull=False,
+                    distance_km__lte=radius,
+                )
+                distance_annotated = True
+
+        self.sort_unavailable = False
+        if sort == "distance":
+            if not ref_point and self.request.user.is_authenticated:
+                profile = getattr(self.request.user, "profile", None)
+                if profile and profile.latitude is not None and profile.longitude is not None:
+                    ref_point = (float(profile.latitude), float(profile.longitude))
+            if ref_point and not self.near_error:
+                if not distance_annotated:
+                    lat, lng = ref_point
                     qs = _annotate_distance_km(
                         qs, lat, lng,
                         lat_field="teacher__profile__latitude",
                         lng_field="teacher__profile__longitude",
-                    ).filter(
-                        teacher__profile__latitude__isnull=False,
-                        teacher__profile__longitude__isnull=False,
-                        distance_km__lte=radius,
                     )
-                else:
-                    self.near_error = True
-                    qs = qs.none()
-        elif municipality:
-            qs = qs.filter(teacher__profile__municipality=municipality)
+                return qs.order_by(F("distance_km").asc(nulls_last=True), "-avg_rating")
+            self.sort_unavailable = True
+
+        if sort == "price":
+            return qs.order_by("price_per_hour", "-avg_rating")
 
         return qs.order_by("-avg_rating", "price_per_hour")
 
@@ -153,6 +180,7 @@ class TeacherDirectoryView(ListView):
             .distinct()
         )
         ctx["near_error"] = getattr(self, "near_error", False)
+        ctx["sort_unavailable"] = getattr(self, "sort_unavailable", False)
         return ctx
 
 
