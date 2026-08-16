@@ -122,7 +122,11 @@ class TeacherDirectoryView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx["all_subjects"] = Subject.objects.all()
+        ctx["all_subjects"] = (
+            Subject.objects.filter(teacherprofile__state=TeacherProfile.State.VALIDATED)
+            .order_by("name")
+            .distinct()
+        )
         ctx["all_municipalities"] = (
             TeacherProfile.objects.filter(state=TeacherProfile.State.VALIDATED)
             .exclude(profile__municipality="")
