@@ -14,8 +14,6 @@ USERS = [
         "last_name": "Dupont",
         "role": "teacher",
         "teacher": {
-            "price_per_hour": 35,
-            "teaching_mode": "both",
             "availability": "Weekday evenings and Saturday mornings",
             "availability_schedule": {
                 "mon": {"morning": False, "afternoon": False, "evening": True},
@@ -49,8 +47,6 @@ USERS = [
         "last_name": "Janssen",
         "role": "teacher",
         "teacher": {
-            "price_per_hour": 40,
-            "teaching_mode": "presential",
             "availability": "Flexible schedule",
             "availability_schedule": {
                 "mon": {"morning": True, "afternoon": True, "evening": False},
@@ -77,8 +73,6 @@ USERS = [
         "last_name": "García",
         "role": "teacher",
         "teacher": {
-            "price_per_hour": 30,
-            "teaching_mode": "online",
             "availability": "Weekends only",
             "availability_schedule": {
                 "mon": {"morning": False, "afternoon": False, "evening": False},
@@ -136,8 +130,6 @@ USERS = [
         "last_name": "El Amrani",
         "role": "both",
         "teacher": {
-            "price_per_hour": 25,
-            "teaching_mode": "both",
             "availability": "Monday to Friday afternoons",
             "availability_schedule": {
                 "mon": {"morning": False, "afternoon": True, "evening": False},
@@ -209,8 +201,6 @@ class Command(BaseCommand):
                 td = data["teacher"]
                 tp = TeacherProfile.objects.create(
                     profile=profile,
-                    price_per_hour=td.get("price_per_hour"),
-                    teaching_mode=td.get("teaching_mode", "both"),
                     availability=td.get("availability", ""),
                     availability_schedule=td.get("availability_schedule", {}),
                     state=td.get("state", "draft"),

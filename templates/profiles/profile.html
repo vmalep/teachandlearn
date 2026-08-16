@@ -87,11 +87,8 @@
         {% endif %}
       </div>
       <dl class="space-y-2 text-sm">
-        {% if teacher_profile.price_per_hour %}
-          <div><span class="text-slate-500">{% trans "Price:" %}</span> <span class="font-medium">€{{ teacher_profile.price_per_hour }}/h</span></div>
-        {% endif %}
         {% if teacher_profile.availability %}
-          <div><span class="text-slate-500">{% trans "Availability:" %}</span> {{ teacher_profile.availability }}</div>
+          <div><span class="text-slate-500">{% trans "Availability details:" %}</span> {{ teacher_profile.availability }}</div>
         {% endif %}
         {% if teacher_profile.certificates.all %}
           <div>

@@ -16,7 +16,7 @@ class ClassOfferingInline(admin.TabularInline):
 
 @admin.register(TeacherProfile)
 class TeacherProfileAdmin(admin.ModelAdmin):
-    list_display = ["profile", "state", "price_per_hour", "created_at"]
+    list_display = ["profile", "state", "created_at"]
     list_filter = ["state"]
     search_fields = ["profile__user__email"]
     inlines = [CertificateInline, ClassOfferingInline]

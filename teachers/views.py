@@ -10,7 +10,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView, DetailView
-from .forms import CertificateFormSet, ClassOfferingFormSet, TeacherProfileForm
+from .forms import CertificateFormSet, ClassOfferingFormSet, TeacherPresentationForm, TeacherProfileForm
 from .models import ClassOffering, TeacherProfile, TeachingMode
 from subjects.models import Subject
 
@@ -278,10 +278,12 @@ class TeacherProfileEditView(LoginRequiredMixin, View):
         tp = self._get_tp(request)
         if tp is None:
             return redirect("profiles:profile")
+        presentation_form = TeacherPresentationForm(instance=tp.profile)
         form = TeacherProfileForm(instance=tp)
         cert_formset = CertificateFormSet(instance=tp)
         offering_formset = ClassOfferingFormSet(instance=tp)
         return render(request, self.template_name, {
+            "presentation_form": presentation_form,
             "form": form,
             "cert_formset": cert_formset,
             "offering_formset": offering_formset,
@@ -292,15 +294,18 @@ class TeacherProfileEditView(LoginRequiredMixin, View):
         tp = self._get_tp(request)
         if tp is None:
             return redirect("profiles:profile")
+        presentation_form = TeacherPresentationForm(request.POST, instance=tp.profile)
         form = TeacherProfileForm(request.POST, instance=tp)
         cert_formset = CertificateFormSet(request.POST, request.FILES, instance=tp)
         offering_formset = ClassOfferingFormSet(request.POST, instance=tp)
-        if form.is_valid() and cert_formset.is_valid() and offering_formset.is_valid():
+        if presentation_form.is_valid() and form.is_valid() and cert_formset.is_valid() and offering_formset.is_valid():
+            presentation_form.save()
             form.save()
             cert_formset.save()
             offering_formset.save()
             return redirect("teachers:profile")
         return render(request, self.template_name, {
+            "presentation_form": presentation_form,
             "form": form,
             "cert_formset": cert_formset,
             "offering_formset": offering_formset,

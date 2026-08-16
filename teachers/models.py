@@ -18,16 +18,6 @@ class TeacherProfile(models.Model):
     profile = models.OneToOneField(
         "profiles.Profile", on_delete=models.CASCADE, related_name="teacher_profile"
     )
-    price_per_hour = models.DecimalField(
-        max_digits=6,
-        decimal_places=2,
-        null=True,
-        blank=True,
-        validators=[MinValueValidator(0)],
-    )
-    teaching_mode = models.CharField(
-        max_length=20, choices=TeachingMode.choices, default=TeachingMode.BOTH
-    )
     availability = models.TextField(blank=True)
     availability_schedule = models.JSONField(default=dict, blank=True)
     state = models.CharField(max_length=20, choices=State.choices, default=State.DRAFT)

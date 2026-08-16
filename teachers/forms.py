@@ -1,8 +1,10 @@
 from django import forms
 from django.forms import inlineformset_factory
+from django.utils.translation import gettext_lazy as _
 from .models import Certificate, ClassOffering, TeacherProfile
 from .widgets import AvailabilityWidget
 from profiles.forms import apply_input_class
+from profiles.models import Profile
 
 
 class AvailabilityScheduleField(forms.Field):
@@ -20,9 +22,31 @@ class TeacherProfileForm(forms.ModelForm):
 
     class Meta:
         model = TeacherProfile
-        fields = ["price_per_hour", "teaching_mode", "availability", "availability_schedule"]
+        fields = ["availability", "availability_schedule"]
         widgets = {
             "availability": forms.Textarea(attrs={"rows": 3}),
+        }
+        labels = {
+            "availability": _("Availability details"),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        apply_input_class(self)
+
+
+class TeacherPresentationForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ["bio"]
+        widgets = {
+            "bio": forms.Textarea(attrs={"rows": 4}),
+        }
+        labels = {
+            "bio": _("Presentation"),
+        }
+        help_texts = {
+            "bio": _("Introduce yourself to students — your background, teaching style, experience."),
         }
 
     def __init__(self, *args, **kwargs):
