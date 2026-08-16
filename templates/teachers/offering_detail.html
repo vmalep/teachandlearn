@@ -4,30 +4,6 @@
 {% block content %}
 <div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
 
-  {# Offering hero #}
-  <div class="bg-white rounded-2xl shadow p-6">
-    <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">{{ offering.subject }}</p>
-    <h1 class="text-2xl font-bold text-slate-900">{{ offering.get_format_display }}</h1>
-
-    <div class="flex flex-wrap gap-2 mt-3">
-      <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-full">{{ offering.get_teaching_mode_display }}</span>
-      <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-full">{{ offering.get_level_display }}</span>
-    </div>
-
-    {% if offering.description %}
-      <p class="text-sm text-slate-700 leading-relaxed mt-4">{{ offering.description }}</p>
-    {% endif %}
-
-    <div class="mt-4 pt-4 border-t border-slate-100">
-      {% if offering.price_per_hour %}
-        <span class="text-2xl font-bold text-slate-900">€{{ offering.price_per_hour }}</span>
-        <span class="text-sm text-slate-400">/{% trans "hour" %}</span>
-      {% else %}
-        <span class="text-base text-slate-400">{% trans "Price on request" %}</span>
-      {% endif %}
-    </div>
-  </div>
-
   {# Teacher presentation #}
   <div class="bg-white rounded-2xl shadow p-6">
     <div class="flex items-start gap-4">
@@ -62,27 +38,52 @@
     {% if offering.teacher.profile.bio %}
       <p class="text-sm text-slate-700 leading-relaxed mt-4 pt-4 border-t border-slate-100">{{ offering.teacher.profile.bio }}</p>
     {% endif %}
+  </div>
 
-    <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-4 flex-wrap">
-      {% if conversation %}
-        <a href="/messages/{{ conversation.pk }}/"
-          class="inline-block bg-violet-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-violet-700 transition-colors">
-          {% trans "Continue conversation" %}
-        </a>
-      {% else %}
-        <form method="post" action="/messages/start/{{ offering.teacher.profile.user.pk }}/" class="inline">
-          {% csrf_token %}
-          <input type="hidden" name="offering" value="{{ offering.pk }}">
-          <button type="submit"
-            class="bg-violet-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-violet-700 transition-colors">
-            {% trans "Contact this teacher" %}
-          </button>
-        </form>
-      {% endif %}
-      <a href="/teachers/{{ offering.teacher.pk }}/" class="text-sm text-violet-600 hover:underline font-medium">
-        {% trans "View full profile" %} →
-      </a>
+  {# Offering details #}
+  <div class="bg-white rounded-2xl shadow p-6">
+    <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">{{ offering.subject }}</p>
+    <h1 class="text-2xl font-bold text-slate-900">{{ offering.get_format_display }}</h1>
+
+    <div class="flex flex-wrap gap-2 mt-3">
+      <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-full">{{ offering.get_teaching_mode_display }}</span>
+      <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-full">{{ offering.get_level_display }}</span>
     </div>
+
+    {% if offering.description %}
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">{{ offering.description }}</p>
+    {% endif %}
+
+    <div class="mt-4 pt-4 border-t border-slate-100">
+      {% if offering.price_per_hour %}
+        <span class="text-2xl font-bold text-slate-900">€{{ offering.price_per_hour }}</span>
+        <span class="text-sm text-slate-400">/{% trans "hour" %}</span>
+      {% else %}
+        <span class="text-base text-slate-400">{% trans "Price on request" %}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  {# Contact #}
+  <div class="bg-white rounded-2xl shadow p-6 flex items-center gap-4 flex-wrap">
+    {% if conversation %}
+      <a href="/messages/{{ conversation.pk }}/"
+        class="inline-block bg-violet-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-violet-700 transition-colors">
+        {% trans "Continue conversation" %}
+      </a>
+    {% else %}
+      <form method="post" action="/messages/start/{{ offering.teacher.profile.user.pk }}/" class="inline">
+        {% csrf_token %}
+        <input type="hidden" name="offering" value="{{ offering.pk }}">
+        <button type="submit"
+          class="bg-violet-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-violet-700 transition-colors">
+          {% trans "Contact this teacher" %}
+        </button>
+      </form>
+    {% endif %}
+    <a href="/teachers/{{ offering.teacher.pk }}/" class="text-sm text-violet-600 hover:underline font-medium">
+      {% trans "View full profile" %} →
+    </a>
   </div>
 
 </div>
