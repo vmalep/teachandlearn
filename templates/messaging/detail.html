@@ -88,7 +88,7 @@
       {% csrf_token %}
       <textarea name="body" rows="2" placeholder="{% trans "Write a message…" %}"
         class="flex-1 field-input resize-none"
-        onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();this.form.submit();}"></textarea>
+        onkeydown="if(event.key==='Enter' && !event.shiftKey){event.preventDefault();this.form.submit();}">{{ prefill_message }}</textarea>
       <button type="submit"
         class="shrink-0 bg-violet-600 text-white p-2.5 rounded-xl hover:bg-violet-700 transition-colors">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

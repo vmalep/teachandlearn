@@ -216,6 +216,35 @@ class TeacherDetailView(LoginRequiredMixin, DetailView):
         return ctx
 
 
+class OfferingDetailView(LoginRequiredMixin, DetailView):
+    model = ClassOffering
+    template_name = "teachers/offering_detail.html"
+    context_object_name = "offering"
+
+    def get_queryset(self):
+        return _rating_qs(
+            ClassOffering.objects.filter(
+                is_active=True,
+                teacher__state=TeacherProfile.State.VALIDATED,
+                teacher__pk=self.kwargs["teacher_pk"],
+            )
+            .select_related("subject", "teacher__profile__user"),
+            prefix="teacher__profile__user__received_reviews",
+        )
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        offering = self.object
+        teacher = offering.teacher
+        ctx["teacher"] = teacher
+        if self.request.user.is_authenticated:
+            from messaging.models import Conversation
+            ctx["conversation"] = Conversation.objects.filter(
+                student=self.request.user, teacher=teacher.profile.user
+            ).first()
+        return ctx
+
+
 class MapView(View):
     def get(self, request):
         return render(request, "map.html", {"all_subjects": Subject.objects.all()})

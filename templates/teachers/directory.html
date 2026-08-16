@@ -108,7 +108,7 @@
   {% if offerings %}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {% for offering in offerings %}
-        <a href="/teachers/{{ offering.teacher.pk }}/#offering-{{ offering.pk }}"
+        <a href="/teachers/{{ offering.teacher.pk }}/offerings/{{ offering.pk }}/"
           class="group bg-white rounded-2xl shadow hover:shadow-md hover:border-violet-200 transition-all p-5 flex flex-col gap-3">
 
           <div class="flex items-center gap-3">

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ offering.subject }} — {{ offering.get_format_display }} — {{ offering.teacher.profile.user.first_name|default:offering.teacher.profile.user.email }} — TeachAndLearn{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto px-4 py-10 space-y-6">
+
+  {# Offering hero #}
+  <div class="bg-white rounded-2xl shadow p-6">
+    <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">{{ offering.subject }}</p>
+    <h1 class="text-2xl font-bold text-slate-900">{{ offering.get_format_display }}</h1>
+
+    <div class="flex flex-wrap gap-2 mt-3">
+      <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-full">{{ offering.get_teaching_mode_display }}</span>
+      <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-full">{{ offering.get_level_display }}</span>
+    </div>
+
+    {% if offering.description %}
+      <p class="text-sm text-slate-700 leading-relaxed mt-4">{{ offering.description }}</p>
+    {% endif %}
+
+    <div class="mt-4 pt-4 border-t border-slate-100">
+      {% if offering.price_per_hour %}
+        <span class="text-2xl font-bold text-slate-900">€{{ offering.price_per_hour }}</span>
+        <span class="text-sm text-slate-400">/{% trans "hour" %}</span>
+      {% else %}
+        <span class="text-base text-slate-400">{% trans "Price on request" %}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  {# Teacher presentation #}
+  <div class="bg-white rounded-2xl shadow p-6">
+    <div class="flex items-start gap-4">
+      {% if offering.teacher.profile.avatar %}
+        <img src="{{ offering.teacher.profile.avatar.url }}" alt=""
+          class="w-16 h-16 rounded-2xl object-cover shrink-0">
+      {% else %}
+        <div class="w-16 h-16 rounded-2xl bg-violet-100 flex items-center justify-center text-xl font-bold text-violet-400 shrink-0">
+          {{ offering.teacher.profile.user.first_name|first|upper }}
+        </div>
+      {% endif %}
+      <div class="flex-1 min-w-0">
+        <p class="font-semibold text-slate-900">
+          {% if user.is_authenticated %}{{ offering.teacher.profile.user.get_full_name|default:offering.teacher.profile.user.email }}{% else %}{{ offering.teacher.profile.user.first_name|default:offering.teacher.profile.user.email }}{% endif %}
+        </p>
+        {% if offering.teacher.profile.municipality %}
+          <p class="text-sm text-slate-500 mt-0.5 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd"/></svg>
+            {{ offering.teacher.profile.municipality }}
+          </p>
+        {% endif %}
+        {% if offering.avg_rating %}
+          <div class="flex items-center gap-1.5 mt-1.5">
+            <span class="text-yellow-400 text-sm leading-none">★</span>
+            <span class="text-sm font-semibold text-slate-700">{{ offering.avg_rating|floatformat:1 }}</span>
+            <span class="text-xs text-slate-400">({% blocktrans count num=offering.review_count %}{{ num }} review{% plural %}{{ num }} reviews{% endblocktrans %})</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if offering.teacher.profile.bio %}
+      <p class="text-sm text-slate-700 leading-relaxed mt-4 pt-4 border-t border-slate-100">{{ offering.teacher.profile.bio }}</p>
+    {% endif %}
+
+    <div class="mt-4 pt-4 border-t border-slate-100 flex items-center gap-4 flex-wrap">
+      {% if conversation %}
+        <a href="/messages/{{ conversation.pk }}/"
+          class="inline-block bg-violet-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-violet-700 transition-colors">
+          {% trans "Continue conversation" %}
+        </a>
+      {% else %}
+        <form method="post" action="/messages/start/{{ offering.teacher.profile.user.pk }}/" class="inline">
+          {% csrf_token %}
+          <input type="hidden" name="offering" value="{{ offering.pk }}">
+          <button type="submit"
+            class="bg-violet-600 text-white px-6 py-2.5 rounded-xl font-medium hover:bg-violet-700 transition-colors">
+            {% trans "Contact this teacher" %}
+          </button>
+        </form>
+      {% endif %}
+      <a href="/teachers/{{ offering.teacher.pk }}/" class="text-sm text-violet-600 hover:underline font-medium">
+        {% trans "View full profile" %} →
+      </a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

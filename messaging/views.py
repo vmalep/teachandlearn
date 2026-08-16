@@ -2,6 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.db.models import OuterRef, Q, Subquery
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
+from django.utils.translation import gettext as _
 from django.views import View
 from django.views.generic import ListView
 from .models import Conversation, Message
@@ -49,10 +51,25 @@ class ConversationDetailView(LoginRequiredMixin, View):
         other = conversation.teacher if request.user == conversation.student else conversation.student
         # Mark incoming messages as read
         conversation.messages.exclude(sender=request.user).filter(is_read=False).update(is_read=True)
+
+        prefill_message = ""
+        offering_id = request.GET.get("offering")
+        if offering_id:
+            from teachers.models import ClassOffering
+            offering = ClassOffering.objects.filter(
+                pk=offering_id, teacher__profile__user=conversation.teacher
+            ).select_related("subject").first()
+            if offering:
+                prefill_message = _("Hi, I'm interested in your %(subject)s — %(format)s class.") % {
+                    "subject": offering.subject,
+                    "format": offering.get_format_display(),
+                }
+
         return render(request, self.template_name, {
             "conversation": conversation,
             "thread": conversation.messages.all(),
             "other": other,
+            "prefill_message": prefill_message,
         })
 
     def post(self, request, pk):
@@ -84,7 +101,11 @@ class StartConversationView(LoginRequiredMixin, View):
         )
         if teacher_user == request.user:
             return redirect("home")
-        conversation, _ = Conversation.objects.get_or_create(
+        conversation, _created = Conversation.objects.get_or_create(
             student=request.user, teacher=teacher_user
         )
-        return redirect("messaging:detail", pk=conversation.pk)
+        url = reverse("messaging:detail", kwargs={"pk": conversation.pk})
+        offering_id = request.POST.get("offering")
+        if offering_id:
+            url += f"?offering={offering_id}"
+        return redirect(url)
