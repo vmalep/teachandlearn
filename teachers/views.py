@@ -11,7 +11,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView, DetailView
 from .forms import CertificateFormSet, ClassOfferingFormSet, TeacherProfileForm
-from .models import ClassOffering, TeacherProfile
+from .models import ClassOffering, TeacherProfile, TeachingMode
 from subjects.models import Subject
 
 EARTH_RADIUS_KM = 6371.0
@@ -91,9 +91,15 @@ class TeacherDirectoryView(ListView):
         max_price = self.request.GET.get("max_price")
         near = self.request.GET.get("near", "").strip()
         radius_km = self.request.GET.get("radius_km")
+        teaching_mode = self.request.GET.get("teaching_mode")
+        format_ = self.request.GET.get("format")
 
         if subject:
             qs = qs.filter(subject__id=subject)
+        if teaching_mode:
+            qs = qs.filter(teaching_mode=teaching_mode)
+        if format_:
+            qs = qs.filter(format=format_)
         if max_price:
             try:
                 qs = qs.filter(price_per_hour__lte=float(max_price))
@@ -137,6 +143,8 @@ class TeacherDirectoryView(ListView):
             .order_by("name")
             .distinct()
         )
+        ctx["teaching_mode_choices"] = TeachingMode.choices
+        ctx["format_choices"] = ClassOffering.Format.choices
         ctx["all_municipalities"] = (
             TeacherProfile.objects.filter(state=TeacherProfile.State.VALIDATED)
             .exclude(profile__municipality="")
@@ -157,7 +165,7 @@ class TeacherDetailView(LoginRequiredMixin, DetailView):
         return _rating_qs(
             TeacherProfile.objects.filter(state=TeacherProfile.State.VALIDATED)
             .select_related("profile__user")
-            .prefetch_related("subjects", "certificates", "offerings__subject")
+            .prefetch_related("certificates", "offerings__subject")
         )
 
     def get_context_data(self, **kwargs):
@@ -197,7 +205,9 @@ class MapDataView(View):
             .filter(profile__municipality__gt="")
         )
         if subject_id:
-            teacher_qs = teacher_qs.filter(subjects__id=subject_id)
+            teacher_qs = teacher_qs.filter(
+                offerings__is_active=True, offerings__subject__id=subject_id
+            )
 
         teacher_rows = (
             teacher_qs

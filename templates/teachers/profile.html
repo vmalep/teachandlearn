@@ -40,30 +40,11 @@
 
   <div class="bg-white rounded-2xl shadow p-6 space-y-5">
 
-    <div>
-      <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">{% trans "Subjects" %}</h2>
-      {% if teacher_profile.subjects.all %}
-        <div class="flex flex-wrap gap-2">
-          {% for s in teacher_profile.subjects.all %}
-            <span class="bg-violet-50 text-violet-700 px-3 py-1 rounded-full text-sm">{{ s }}</span>
-          {% endfor %}
-        </div>
-      {% else %}
-        <p class="text-sm text-slate-400">{% trans "No subjects added yet." %}</p>
-      {% endif %}
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <div>
         <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">{% trans "Price per hour" %}</p>
         <p class="text-sm font-medium text-slate-800">
           {% if teacher_profile.price_per_hour %}€{{ teacher_profile.price_per_hour }}{% else %}<span class="text-slate-400">{% trans "Not set" %}</span>{% endif %}
-        </p>
-      </div>
-      <div>
-        <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">{% trans "Native language" %}</p>
-        <p class="text-sm font-medium text-slate-800">
-          {% if teacher_profile.native_language %}{{ teacher_profile.native_language }}{% else %}<span class="text-slate-400">{% trans "Not set" %}</span>{% endif %}
         </p>
       </div>
       <div>

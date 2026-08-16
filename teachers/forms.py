@@ -20,9 +20,8 @@ class TeacherProfileForm(forms.ModelForm):
 
     class Meta:
         model = TeacherProfile
-        fields = ["subjects", "native_language", "price_per_hour", "teaching_mode", "availability", "availability_schedule"]
+        fields = ["price_per_hour", "teaching_mode", "availability", "availability_schedule"]
         widgets = {
-            "subjects": forms.CheckboxSelectMultiple(),
             "availability": forms.Textarea(attrs={"rows": 3}),
         }
 

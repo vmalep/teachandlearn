@@ -19,7 +19,6 @@ class TeacherProfileAdmin(admin.ModelAdmin):
     list_display = ["profile", "state", "price_per_hour", "created_at"]
     list_filter = ["state"]
     search_fields = ["profile__user__email"]
-    filter_horizontal = ["subjects"]
     inlines = [CertificateInline, ClassOfferingInline]
     actions = ["validate_profiles", "reject_profiles"]
 

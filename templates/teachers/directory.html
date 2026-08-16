@@ -10,9 +10,9 @@
     <p class="text-stone-500 text-base mb-2">{% trans "Verified teachers for one-on-one lessons in Belgium" %}</p>
 
     <form method="get" class="mt-8 bg-white rounded-2xl p-3 shadow-md">
-      <div class="flex flex-col sm:flex-row gap-2">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
         <select name="subject"
-          class="flex-1 rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
+          class="rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
           <option value="">{% trans "All subjects" %}</option>
           {% for subj in all_subjects %}
             <option value="{{ subj.pk }}" {% if request.GET.subject == subj.pk|stringformat:"s" %}selected{% endif %}>
@@ -21,9 +21,25 @@
           {% endfor %}
         </select>
 
+        <select name="teaching_mode"
+          class="rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
+          <option value="">{% trans "Online or in person" %}</option>
+          {% for value, label in teaching_mode_choices %}
+            <option value="{{ value }}" {% if request.GET.teaching_mode == value %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+
+        <select name="format"
+          class="rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
+          <option value="">{% trans "Individual or group" %}</option>
+          {% for value, label in format_choices %}
+            <option value="{{ value }}" {% if request.GET.format == value %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+
         <input type="number" name="max_price" placeholder="{% trans "Max €/h" %}" min="0" step="5"
           value="{{ request.GET.max_price }}"
-          class="w-28 rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
+          class="rounded-xl border border-slate-200 bg-transparent px-3 py-2.5 text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-violet-400">
       </div>
 
       <div class="flex items-center gap-2 mt-3 mb-1">
@@ -70,7 +86,7 @@
 {# Results #}
 <div class="max-w-5xl mx-auto px-4 py-10">
 
-  {% if request.GET.subject or request.GET.municipality or request.GET.max_price or request.GET.near %}
+  {% if request.GET.subject or request.GET.municipality or request.GET.max_price or request.GET.near or request.GET.teaching_mode or request.GET.format %}
     <div class="flex items-center justify-between mb-6">
       <p class="text-sm text-slate-500">
         {% blocktrans count num=offerings|length %}{{ num }} class found{% plural %}{{ num }} classes found{% endblocktrans %}

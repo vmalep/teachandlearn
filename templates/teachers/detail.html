@@ -29,14 +29,6 @@
           </p>
         {% endif %}
 
-        {% if teacher.subjects.all %}
-          <div class="flex flex-wrap gap-2 mt-3">
-            {% for s in teacher.subjects.all %}
-              <span class="bg-violet-50 text-violet-700 px-3 py-1 rounded-full text-sm">{{ s }}</span>
-            {% endfor %}
-          </div>
-        {% endif %}
-
         <div class="flex items-center gap-5 mt-4">
           {% if teacher.price_per_hour %}
             <div>
@@ -84,12 +76,6 @@
 
   {# Details #}
   <div class="bg-white rounded-2xl shadow p-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
-    {% if teacher.native_language %}
-    <div>
-      <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">{% trans "Native language" %}</p>
-      <p class="text-sm font-medium text-slate-800">{{ teacher.native_language }}</p>
-    </div>
-    {% endif %}
     {% if teacher.availability %}
     <div>
       <p class="text-xs text-slate-400 uppercase tracking-wider mb-1">{% trans "Availability" %}</p>

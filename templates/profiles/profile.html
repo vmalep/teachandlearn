@@ -87,18 +87,8 @@
         {% endif %}
       </div>
       <dl class="space-y-2 text-sm">
-        {% if teacher_profile.subjects.all %}
-          <div class="flex gap-2 flex-wrap">
-            {% for s in teacher_profile.subjects.all %}
-              <span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full text-xs">{{ s }}</span>
-            {% endfor %}
-          </div>
-        {% endif %}
         {% if teacher_profile.price_per_hour %}
           <div><span class="text-slate-500">{% trans "Price:" %}</span> <span class="font-medium">€{{ teacher_profile.price_per_hour }}/h</span></div>
-        {% endif %}
-        {% if teacher_profile.native_language %}
-          <div><span class="text-slate-500">{% trans "Native language:" %}</span> {{ teacher_profile.native_language }}</div>
         {% endif %}
         {% if teacher_profile.availability %}
           <div><span class="text-slate-500">{% trans "Availability:" %}</span> {{ teacher_profile.availability }}</div>

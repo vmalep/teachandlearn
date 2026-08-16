@@ -17,8 +17,6 @@ class TeacherProfile(models.Model):
     profile = models.OneToOneField(
         "profiles.Profile", on_delete=models.CASCADE, related_name="teacher_profile"
     )
-    subjects = models.ManyToManyField("subjects.Subject", blank=True)
-    native_language = models.CharField(max_length=100, blank=True)
     price_per_hour = models.DecimalField(
         max_digits=6,
         decimal_places=2,

@@ -14,8 +14,6 @@ USERS = [
         "last_name": "Dupont",
         "role": "teacher",
         "teacher": {
-            "subjects": ["French", "English"],
-            "native_language": "French",
             "price_per_hour": 35,
             "teaching_mode": "both",
             "availability": "Weekday evenings and Saturday mornings",
@@ -51,8 +49,6 @@ USERS = [
         "last_name": "Janssen",
         "role": "teacher",
         "teacher": {
-            "subjects": ["Dutch", "German"],
-            "native_language": "Dutch",
             "price_per_hour": 40,
             "teaching_mode": "presential",
             "availability": "Flexible schedule",
@@ -81,8 +77,6 @@ USERS = [
         "last_name": "García",
         "role": "teacher",
         "teacher": {
-            "subjects": ["Spanish"],
-            "native_language": "Spanish",
             "price_per_hour": 30,
             "teaching_mode": "online",
             "availability": "Weekends only",
@@ -142,8 +136,6 @@ USERS = [
         "last_name": "El Amrani",
         "role": "both",
         "teacher": {
-            "subjects": ["Arabic"],
-            "native_language": "Arabic",
             "price_per_hour": 25,
             "teaching_mode": "both",
             "availability": "Monday to Friday afternoons",
@@ -217,7 +209,6 @@ class Command(BaseCommand):
                 td = data["teacher"]
                 tp = TeacherProfile.objects.create(
                     profile=profile,
-                    native_language=td.get("native_language", ""),
                     price_per_hour=td.get("price_per_hour"),
                     teaching_mode=td.get("teaching_mode", "both"),
                     availability=td.get("availability", ""),
@@ -225,10 +216,6 @@ class Command(BaseCommand):
                     state=td.get("state", "draft"),
                     rejection_reason=td.get("rejection_reason", ""),
                 )
-                for subject_name in td.get("subjects", []):
-                    subject = Subject.objects.filter(name=subject_name).first()
-                    if subject:
-                        tp.subjects.add(subject)
                 for offering_data in td.get("offerings", []):
                     od = {**offering_data}
                     subject_name = od.pop("subject")
