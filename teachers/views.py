@@ -10,8 +10,8 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView, DetailView
-from .forms import CertificateFormSet, TeacherProfileForm
-from .models import TeacherProfile
+from .forms import CertificateFormSet, ClassOfferingFormSet, TeacherProfileForm
+from .models import ClassOffering, TeacherProfile
 from subjects.models import Subject
 
 EARTH_RADIUS_KM = 6371.0
@@ -43,15 +43,15 @@ def _geocode_text(text):
     return None
 
 
-def _annotate_distance_km(qs, lat, lng):
-    """Annotate queryset with great-circle distance (km) from (lat, lng) to profile__latitude/longitude."""
+def _annotate_distance_km(qs, lat, lng, lat_field="profile__latitude", lng_field="profile__longitude"):
+    """Annotate queryset with great-circle distance (km) from (lat, lng) to the given lat/lng fields."""
     lat_rad = Radians(Value(lat, output_field=FloatField()))
     lng_rad = Radians(Value(lng, output_field=FloatField()))
-    profile_lat_rad = Radians(Cast("profile__latitude", FloatField()))
-    profile_lng_rad = Radians(Cast("profile__longitude", FloatField()))
+    target_lat_rad = Radians(Cast(lat_field, FloatField()))
+    target_lng_rad = Radians(Cast(lng_field, FloatField()))
     cos_angle = (
-        Cos(lat_rad) * Cos(profile_lat_rad) * Cos(profile_lng_rad - lng_rad)
-        + Sin(lat_rad) * Sin(profile_lat_rad)
+        Cos(lat_rad) * Cos(target_lat_rad) * Cos(target_lng_rad - lng_rad)
+        + Sin(lat_rad) * Sin(target_lat_rad)
     )
     # Clamp to [-1, 1] — floating-point rounding can push it just outside that
     # range for near-identical points, which would make ACos raise in Postgres.
@@ -59,29 +59,32 @@ def _annotate_distance_km(qs, lat, lng):
     return qs.annotate(distance_km=ACos(clamped) * EARTH_RADIUS_KM)
 
 
-def _rating_qs(qs):
+def _rating_qs(qs, prefix="profile__user__received_reviews"):
     return qs.annotate(
         avg_rating=Avg(
-            "profile__user__received_reviews__rating",
-            filter=Q(profile__user__received_reviews__state="validated"),
+            f"{prefix}__rating",
+            filter=Q(**{f"{prefix}__state": "validated"}),
         ),
         review_count=Count(
-            "profile__user__received_reviews",
-            filter=Q(profile__user__received_reviews__state="validated"),
+            prefix,
+            filter=Q(**{f"{prefix}__state": "validated"}),
         ),
     )
 
 
 class TeacherDirectoryView(ListView):
-    model = TeacherProfile
+    model = ClassOffering
     template_name = "teachers/directory.html"
-    context_object_name = "teachers"
+    context_object_name = "offerings"
 
     def get_queryset(self):
         qs = _rating_qs(
-            TeacherProfile.objects.filter(state=TeacherProfile.State.VALIDATED)
-            .select_related("profile__user")
-            .prefetch_related("subjects")
+            ClassOffering.objects.filter(
+                is_active=True,
+                teacher__state=TeacherProfile.State.VALIDATED,
+            )
+            .select_related("subject", "teacher__profile__user"),
+            prefix="teacher__profile__user__received_reviews",
         )
         subject = self.request.GET.get("subject")
         municipality = self.request.GET.get("municipality")
@@ -90,7 +93,7 @@ class TeacherDirectoryView(ListView):
         radius_km = self.request.GET.get("radius_km")
 
         if subject:
-            qs = qs.filter(subjects__id=subject)
+            qs = qs.filter(subject__id=subject)
         if max_price:
             try:
                 qs = qs.filter(price_per_hour__lte=float(max_price))
@@ -107,23 +110,30 @@ class TeacherDirectoryView(ListView):
                 coords = _geocode_text(near)
                 if coords:
                     lat, lng = coords
-                    qs = _annotate_distance_km(qs, lat, lng).filter(
-                        profile__latitude__isnull=False,
-                        profile__longitude__isnull=False,
+                    qs = _annotate_distance_km(
+                        qs, lat, lng,
+                        lat_field="teacher__profile__latitude",
+                        lng_field="teacher__profile__longitude",
+                    ).filter(
+                        teacher__profile__latitude__isnull=False,
+                        teacher__profile__longitude__isnull=False,
                         distance_km__lte=radius,
                     )
                 else:
                     self.near_error = True
                     qs = qs.none()
         elif municipality:
-            qs = qs.filter(profile__municipality=municipality)
+            qs = qs.filter(teacher__profile__municipality=municipality)
 
         return qs.order_by("-avg_rating", "price_per_hour")
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx["all_subjects"] = (
-            Subject.objects.filter(teacherprofile__state=TeacherProfile.State.VALIDATED)
+            Subject.objects.filter(
+                classoffering__is_active=True,
+                classoffering__teacher__state=TeacherProfile.State.VALIDATED,
+            )
             .order_by("name")
             .distinct()
         )
@@ -147,12 +157,13 @@ class TeacherDetailView(LoginRequiredMixin, DetailView):
         return _rating_qs(
             TeacherProfile.objects.filter(state=TeacherProfile.State.VALIDATED)
             .select_related("profile__user")
-            .prefetch_related("subjects", "certificates")
+            .prefetch_related("subjects", "certificates", "offerings__subject")
         )
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         teacher = self.object
+        ctx["offerings"] = teacher.offerings.filter(is_active=True).select_related("subject")
         from reviews.models import Review
         ctx["reviews"] = Review.objects.filter(
             teacher=teacher.profile.user, state=Review.State.VALIDATED
@@ -237,7 +248,10 @@ class TeacherProfileView(LoginRequiredMixin, View):
         if not profile.is_teacher:
             return redirect("profiles:profile")
         tp, _ = TeacherProfile.objects.get_or_create(profile=profile)
-        return render(request, self.template_name, {"teacher_profile": tp})
+        return render(request, self.template_name, {
+            "teacher_profile": tp,
+            "offerings": tp.offerings.select_related("subject").all(),
+        })
 
 
 class TeacherProfileEditView(LoginRequiredMixin, View):
@@ -256,7 +270,13 @@ class TeacherProfileEditView(LoginRequiredMixin, View):
             return redirect("profiles:profile")
         form = TeacherProfileForm(instance=tp)
         cert_formset = CertificateFormSet(instance=tp)
-        return render(request, self.template_name, {"form": form, "cert_formset": cert_formset, "teacher_profile": tp})
+        offering_formset = ClassOfferingFormSet(instance=tp)
+        return render(request, self.template_name, {
+            "form": form,
+            "cert_formset": cert_formset,
+            "offering_formset": offering_formset,
+            "teacher_profile": tp,
+        })
 
     def post(self, request):
         tp = self._get_tp(request)
@@ -264,8 +284,15 @@ class TeacherProfileEditView(LoginRequiredMixin, View):
             return redirect("profiles:profile")
         form = TeacherProfileForm(request.POST, instance=tp)
         cert_formset = CertificateFormSet(request.POST, request.FILES, instance=tp)
-        if form.is_valid() and cert_formset.is_valid():
+        offering_formset = ClassOfferingFormSet(request.POST, instance=tp)
+        if form.is_valid() and cert_formset.is_valid() and offering_formset.is_valid():
             form.save()
             cert_formset.save()
+            offering_formset.save()
             return redirect("teachers:profile")
-        return render(request, self.template_name, {"form": form, "cert_formset": cert_formset, "teacher_profile": tp})
+        return render(request, self.template_name, {
+            "form": form,
+            "cert_formset": cert_formset,
+            "offering_formset": offering_formset,
+            "teacher_profile": tp,
+        })

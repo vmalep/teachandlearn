@@ -49,6 +49,50 @@
     </div>
 
     <div class="bg-white rounded-2xl shadow p-6">
+      <div class="flex items-center justify-between mb-1">
+        <h2 class="text-sm font-semibold text-slate-700">{% trans "Class Offerings" %}</h2>
+        <span class="text-xs text-slate-400">{% trans "At least one required" %}</span>
+      </div>
+      <p class="text-xs text-slate-500 mb-4">{% trans "Each offering is a class students can find and book — e.g. \"English individual\" or \"Spanish conversation table\"." %}</p>
+      {{ offering_formset.management_form }}
+      {% if offering_formset.non_form_errors %}
+        <p class="text-xs text-red-600 mb-3">{{ offering_formset.non_form_errors|first }}</p>
+      {% endif %}
+      <div class="space-y-4">
+        {% for of_form in offering_formset %}
+          <div class="border border-slate-100 rounded-xl p-4 space-y-3 {% if of_form.instance.pk %}bg-slate-50{% endif %}">
+            {% if of_form.instance.pk %}
+              <p class="text-xs font-medium text-slate-500 uppercase tracking-wide">
+                {% blocktrans with num=forloop.counter %}Offering #{{ num }}{% endblocktrans %}
+              </p>
+            {% else %}
+              <p class="text-xs font-medium text-violet-500 uppercase tracking-wide">{% trans "Add new" %}</p>
+            {% endif %}
+            {{ of_form.id }}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {% include "components/field.html" with field=of_form.subject %}
+              {% include "components/field.html" with field=of_form.teaching_mode %}
+              {% include "components/field.html" with field=of_form.format %}
+              {% include "components/field.html" with field=of_form.level %}
+              {% include "components/field.html" with field=of_form.price_per_hour %}
+            </div>
+            {% include "components/field.html" with field=of_form.description %}
+            <label class="flex items-center gap-2 text-sm text-slate-700 cursor-pointer">
+              {{ of_form.is_active }}
+              <span>{% trans "Active (visible to students)" %}</span>
+            </label>
+            {% if of_form.instance.pk %}
+              <label class="flex items-center gap-2 text-sm text-red-600 cursor-pointer mt-1">
+                {{ of_form.DELETE }}
+                <span>{% trans "Remove this offering" %}</span>
+              </label>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6">
       <h2 class="text-sm font-semibold text-slate-700 mb-4">{% trans "Certificates & Credentials" %}</h2>
       {{ cert_formset.management_form }}
       <div class="space-y-4">

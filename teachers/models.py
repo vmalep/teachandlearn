@@ -2,16 +2,17 @@ from django.db import models
 from django.core.validators import MinValueValidator
 
 
+class TeachingMode(models.TextChoices):
+    ONLINE = "online", "Online"
+    PRESENTIAL = "presential", "Presential"
+    BOTH = "both", "Both"
+
+
 class TeacherProfile(models.Model):
     class State(models.TextChoices):
         DRAFT = "draft", "Draft"
         VALIDATED = "validated", "Validated"
         REJECTED = "rejected", "Rejected"
-
-    class TeachingMode(models.TextChoices):
-        ONLINE = "online", "Online"
-        PRESENTIAL = "presential", "Presential"
-        BOTH = "both", "Both"
 
     profile = models.OneToOneField(
         "profiles.Profile", on_delete=models.CASCADE, related_name="teacher_profile"
@@ -58,3 +59,43 @@ class Certificate(models.Model):
 
     def __str__(self):
         return f"{self.name} — {self.teacher.profile.user.email}"
+
+
+class ClassOffering(models.Model):
+    class Format(models.TextChoices):
+        INDIVIDUAL = "individual", "Individual lesson"
+        GROUP = "group", "Group / Conversation table"
+
+    class Level(models.TextChoices):
+        ALL = "all", "All levels"
+        BEGINNER = "beginner", "Beginner"
+        ELEMENTARY = "elementary", "Elementary"
+        INTERMEDIATE = "intermediate", "Intermediate"
+        UPPER_INTERMEDIATE = "upper_intermediate", "Upper-intermediate"
+        ADVANCED = "advanced", "Advanced"
+
+    teacher = models.ForeignKey(
+        TeacherProfile, on_delete=models.CASCADE, related_name="offerings"
+    )
+    subject = models.ForeignKey("subjects.Subject", on_delete=models.CASCADE)
+    teaching_mode = models.CharField(
+        max_length=20, choices=TeachingMode.choices, default=TeachingMode.BOTH
+    )
+    format = models.CharField(
+        max_length=20, choices=Format.choices, default=Format.INDIVIDUAL
+    )
+    level = models.CharField(
+        max_length=20, choices=Level.choices, default=Level.ALL
+    )
+    price_per_hour = models.DecimalField(
+        max_digits=6, decimal_places=2, null=True, blank=True,
+        validators=[MinValueValidator(0)]
+    )
+    description = models.TextField(blank=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["subject__name", "format"]
+
+    def __str__(self):
+        return f"{self.subject} — {self.get_format_display()} ({self.teacher})"
