@@ -247,7 +247,15 @@ class OfferingDetailView(LoginRequiredMixin, DetailView):
 
 class MapView(View):
     def get(self, request):
-        return render(request, "map.html", {"all_subjects": Subject.objects.all()})
+        all_subjects = (
+            Subject.objects.filter(
+                classoffering__is_active=True,
+                classoffering__teacher__state=TeacherProfile.State.VALIDATED,
+            )
+            .order_by("name")
+            .distinct()
+        )
+        return render(request, "map.html", {"all_subjects": all_subjects})
 
 
 class MapDataView(View):
