@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
@@ -49,6 +50,16 @@ class VerifyEmailView(View):
             user.is_active = True
             user.email_verified = True
             user.save()
+            self._notify_admin_new_user(request, user)
             login(request, user)
             return redirect("/")
         return render(request, "accounts/verify_invalid.html")
+
+    def _notify_admin_new_user(self, request, user):
+        link = request.build_absolute_uri(f"/admin/accounts/user/{user.pk}/change/")
+        send_mail(
+            "New TeachAndLearn account verified",
+            f"{user.get_full_name() or user.email} ({user.email}) just verified their account.\n\n{link}",
+            None,
+            [settings.ADMIN_NOTIFICATION_EMAIL],
+        )
