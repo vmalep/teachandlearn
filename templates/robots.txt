@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /accounts/
+Disallow: /profiles/
+Disallow: /messages/
+Disallow: /reviews/
+
+Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml
