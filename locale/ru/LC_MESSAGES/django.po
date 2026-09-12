@@ -2,35 +2,40 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-16 19:44+0200\n"
+"POT-Creation-Date: 2026-09-12 10:28+0200\n"
 "Language: ru\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: config/settings.py:102
+#: config/settings.py:103
 msgid "English"
 msgstr ""
 
-#: config/settings.py:103
+#: config/settings.py:104
 msgid "French"
 msgstr ""
 
-#: config/settings.py:104
+#: config/settings.py:105
 msgid "Spanish"
 msgstr ""
 
-#: config/settings.py:105
+#: config/settings.py:106
 msgid "Russian"
 msgstr ""
 
-#: config/settings.py:106
+#: config/settings.py:107
 msgid "Dutch"
 msgstr ""
 
-#: config/settings.py:107
+#: config/settings.py:108
 msgid "German"
+msgstr ""
+
+#: messaging/views.py:63
+#, python-format
+msgid "Hi, I'm interested in your %(subject)s — %(format)s class."
 msgstr ""
 
 #: profiles/forms.py:35
@@ -61,11 +66,27 @@ msgstr "Я преподаватель"
 msgid "I want to learn"
 msgstr "Предметы, которые я хочу изучить"
 
-#: teachers/models.py:65
+#: teachers/forms.py:30 templates/teachers/detail.html:81
+#: templates/teachers/profile.html:59
+#, fuzzy
+#| msgid "Availability"
+msgid "Availability details"
+msgstr "Доступность"
+
+#: teachers/forms.py:46 templates/teachers/profile.html:44
+msgid "Presentation"
+msgstr ""
+
+#: teachers/forms.py:49
+msgid ""
+"Introduce yourself to students — your background, teaching style, experience."
+msgstr ""
+
+#: teachers/models.py:55
 msgid "Individual lesson"
 msgstr "Индивидуальное занятие"
 
-#: teachers/models.py:66
+#: teachers/models.py:56
 msgid "Group"
 msgstr "Группа"
 
@@ -247,42 +268,68 @@ msgstr "Эта ссылка подтверждения уже использов
 msgid "Register again"
 msgstr "Зарегистрироваться снова"
 
-#: templates/base.html:50 templates/base.html:84 templates/map.html:3
+#: templates/base.html:63 templates/base.html:97 templates/map.html:3
 msgid "Map"
 msgstr ""
 
-#: templates/base.html:53 templates/base.html:86
+#: templates/base.html:66 templates/base.html:99
 #: templates/profiles/profile.html:3 templates/students/profile.html:10
 #: templates/teachers/profile.html:10
 msgid "My Profile"
 msgstr "Мой профиль"
 
-#: templates/base.html:55 templates/base.html:88
+#: templates/base.html:68 templates/base.html:101
 #: templates/messaging/detail.html:3 templates/messaging/list.html:3
 #: templates/messaging/list.html:7
 msgid "Messages"
 msgstr "Сообщения"
 
-#: templates/base.html:62 templates/base.html:95
+#: templates/base.html:75 templates/base.html:108
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/base.html:65 templates/base.html:98
+#: templates/base.html:78 templates/base.html:111
 msgid "Login"
 msgstr "Войти"
 
-#: templates/base.html:66 templates/base.html:99
+#: templates/base.html:79 templates/base.html:112
 msgid "Register"
 msgstr "Зарегистрироваться"
 
-#: templates/base.html:103
+#: templates/base.html:116
 #, fuzzy
 #| msgid "Native language"
 msgid "Language"
 msgstr "Родной язык"
 
-#: templates/base.html:125
-msgid "This site is under construction — content and features may change."
+#: templates/base.html:140
+msgid ""
+"This site uses only the cookies necessary for it to work (login session, "
+"security, language preference) — no tracking or advertising cookies."
+msgstr ""
+
+#: templates/base.html:143 templates/base.html:160
+msgid "Got it"
+msgstr ""
+
+#: templates/base.html:151
+#, fuzzy
+#| msgid "My role on TeachAndLearn"
+msgid "Welcome to TeachAndLearn"
+msgstr "Моя роль на TeachAndLearn"
+
+#: templates/base.html:153
+msgid ""
+"TeachAndLearn connects private teachers and students across Belgium, "
+"starting from Namur, for one-on-one or group lessons, in any subject."
+msgstr ""
+
+#: templates/base.html:156
+msgid ""
+"This site is brand new and still evolving. If you have ideas, feedback, or "
+"run into issues, we'd love to hear from you at <a "
+"href=\"mailto:teachandlearn.cloud@pm.me\" class=\"text-violet-600 "
+"hover:underline\">teachandlearn.cloud@pm.me</a>."
 msgstr ""
 
 #: templates/map.html:8
@@ -382,7 +429,7 @@ msgid "No results — enter manually"
 msgstr ""
 
 #: templates/profiles/municipality_options.html:17
-#: templates/profiles/profile_edit.html:42
+#: templates/profiles/profile_edit.html:57
 msgid "Enter postal code first"
 msgstr ""
 
@@ -391,12 +438,12 @@ msgid "Avatar"
 msgstr "Аватар"
 
 #: templates/profiles/profile.html:31 templates/profiles/profile.html:39
-#: templates/profiles/profile.html:74 templates/profiles/profile.html:118
+#: templates/profiles/profile.html:74 templates/profiles/profile.html:115
 #: templates/students/profile.html:11 templates/teachers/profile.html:11
 msgid "Edit"
 msgstr "Редактировать"
 
-#: templates/profiles/profile.html:38 templates/profiles/profile_edit.html:24
+#: templates/profiles/profile.html:38 templates/profiles/profile_edit.html:39
 #, fuzzy
 #| msgid "optional"
 msgid "Location"
@@ -419,46 +466,44 @@ msgid "Pending validation"
 msgstr "Ожидает проверки"
 
 #: templates/profiles/profile.html:91
-msgid "Price:"
-msgstr "Цена:"
-
-#: templates/profiles/profile.html:94
-msgid "Availability:"
+#, fuzzy
+#| msgid "Availability:"
+msgid "Availability details:"
 msgstr "Доступность:"
 
-#: templates/profiles/profile.html:98
+#: templates/profiles/profile.html:95
 msgid "Certificates:"
 msgstr "Сертификаты:"
 
-#: templates/profiles/profile.html:108
+#: templates/profiles/profile.html:105
 msgid "No teacher profile yet."
 msgstr "Профиль преподавателя ещё не создан."
 
-#: templates/profiles/profile.html:108 templates/profiles/profile.html:140
+#: templates/profiles/profile.html:105 templates/profiles/profile.html:137
 msgid "Set it up"
 msgstr "Настроить"
 
-#: templates/profiles/profile.html:117
+#: templates/profiles/profile.html:114
 msgid "Student Profile"
 msgstr "Профиль студента"
 
-#: templates/profiles/profile.html:124
+#: templates/profiles/profile.html:121
 msgid "Subjects:"
 msgstr "Предметы:"
 
-#: templates/profiles/profile.html:136
+#: templates/profiles/profile.html:133
 msgid "Goals:"
 msgstr "Цели:"
 
-#: templates/profiles/profile.html:140
+#: templates/profiles/profile.html:137
 msgid "No student profile yet."
 msgstr "Профиль студента ещё не создан."
 
-#: templates/profiles/profile.html:147
+#: templates/profiles/profile.html:144
 msgid "You haven't set a role yet."
 msgstr "Вы ещё не выбрали роль."
 
-#: templates/profiles/profile.html:148
+#: templates/profiles/profile.html:145
 msgid "Set up your profile"
 msgstr "Настроить профиль"
 
@@ -473,37 +518,41 @@ msgstr "Редактировать профиль"
 msgid "Back"
 msgstr "Назад"
 
-#: templates/profiles/profile_edit.html:33
+#: templates/profiles/profile_edit.html:30
+msgid "Name"
+msgstr ""
+
+#: templates/profiles/profile_edit.html:48
 msgid "Municipality"
 msgstr "Муниципалитет"
 
-#: templates/profiles/profile_edit.html:57
+#: templates/profiles/profile_edit.html:72
 msgid "Street address"
 msgstr ""
 
-#: templates/profiles/profile_edit.html:57
+#: templates/profiles/profile_edit.html:72
 msgid "optional — private, used for map only"
 msgstr ""
 
-#: templates/profiles/profile_edit.html:71
+#: templates/profiles/profile_edit.html:86
 msgid "My role on TeachAndLearn"
 msgstr "Моя роль на TeachAndLearn"
 
-#: templates/profiles/profile_edit.html:75
+#: templates/profiles/profile_edit.html:90
 msgid "I am a teacher"
 msgstr "Я преподаватель"
 
-#: templates/profiles/profile_edit.html:79
+#: templates/profiles/profile_edit.html:94
 msgid "I am a student"
 msgstr "Я студент"
 
-#: templates/profiles/profile_edit.html:87
+#: templates/profiles/profile_edit.html:102
 #: templates/students/profile_edit.html:48
 #: templates/teachers/profile_edit.html:105
 msgid "Save changes"
 msgstr "Сохранить"
 
-#: templates/profiles/profile_edit.html:90 templates/reviews/write.html:67
+#: templates/profiles/profile_edit.html:105 templates/reviews/write.html:67
 #: templates/students/profile_edit.html:51
 #: templates/teachers/profile_edit.html:108
 msgid "Cancel"
@@ -521,7 +570,7 @@ msgstr "Назад к профилю"
 msgid "Edit your review"
 msgstr "Редактировать отзыв"
 
-#: templates/reviews/write.html:15 templates/teachers/detail.html:147
+#: templates/reviews/write.html:15 templates/teachers/detail.html:143
 msgid "Write a review"
 msgstr "Написать отзыв"
 
@@ -599,11 +648,7 @@ msgstr "Удалить"
 msgid "Save to add another subject row."
 msgstr "Сохраните, чтобы добавить ещё один предмет."
 
-#: templates/teachers/detail.html:36
-msgid "hour"
-msgstr "час"
-
-#: templates/teachers/detail.html:44
+#: templates/teachers/detail.html:37 templates/teachers/offering_detail.html:32
 #, python-format
 msgid "%(num)s review"
 msgid_plural "%(num)s reviews"
@@ -611,57 +656,53 @@ msgstr[0] "%(num)s отзыв"
 msgstr[1] "%(num)s отзыва"
 msgstr[2] "%(num)s отзывов"
 
-#: templates/teachers/detail.html:55
+#: templates/teachers/detail.html:48 templates/teachers/offering_detail.html:72
 msgid "Continue conversation"
 msgstr "Продолжить разговор"
 
-#: templates/teachers/detail.html:62
+#: templates/teachers/detail.html:55 templates/teachers/offering_detail.html:80
 msgid "Contact this teacher"
 msgstr "Связаться с преподавателем"
 
-#: templates/teachers/detail.html:72
+#: templates/teachers/detail.html:65
 msgid "About"
 msgstr "О себе"
 
-#: templates/teachers/detail.html:81 templates/teachers/profile.html:58
-msgid "Availability"
-msgstr "Доступность"
-
-#: templates/teachers/detail.html:89 templates/teachers/profile.html:65
+#: templates/teachers/detail.html:72 templates/teachers/profile.html:52
 msgid "Weekly schedule"
 msgstr ""
 
-#: templates/teachers/detail.html:97 templates/teachers/profile.html:73
+#: templates/teachers/detail.html:90 templates/teachers/profile.html:67
 #: templates/teachers/profile_edit.html:30
 msgid "Class Offerings"
 msgstr ""
 
-#: templates/teachers/detail.html:122 templates/teachers/profile.html:106
+#: templates/teachers/detail.html:118 templates/teachers/profile.html:100
 #: templates/teachers/profile_edit.html:73
 msgid "Certificates & Credentials"
 msgstr "Сертификаты и квалификации"
 
-#: templates/teachers/detail.html:129 templates/teachers/profile.html:114
+#: templates/teachers/detail.html:125 templates/teachers/profile.html:108
 msgid "Obtained:"
 msgstr "Получен:"
 
-#: templates/teachers/detail.html:130 templates/teachers/profile.html:115
+#: templates/teachers/detail.html:126 templates/teachers/profile.html:109
 msgid "Expires:"
 msgstr "Действителен до:"
 
-#: templates/teachers/detail.html:141
+#: templates/teachers/detail.html:137
 msgid "Reviews"
 msgstr "Отзывы"
 
-#: templates/teachers/detail.html:144
+#: templates/teachers/detail.html:140
 msgid "You already reviewed this teacher"
 msgstr "Вы уже оставили отзыв об этом преподавателе"
 
-#: templates/teachers/detail.html:160
+#: templates/teachers/detail.html:156
 msgid "Anonymous"
 msgstr "Аноним"
 
-#: templates/teachers/detail.html:176
+#: templates/teachers/detail.html:172
 msgid "No reviews yet."
 msgstr "Отзывов пока нет."
 
@@ -689,53 +730,71 @@ msgstr ""
 msgid "Max €/h"
 msgstr "Макс. €/ч"
 
+#: templates/teachers/directory.html:46
+msgid "Sort: best rated"
+msgstr ""
+
 #: templates/teachers/directory.html:47
-msgid "Location — pick one"
+msgid "Sort: price low to high"
+msgstr ""
+
+#: templates/teachers/directory.html:48
+msgid "Sort: closest to me"
 msgstr ""
 
 #: templates/teachers/directory.html:54
+msgid "Location — pick one"
+msgstr ""
+
+#: templates/teachers/directory.html:61
 #, fuzzy
 #| msgid "Municipality"
 msgid "All municipalities"
 msgstr "Муниципалитет"
 
-#: templates/teachers/directory.html:60
+#: templates/teachers/directory.html:67
 #, fuzzy
 #| msgid "For"
 msgid "or"
 msgstr "Для"
 
-#: templates/teachers/directory.html:62
+#: templates/teachers/directory.html:69
 #, fuzzy
 #| msgid "Municipality"
 msgid "Address or municipality"
 msgstr "Муниципалитет"
 
-#: templates/teachers/directory.html:68
+#: templates/teachers/directory.html:75
 msgid "within 5 km"
 msgstr ""
 
-#: templates/teachers/directory.html:69
+#: templates/teachers/directory.html:76
 msgid "within 10 km"
 msgstr ""
 
-#: templates/teachers/directory.html:70
+#: templates/teachers/directory.html:77
 msgid "within 20 km"
 msgstr ""
 
-#: templates/teachers/directory.html:71
+#: templates/teachers/directory.html:78
 msgid "within 50 km"
 msgstr ""
 
-#: templates/teachers/directory.html:77
+#: templates/teachers/directory.html:84
 msgid "Search"
 msgstr "Поиск"
 
-#: templates/teachers/directory.html:81
+#: templates/teachers/directory.html:88
 msgid "Could not find that location — try a different spelling."
 msgstr ""
 
-#: templates/teachers/directory.html:92
+#: templates/teachers/directory.html:91
+msgid ""
+"Can't sort by distance yet — search near an address above, or sign in and "
+"set an address on your profile."
+msgstr ""
+
+#: templates/teachers/directory.html:102
 #, fuzzy, python-format
 #| msgid "%(num)s teacher found"
 #| msgid_plural "%(num)s teachers found"
@@ -745,23 +804,34 @@ msgstr[0] "Найден %(num)s преподаватель"
 msgstr[1] "Найдено %(num)s преподавателя"
 msgstr[2] "Найдено %(num)s преподавателей"
 
-#: templates/teachers/directory.html:94
+#: templates/teachers/directory.html:104
 msgid "Clear filters"
 msgstr "Сбросить фильтры"
 
-#: templates/teachers/directory.html:136
+#: templates/teachers/directory.html:147
+#: templates/teachers/offering_detail.html:62
 msgid "Price on request"
 msgstr "Цена по запросу"
 
-#: templates/teachers/directory.html:152
+#: templates/teachers/directory.html:163
 #, fuzzy
 #| msgid "No teachers found for these filters."
 msgid "No classes found for these filters."
 msgstr "Преподаватели по этим фильтрам не найдены."
 
-#: templates/teachers/directory.html:153
+#: templates/teachers/directory.html:164
 msgid "See all teachers"
 msgstr "Все преподаватели"
+
+#: templates/teachers/offering_detail.html:60
+msgid "hour"
+msgstr "час"
+
+#: templates/teachers/offering_detail.html:85
+#, fuzzy
+#| msgid "Set up your profile"
+msgid "View full profile"
+msgstr "Настроить профиль"
 
 #: templates/teachers/profile.html:3 templates/teachers/profile.html:8
 msgid "My Teacher Profile"
@@ -791,35 +861,25 @@ msgstr "Ожидает проверки"
 msgid "An admin will review your profile before it goes live."
 msgstr "Администратор проверит ваш профиль перед публикацией."
 
-#: templates/teachers/profile.html:45
-msgid "Price per hour"
-msgstr "Цена в час"
-
-#: templates/teachers/profile.html:47
+#: templates/teachers/profile.html:46
 msgid "Not set"
 msgstr "Не указано"
 
-#: templates/teachers/profile.html:51
-#, fuzzy
-#| msgid "Teaching info"
-msgid "Teaching mode"
-msgstr "Информация о преподавании"
-
-#: templates/teachers/profile.html:91
+#: templates/teachers/profile.html:85
 msgid "Active"
 msgstr ""
 
-#: templates/teachers/profile.html:93
+#: templates/teachers/profile.html:87
 msgid "Hidden"
 msgstr ""
 
-#: templates/teachers/profile.html:101
+#: templates/teachers/profile.html:95
 #, fuzzy
 #| msgid "No certificates added yet."
 msgid "No offerings added yet."
 msgstr "Сертификаты ещё не добавлены."
 
-#: templates/teachers/profile.html:121
+#: templates/teachers/profile.html:115
 msgid "No certificates added yet."
 msgstr "Сертификаты ещё не добавлены."
 
@@ -832,7 +892,7 @@ msgstr "Редактировать профиль преподавателя"
 msgid "Teaching info"
 msgstr "Информация о преподавании"
 
-#: templates/teachers/profile_edit.html:23
+#: templates/teachers/profile_edit.html:21
 #, fuzzy
 #| msgid "Availability"
 msgid "Weekly availability"
@@ -875,6 +935,17 @@ msgstr "Сертификат №%(num)s"
 #: templates/teachers/profile_edit.html:94
 msgid "Remove this certificate"
 msgstr "Удалить этот сертификат"
+
+#~ msgid "Price:"
+#~ msgstr "Цена:"
+
+#~ msgid "Price per hour"
+#~ msgstr "Цена в час"
+
+#, fuzzy
+#~| msgid "Teaching info"
+#~ msgid "Teaching mode"
+#~ msgstr "Информация о преподавании"
 
 #~ msgid "Native language:"
 #~ msgstr "Родной язык:"
