@@ -19,6 +19,21 @@
         </div>
       {% endif %}
 
+      {% if name_form.non_field_errors %}
+        <div class="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+          {% for error in name_form.non_field_errors %}{{ error }}{% endfor %}
+        </div>
+      {% endif %}
+
+      {# Name #}
+      <div>
+        <p class="text-sm font-semibold text-slate-700 mb-3">{% trans "Name" %}</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {% include "components/field.html" with field=name_form.first_name %}
+          {% include "components/field.html" with field=name_form.last_name %}
+        </div>
+      </div>
+
       {# Location #}
       <div>
         <p class="text-sm font-semibold text-slate-700 mb-3">{% trans "Location" %}</p>

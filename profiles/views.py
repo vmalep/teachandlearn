@@ -9,6 +9,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, UpdateView
+from accounts.forms import UserNameForm
 from .forms import ProfileForm
 from .models import Profile
 
@@ -113,6 +114,21 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         return self.request.user.profile
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        if "name_form" not in ctx:
+            ctx["name_form"] = UserNameForm(instance=self.request.user)
+        return ctx
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        name_form = UserNameForm(request.POST, instance=request.user)
+        if form.is_valid() and name_form.is_valid():
+            name_form.save()
+            return self.form_valid(form)
+        return self.render_to_response(self.get_context_data(form=form, name_form=name_form))
 
     def form_valid(self, form):
         profile = form.save(commit=False)
