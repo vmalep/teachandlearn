@@ -140,6 +140,24 @@
     </div>
   {% endif %}
 
+  {% if not request.COOKIES.welcome_modal_dismissed %}
+    <div id="welcome-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50">
+      <div class="bg-white rounded-2xl shadow-xl p-6 max-w-md w-full space-y-4">
+        <h2 class="text-lg font-bold text-slate-900">{% trans "Welcome to TeachAndLearn" %}</h2>
+        <p class="text-sm text-slate-700 leading-relaxed">
+          {% trans "TeachAndLearn connects private teachers and students across Belgium for one-on-one lessons, in any subject." %}
+        </p>
+        <p class="text-sm text-slate-700 leading-relaxed">
+          {% blocktrans %}This site is brand new and still evolving. If you have ideas, feedback, or run into issues, we'd love to hear from you at <a href="mailto:teachandlearn.cloud@pm.me" class="text-violet-600 hover:underline">teachandlearn.cloud@pm.me</a>.{% endblocktrans %}
+        </p>
+        <button id="welcome-modal-dismiss" type="button"
+          class="w-full bg-violet-600 text-white px-4 py-2.5 rounded-xl font-medium hover:bg-violet-700 transition-colors">
+          {% trans "Got it" %}
+        </button>
+      </div>
+    </div>
+  {% endif %}
+
   <main class="flex-1">
     {% block content %}{% endblock %}
   </main>
@@ -156,6 +174,14 @@
       document.getElementById('cookie-notice-dismiss').addEventListener('click', function() {
         document.cookie = 'cookie_notice_dismissed=1; max-age=31536000; path=/; SameSite=Lax';
         cookieNotice.remove();
+      });
+    }
+
+    var welcomeModal = document.getElementById('welcome-modal');
+    if (welcomeModal) {
+      document.getElementById('welcome-modal-dismiss').addEventListener('click', function() {
+        document.cookie = 'welcome_modal_dismissed=1; max-age=31536000; path=/; SameSite=Lax';
+        welcomeModal.remove();
       });
     }
   </script>
