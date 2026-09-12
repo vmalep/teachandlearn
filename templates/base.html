@@ -133,6 +133,17 @@
     {% trans "This site is under construction — content and features may change." %}
   </div>
 
+  {% if not request.COOKIES.cookie_notice_dismissed %}
+    <div id="cookie-notice"
+      class="bg-slate-800 text-white px-4 py-2.5 flex flex-col sm:flex-row items-center justify-center gap-3 text-xs text-center">
+      <p>{% trans "This site uses only the cookies necessary for it to work (login session, security, language preference) — no tracking or advertising cookies." %}</p>
+      <button id="cookie-notice-dismiss" type="button"
+        class="shrink-0 bg-violet-600 text-white px-3 py-1 rounded-lg font-medium hover:bg-violet-700 transition-colors">
+        {% trans "Got it" %}
+      </button>
+    </div>
+  {% endif %}
+
   <main class="flex-1">
     {% block content %}{% endblock %}
   </main>
@@ -142,6 +153,16 @@
     <span class="mx-2">·</span>
     <a href="mailto:teachandlearn.cloud@pm.me" class="hover:text-slate-600">teachandlearn.cloud@pm.me</a>
   </footer>
+
+  <script>
+    var cookieNotice = document.getElementById('cookie-notice');
+    if (cookieNotice) {
+      document.getElementById('cookie-notice-dismiss').addEventListener('click', function() {
+        document.cookie = 'cookie_notice_dismissed=1; max-age=31536000; path=/; SameSite=Lax';
+        cookieNotice.remove();
+      });
+    }
+  </script>
 
   <script>
     var toggle = document.getElementById('menu-toggle');
