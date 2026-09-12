@@ -148,6 +148,22 @@
   {% if not request.COOKIES.welcome_modal_dismissed %}
     <div id="welcome-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50">
       <div class="bg-white rounded-2xl shadow-xl p-6 max-w-md w-full space-y-4">
+        <div class="flex flex-wrap gap-1.5">
+          {% get_current_language as modal_current_lang %}
+          {% get_available_languages as modal_languages %}
+          {% for lang_code, lang_name in modal_languages %}
+            {% get_language_info for lang_code as modal_li %}
+            <form method="post" action="{% url 'set_language' %}">
+              {% csrf_token %}
+              <input type="hidden" name="language" value="{{ lang_code }}">
+              <input type="hidden" name="next" value="{{ request.get_full_path }}">
+              <button type="submit"
+                class="px-2.5 py-1 rounded-full text-xs {% if lang_code == modal_current_lang %}bg-violet-600 text-white{% else %}bg-slate-100 text-slate-600 hover:bg-slate-200{% endif %}">
+                {{ modal_li.name_local|capfirst }}
+              </button>
+            </form>
+          {% endfor %}
+        </div>
         <h2 class="text-lg font-bold text-slate-900">{% trans "Welcome to TeachAndLearn" %}</h2>
         <p class="text-sm text-slate-700 leading-relaxed">
           {% trans "TeachAndLearn connects private teachers and students across Belgium, starting from Namur, for one-on-one or group lessons, in any subject." %}
